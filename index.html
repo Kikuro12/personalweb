@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marwen O. Deiparine - Personal Webpage</title>
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Styling -->
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: #1a1a1a;
+      color: #f5f5f5;
+    }
+
+    /* Header */
+    header {
+      padding: 50px 20px;
+      text-align: center;
+      background: #121212;
+    }
+    header h1 {
+      font-size: 2.8em;
+      color: #f54291;
+      margin: 0;
+    }
+    header h2 {
+      font-size: 1.6em;
+      color: #f5f5f5;
+      margin: 10px 0 20px;
+    }
+    header p {
+      font-size: 1.2em;
+      color: #aaa;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Main Section */
+    main {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .profile-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .profile-image {
+      flex: 1;
+      min-width: 300px;
+      max-width: 400px;
+    }
+    .profile-image img {
+      width: 100%;
+      border-radius: 10px;
+      border: 2px solid #f54291;
+    }
+
+    .profile-details {
+      flex: 2;
+      min-width: 300px;
+      color: #f5f5f5;
+    }
+    .profile-details h3 {
+      font-size: 1.8em;
+      color: #f54291;
+    }
+    .profile-details p {
+      font-size: 1.1em;
+      line-height: 1.6;
+      margin: 15px 0;
+    }
+
+    /* Buttons */
+    .button-container {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .project-caption {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #f54291;
+    }
+    .button {
+      text-decoration: none;
+      color: #f5f5f5;
+      background: #f54291;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background 0.3s;
+      text-align: center;
+    }
+    .button:hover {
+      background: #e03a7f;
+    }
+
+    /* Social Media Section */
+    .social-media {
+      margin-top: 30px;
+      text-align: center;
+    }
+    .social-media h3 {
+      font-size: 1.6em;
+      color: #f54291;
+      margin-bottom: 15px;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    .social-icons a {
+      text-decoration: none;
+      color: #f5f5f5;
+      font-size: 1.5em;
+      transition: color 0.3s;
+    }
+    .social-icons a:hover {
+      color: #f54291;
+    }
+
+    /* Cat Animation */
+    .cat-container {
+      text-align: center;
+      margin-top: 40px;
+      position: relative;
+    }
+    .cat-gif {
+      width: 200px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .cat-gif:hover {
+      transform: scale(1.1);
+    }
+    .cat-message {
+      color: #f54291;
+      font-size: 1.2em;
+      margin-top: 10px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .cat-gif:hover + .cat-message {
+      opacity: 1;
+    }
+
+    /* Confession Box */
+.confession-section {
+      margin-top: 40px;
+      text-align: center;
+      position: relative;
+      background-color: #222;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+    }
+    .confession-section h3 {
+      font-size: 1.8em;
+      color: #f54291;
+      margin-bottom: 20px;
+    }
+    .confession-input-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .confession-input-container input, .confession-input-container textarea {
+      padding: 10px;
+      font-size: 1.1em;
+      border: 2px solid #f54291;
+      border-radius: 5px;
+      background: #333;
+      color: #f5f5f5;
+    }
+    .confession-input-container button {
+      padding: 10px 20px;
+      background-color: #f54291;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .confession-input-container button:hover {
+      background-color: #e03a7f;
+    }
+
+    /* Cat Gif Section */
+    .cat-container {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .cat-gif {
+      width: 200px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .cat-gif:hover {
+      transform: scale(1.1);
+    }
+
+    /* Confession Display */
+    .confession-display {
+      margin-top: 20px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .confession-item {
+      background-color: #333;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 5px;
+    }
+    .confession-author {
+      color: #f54291;
+      font-weight: bold;
+    }
+    .confession-message {
+      color: #f5f5f5;
+      margin-top: 10px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #121212;
+      color: #aaa;
+      font-size: 0.9em;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.2em;
+      }
+      header h2 {
+        font-size: 1.4em;
+      }
+      .profile-container {
+        flex-direction: column;
+      }
+      .profile-details h3 {
+        font-size: 1.6em;
+      }
+      .profile-details p {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <h1>Hi, I'm Marwen O. Deiparine</h1>
+    <h2>Aspiring Developer & Layout Artist</h2>
+    <p>I use creativity and technology to craft beautiful layouts and practical solutions. Swimming, coding, and designing are my passions!</p>
+  </header>
+
+  <!-- Main Section -->
+  <main>
+    <div class="profile-container">
+      <!-- Profile Image -->
+      <div class="profile-image">
+        <img src="https://i.imgur.com/VQ6OsOO.png" alt="Marwen O. Deiparine">
+      </div>
+      
+      <!-- Profile Details -->
+      <div class="profile-details">
+        <h3>About Me</h3>
+        <p>
+          Hello! I'm Marwen, an 18-year-old BSIT student passionate about technology and design. As a layout artist, I enjoy transforming ideas into visuals. Outside of work, I'm a varsity swimmer and a music enthusiast, playing both guitar and bass guitar.
+        </p>
+        <p>
+          I believe in continuous learning and creativity, whether it's coding an innovative web application or crafting unique layouts. Let's create something amazing together!
+        </p>
+      </div>
+    </div>
+
+    <!-- Projects Section -->
+    <div class="button-container">
+      <div class="project-caption">Here are my projects:</div>
+      <a href="https://kikuro12.github.io/kiur-login-page/" class="button" target="_blank">Kiur Login Page</a>
+      <a href="https://kikuro12.github.io/kikuro-calendar/" class="button" target="_blank">Kiur Calendar</a>
+      <a href="https://kikuro12.github.io/kiur-calculator/" class="button" target="_blank">Kiur Calculator</a>
+    </div>
+
+    <!-- Cat Animation -->
+    <div class="cat-container">
+      <img src="https://i.gifer.com/nUq.gif" alt="Interactive Cat GIF" class="cat-gif">
+      <p class="cat-message">Meow! I'm your fun study buddy!</p>
+    </div>
+    
+    <!-- Find Me On Section -->
+<div class="social-media">
+      <h3>Find Me On</h3>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/profile.php?id=100025231074173" target="_blank" title="Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://www.instagram.com/mhrwennn?igsh=OGQ5ZDc2ODk2ZA==" target="_blank" title="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="mailto:Kikuro112@gmail.com" target="_blank" title="Gmail">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://github.com/Kikuro12" target="_blank" title="GitHub">
+          <i class="fab fa-github"></i></a>
+      </div>
+    </div>
+
+    <!-- Confession Box Section -->
+<div class="confession-section">
+      <h3>Share Your Confession</h3>
+      <div class="confession-input-container">
+        <!-- Acronym Input -->
+        <input type="text" id="acronym-input" placeholder="Enter your acronym <3">
+        
+        <!-- Confession Text Area -->
+        <textarea id="confession-input" placeholder="Write your confession..."></textarea>
+
+        <!-- Submit Button -->
+        <button onclick="submitConfession()">Submit Confession</button>
+      </div>
+
+      <!-- Cat Gif -->
+      <div class="cat-container">
+        <img src="https://i.gifer.com/2iFb.gif" alt="Interactive Cat Gif" class="cat-gif">
+      </div>
+
+      <!-- Confession Display -->
+      <div class="confession-display" id="confession-display"></div>
+    </div>
+  </main>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2024 Marwen O. Deiparine. All rights reserved.</p>
+  </footer>
+
+<script>
+    function submitConfession() {
+      const acronymInput = document.getElementById("acronym-input").value.trim();
+      const confessionInput = document.getElementById("confession-input").value.trim();
+
+      if (acronymInput !== "" && confessionInput !== "") {
+        const confessionDisplay = document.getElementById("confession-display");
+        const confessionItem = document.createElement("div");
+        confessionItem.classList.add("confession-item");
+        
+        const confessionAcronym = document.createElement("div");
+        confessionAcronym.classList.add("confession-author");
+        confessionAcronym.textContent = acronymInput;
+
+        const confessionMessage = document.createElement("div");
+        confessionMessage.classList.add("confession-message");
+        confessionMessage.textContent = confessionInput;
+
+        confessionItem.appendChild(confessionAcronym);
+        confessionItem.appendChild(confessionMessage);
+        confessionDisplay.appendChild(confessionItem);
+
+        // Clear the inputs after submission
+        document.getElementById("acronym-input").value = "";
+        document.getElementById("confession-input").value = "";
+      }
+    }
+  </script>
+</body>
+</html>

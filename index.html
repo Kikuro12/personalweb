@@ -324,26 +324,26 @@
 
     <!-- Confession Box Section -->
 <div class="confession-section">
-      <h3>Share Your Confession</h3>
-      <div class="confession-input-container">
-        <!-- Acronym Input -->
-        <input type="text" id="acronym-input" placeholder="Enter your acronym <3">
-        
-        <!-- Confession Text Area -->
-        <textarea id="confession-input" placeholder="Write your confession..."></textarea>
+  <h3>Share Your Confession</h3>
+  <div class="confession-input-container">
+    <!-- Acronym Input -->
+    <input type="text" id="acronym-input" placeholder="Enter your acronym <3">
+    
+    <!-- Confession Text Area -->
+    <textarea id="confession-input" placeholder="Write your confession..."></textarea>
 
-        <!-- Submit Button -->
-        <button onclick="submitConfession()">Submit Confession</button>
-      </div>
+    <!-- Submit Button -->
+    <button onclick="submitConfession()">Submit Confession</button>
+  </div>
 
-      <!-- Cat Gif -->
-      <div class="cat-container">
-        <img src="https://i.gifer.com/2iFb.gif" alt="Interactive Cat Gif" class="cat-gif">
-      </div>
+  <!-- Cat Gif -->
+  <div class="cat-container">
+    <img src="https://i.gifer.com/2iFb.gif" alt="Interactive Cat Gif" class="cat-gif">
+  </div>
 
-      <!-- Confession Display -->
-      <div class="confession-display" id="confession-display"></div>
-    </div>
+  <!-- Confession Display -->
+  <div class="confession-display" id="confession-display"></div>
+</div>
   </main>
 
   <!-- Footer Section -->
@@ -352,32 +352,64 @@
   </footer>
 
 <script>
-    function submitConfession() {
-      const acronymInput = document.getElementById("acronym-input").value.trim();
-      const confessionInput = document.getElementById("confession-input").value.trim();
+  // Webhook URL
+  const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1309141481038286939/ivcz2msx4Bqryx8d4GLWv9mrQANgEPbip_ExzPww96Vqky9MnEtk1k_1LqHnK2oi-1WH";
 
-      if (acronymInput !== "" && confessionInput !== "") {
-        const confessionDisplay = document.getElementById("confession-display");
-        const confessionItem = document.createElement("div");
-        confessionItem.classList.add("confession-item");
-        
-        const confessionAcronym = document.createElement("div");
-        confessionAcronym.classList.add("confession-author");
-        confessionAcronym.textContent = acronymInput;
+  function submitConfession() {
+    const acronymInput = document.getElementById("acronym-input").value.trim();
+    const confessionInput = document.getElementById("confession-input").value.trim();
 
-        const confessionMessage = document.createElement("div");
-        confessionMessage.classList.add("confession-message");
-        confessionMessage.textContent = confessionInput;
+    if (acronymInput !== "" && confessionInput !== "") {
+      // Send confession to Discord
+      const payload = {
+        content: `**${acronymInput}**\n${confessionInput}`, // Discord message format
+        username: "Confession Bot",
+        avatar_url: "https://i.imgur.com/VQ6OsOO.png", // Optional avatar
+      };
 
-        confessionItem.appendChild(confessionAcronym);
-        confessionItem.appendChild(confessionMessage);
-        confessionDisplay.appendChild(confessionItem);
+      fetch(DISCORD_WEBHOOK_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+        .then((response) => {
+          if (response.ok) {
+            // Show locally on the webpage
+            const confessionDisplay = document.getElementById("confession-display");
+            const confessionItem = document.createElement("div");
+            confessionItem.classList.add("confession-item");
 
-        // Clear the inputs after submission
-        document.getElementById("acronym-input").value = "";
-        document.getElementById("confession-input").value = "";
-      }
+            const confessionAcronym = document.createElement("div");
+            confessionAcronym.classList.add("confession-author");
+            confessionAcronym.textContent = acronymInput;
+
+            const confessionMessage = document.createElement("div");
+            confessionMessage.classList.add("confession-message");
+            confessionMessage.textContent = confessionInput;
+
+            confessionItem.appendChild(confessionAcronym);
+            confessionItem.appendChild(confessionMessage);
+            confessionDisplay.appendChild(confessionItem);
+
+            // Clear inputs
+            document.getElementById("acronym-input").value = "";
+            document.getElementById("confession-input").value = "";
+
+            alert("Confession submitted successfully!");
+          } else {
+            throw new Error("Failed to send confession to Discord");
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("An error occurred. Please try again.");
+        });
+    } else {
+      alert("Please fill in both fields before submitting!");
     }
-  </script>
+  }
+</script>
 </body>
 </html>

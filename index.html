@@ -308,8 +308,31 @@
     .modal-button:hover {
       background-color: #e03a7f;
     }
+    
+#quote-container {
+    background-color: transparent;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 50%;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #333;
+}
+
+blockquote {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #555;
+}
       
     }
+    
+    
+    
   </style>
 </head>
 <body>
@@ -357,8 +380,6 @@
       <p class="cat-message">Meow! I'm your fun study buddy!</p>
     </div>
     
-     
-    
     <!-- Find Me On Section -->
 <div class="social-media">
       <h3>Find Me On</h3>
@@ -376,6 +397,15 @@
           <i class="fab fa-github"></i></a>
       </div>
     </div>
+    
+<div id="quote-container">
+        <h1>Daily Quote</h1>
+        <blockquote id="quote-text">
+            "Loading quote..."
+        </blockquote>
+        <footer id="quote-author">- Author</footer>
+    </div>
+    <script src="app.js"></script>
 
     <!-- Confession Box Section -->
 <div class="confession-section">
@@ -405,8 +435,6 @@
   <p style="font-size: 0.9em; color: #aaa; text-align: center; padding: 10px; margin-top: 20px; margin-bottom: 20px; background: rgba(255, 255, 255, 0.1); border-radius: 10px;">
     Your confession will be sent securely and stored privately on my server. Only you can see your results below. Rest assured, your privacy is guaranteed.
     
-    
-    
 <!-- Modal for Success / Error -->
     <div id="success-modal" class="modal">
       <div class="modal-content">
@@ -415,12 +443,6 @@
         <button class="modal-button" onclick="closeModal()">Close</button>
       </div>
     </div>
-    
-<div id="daily-quote">
-    <p id="quote-text">"This is the default quote."</p>
-    <p id="quote-author">— Default Author</p>
-</div>
-
 
 
 </div>
@@ -495,21 +517,37 @@
   // Function to close the modal
   function closeModal() {
     document.getElementById("success-modal").style.display = "none";
-    
   }
+  
+// GitHub repository details
+const REPO_OWNER = 'Kikuro12'; // Replace with your GitHub username
+const REPO_NAME = 'personalwebpage'; // Replace with your repository name
+const FILE_PATH = 'quote.json'; // Path to the quote file
 
-  async function fetchDailyQuote() {
-        try {
-            const response = await fetch('quote.json'); // Fetch the quote from JSON
-            const data = await response.json();
-            document.getElementById('quote-text').textContent = `"${data.text}"`;
-            document.getElementById('quote-author').textContent = `— ${data.author}`;
-        } catch (error) {
-            console.error("Failed to fetch the quote:", error);
-        }
+// URL to fetch the quote
+const QUOTE_URL = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
+
+async function fetchQuote() {
+    try {
+        // Fetch the quote data from GitHub
+        const response = await fetch(QUOTE_URL);
+        const data = await response.json();
+
+        // Decode the content (base64) and parse it as JSON
+        const quote = JSON.parse(atob(data.content));
+
+        // Set the quote text and author in the webpage
+        document.getElementById('quote-text').innerText = `"${quote.text}"`;
+        document.getElementById('quote-author').innerText = `- ${quote.author}`;
+    } catch (error) {
+        console.error('Error fetching quote:', error);
+        document.getElementById('quote-text').innerText = "Error loading quote.";
     }
+}
 
-    fetchDailyQuote(); // Call the function when the page loads
+// Fetch the quote when the page loads
+window.onload = fetchQuote;
+}
 </script>
 
 </body>

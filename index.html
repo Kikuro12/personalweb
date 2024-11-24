@@ -497,6 +497,19 @@
     document.getElementById("success-modal").style.display = "none";
     
   }
+
+  async function fetchDailyQuote() {
+        try {
+            const response = await fetch('quote.json'); // Fetch the quote from JSON
+            const data = await response.json();
+            document.getElementById('quote-text').textContent = `"${data.text}"`;
+            document.getElementById('quote-author').textContent = `— ${data.author}`;
+        } catch (error) {
+            console.error("Failed to fetch the quote:", error);
+        }
+    }
+
+    fetchDailyQuote(); // Call the function when the page loads
 </script>
 
 </body>

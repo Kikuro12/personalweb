@@ -357,6 +357,8 @@
       <p class="cat-message">Meow! I'm your fun study buddy!</p>
     </div>
     
+     
+    
     <!-- Find Me On Section -->
 <div class="social-media">
       <h3>Find Me On</h3>
@@ -403,6 +405,8 @@
   <p style="font-size: 0.9em; color: #aaa; text-align: center; padding: 10px; margin-top: 20px; margin-bottom: 20px; background: rgba(255, 255, 255, 0.1); border-radius: 10px;">
     Your confession will be sent securely and stored privately on my server. Only you can see your results below. Rest assured, your privacy is guaranteed.
     
+    
+    
 <!-- Modal for Success / Error -->
     <div id="success-modal" class="modal">
       <div class="modal-content">
@@ -411,6 +415,12 @@
         <button class="modal-button" onclick="closeModal()">Close</button>
       </div>
     </div>
+    
+<div id="daily-quote">
+    <p id="quote-text">"This is the default quote."</p>
+    <p id="quote-author">— Default Author</p>
+</div>
+
 
 
 </div>
@@ -485,6 +495,7 @@
   // Function to close the modal
   function closeModal() {
     document.getElementById("success-modal").style.display = "none";
+    
   }
 </script>
 

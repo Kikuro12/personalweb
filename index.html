@@ -328,10 +328,91 @@ blockquote {
     font-style: italic;
     color: #555;
 }
-      
-    }
-    
-    
+
+      .skills {
+  margin-top: 40px;
+  text-align: center;
+  padding: 20px;
+}
+
+.skills h3 {
+  color: #f54291;
+  font-size: 2em;
+  margin-bottom: 20px;
+  font-family: 'Arial', sans-serif;
+  letter-spacing: 1px;
+}
+
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Responsive grid layout */
+  gap: 20px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.skill-item {
+  width: 80px;
+  height: 80px;
+  background: #1a1a1a;
+  border: 2px solid #f54291;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-item img {
+  width: 50%;
+  height: auto;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.skill-item:hover {
+  transform: scale(1.1);
+  background: #f54291;
+  box-shadow: 0px 4px 15px rgba(245, 66, 145, 0.5);
+}
+
+.skill-item:hover img {
+  filter: grayscale(0);
+  transform: scale(1.2);
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .skills-container {
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 15px;
+  }
+
+  .skill-item {
+    width: 70px;
+    height: 70px;
+  }
+
+  .skill-item img {
+    width: 45%;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills h3 {
+    font-size: 1.5em;
+  }
+
+  .skill-item {
+    width: 60px;
+    height: 60px;
+  }
+
+  .skill-item img {
+    width: 40%;
+  }
+} 
     
   </style>
 </head>
@@ -374,7 +455,36 @@ blockquote {
   <!-- Caption -->
   <p style="font-size: 0.9em; color: #aaa; text-align: center; padding: 10px; margin-top: 20px; margin-bottom: 20px; background: rgba(255, 255, 255, 0.1); border-radius: 10px;">
     This project is still a work in progress and is not yet officially completed. It was created primarily for practice purposes, so please manage your expectations. I encourage you to provide feedback, which you can submit through the confession box located at the bottom of the page. Your input will help me refine my skills and make improvements to the project as I continue to develop it.
-    <!-- Cat Animation -->
+   
+ <div class="skills">
+  <h3>Skill</h3>
+  <div class="skills-container">
+    <div class="skill-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/732/732212.png" alt="HTML">
+    </div>
+    <div class="skill-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/732/732190.png" alt="CSS">
+    </div>
+    <div class="skill-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt="JavaScript">
+    </div>
+    <div class="skill-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968322.png" alt="Python">
+    </div>
+    <div class="skill-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968332.png" alt="PHP">
+    </div>
+    <div class="skill-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/528/528261.png" alt="MySQL">
+    </div>
+    <div class="skill-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/919/919854.png" alt="GitHub">
+    </div>
+  </div>
+</div>
+
+
+<!-- Cat Animation -->
     <div class="cat-container">
       <img src="https://i.gifer.com/nUq.gif" alt="Interactive Cat GIF" class="cat-gif">
       <p class="cat-message">Meow! I'm your fun study buddy!</p>

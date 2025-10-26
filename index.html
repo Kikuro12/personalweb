@@ -1,493 +1,646 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marwen O. Deiparine - Personal Webpage</title>
-  <!-- FontAwesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <!-- Styling -->
-  <style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marwen O. Deiparine - Personal Webpage</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+    /* * NEW REDESIGN V2 - "Glassmorphic" Theme
+     * All element IDs and classes are preserved,
+     * so all JavaScript functions will work perfectly.
+     */
+
     /* General Styles */
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: #1a1a1a;
-      color: #f5f5f5;
+    :root {
+      --primary-color: #f54291; /* Your original pink */
+      --primary-color-hover: #e03a7f;
+      --text-color: #f5f5f5;
+      --text-color-secondary: #aaa;
+      --bg-color: #121212;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+      --card-radius: 15px;
+      --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     }
 
-    /* Header */
-    header {
-      padding: 50px 20px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', 'Arial', sans-serif; /* New, modern font */
+      background: var(--bg-color);
+      /* Added a subtle gradient for depth */
+      background-image: radial-gradient(circle at top left, #2a2a2a, var(--bg-color) 40%);
+      background-attachment: fixed;
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    /* Reusable Glass Card Style */
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: var(--card-radius);
+      border: var(--glass-border);
+      box-shadow: var(--shadow);
+      padding: 30px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 20px 40px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.8em;
+      color: var(--primary-color);
+      margin: 0;
+      font-weight: 700;
+    }
+    header h2 {
+      font-size: 1.6em;
+      color: var(--text-color);
+      margin: 10px 0 20px;
+      font-weight: 400;
+    }
+    header p {
+      font-size: 1.2em;
+      color: var(--text-color-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    /* Main Section */
+    main {
+      padding: 20px;
+      max-width: 1000px; /* Slightly constrained for better readability */
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 30px; /* Creates spacing between all sections */
+    }
+
+    /* Profile Section */
+    .profile-container {
+      /* This is now a glass card */
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: var(--card-radius);
+      border: var(--glass-border);
+      box-shadow: var(--shadow);
+      padding: 30px;
+      /* Flex properties */
+      display: flex;
+      align-items: flex-start; /* Aligned to top */
+      justify-content: space-between;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .profile-image {
+      flex: 1;
+      min-width: 250px; /* Adjusted min-width */
+      max-width: 350px;
+      margin: 0 auto; /* Center on mobile */
+    }
+    .profile-image img {
+      width: 100%;
+      border-radius: 10px;
+      /* Replaced hard border with a softer shadow */
+      box-shadow: 0 0 20px rgba(245, 66, 145, 0.5);
+    }
+
+    .profile-details {
+      flex: 2;
+      min-width: 300px;
+    }
+    .profile-details h3 {
+      font-size: 1.8em;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+    .profile-details p {
+      font-size: 1.1em;
+      margin-bottom: 15px;
+      font-weight: 300;
+    }
+
+    /* Info Box ("work in progress" message) */
+    .info-box {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 20px;
       text-align: center;
-      background: #121212;
+      font-size: 0.9em;
+      color: var(--text-color-secondary);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
-    header h1 {
-      font-size: 2.8em;
-      color: #f54291;
-      margin: 0;
-    }
-    header h2 {
-      font-size: 1.6em;
-      color: #f5f5f5;
-      margin: 10px 0 20px;
-    }
-    header p {
-      font-size: 1.2em;
-      color: #aaa;
-      max-width: 600px;
-      margin: 0 auto;
+    
+    /* Projects Section */
+    .button-container {
+      /* This is now a glass card */
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: var(--card-radius);
+      border: var(--glass-border);
+      box-shadow: var(--shadow);
+      padding: 30px;
+      /* Flex properties */
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .project-caption {
+      font-size: 1.6em; /* Made bigger */
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+    .button {
+      text-decoration: none;
+      color: var(--text-color);
+      /* New glassy button style */
+      background: rgba(245, 66, 145, 0.15);
+      border: 1px solid var(--primary-color);
+      padding: 15px 20px; /* Bigger padding */
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      text-align: left; /* Changed alignment */
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    /* Added a hover icon */
+    .button::after {
+      content: '\f35d';
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all 0.3s ease;
     }
 
-    /* Main Section */
-    main {
-      padding: 40px 20px;
-      max-width: 1200px;
-      margin: 0 auto;
+    .button:hover {
+      background: var(--primary-color);
+      color: var(--bg-color); /* Dark text on hover */
+      box-shadow: 0 0 15px rgba(245, 66, 145, 0.5);
+      transform: translateY(-2px);
+    }
+    .button:hover::after {
+      opacity: 1;
+      transform: translateX(0);
     }
 
-    .profile-container {
+    /* Social Media Section */
+    .social-media {
+      /* This is now a glass card */
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: var(--card-radius);
+      border: var(--glass-border);
+      box-shadow: var(--shadow);
+      padding: 30px;
+      text-align: center;
+    }
+    .social-media h3 {
+      font-size: 1.6em;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+    }
+    .social-icons a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-size: 2em; /* Bigger icons */
+      transition: all 0.3s ease;
+      /* Added a shape for a better hover effect */
+      width: 60px;
+      height: 60px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    .social-icons a:hover {
+      color: var(--primary-color);
+      background: rgba(245, 66, 145, 0.1);
+      transform: translateY(-5px);
+    }
+
+    /* Cat Animation */
+    .cat-container {
+      text-align: center;
+      position: relative;
+    }
+    .cat-gif {
+      width: 200px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .cat-gif:hover {
+      transform: scale(1.1);
+    }
+    .cat-message {
+      color: var(--primary-color);
+      font-size: 1.2em;
+      margin-top: 10px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      font-weight: 600;
+    }
+    .cat-gif:hover + .cat-message {
+      opacity: 1;
+  T   }
+     /* Special style for the cat in the confession box */
+     .confession-section .cat-gif {
+       width: 150px;
+     }
+
+    /* Confession Box */
+    .confession-section {
+      /* This is now a glass card */
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: var(--card-radius);
+      border: var(--glass-border);
+      box-shadow: var(--shadow);
+      padding: 30px;
+      text-align: center;
+      position: relative;
+    }
+    .confession-section h3 {
+      font-size: 1.8em;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    .confession-input-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 20px;
+      max-width: 500px; /* Constrain width */
+      margin-left: auto;
+      margin-right: auto;
+    }
+    /* New Input Styles */
+    .confession-input-container input, 
+    .confession-input-container textarea {
+      padding: 15px;
+      font-size: 1.1em;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.2);
+      color: var(--text-color);
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease;
+    }
+    .confession-input-container input:focus, 
+    .confession-input-container textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 10px rgba(245, 66, 145, 0.5);
+    }
+    .confession-input-container textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    /* New Button Style */
+    .confession-input-container button {
+      padding: 15px 20px;
+      background-color: var(--primary-color);
+      border-radius: 10px;
+      border: none;
+      color: #fff;
+      font-size: 1.1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .confession-input-container button:hover {
+      background-color: var(--primary-color-hover);
+      box-shadow: 0 0 15px rgba(245, 66, 145, 0.7);
+      transform: translateY(-3px);
+    }
+
+    /* Confession Display */
+    .confession-display {
+      margin-top: 20px;
+      max-height: 300px;
+      overflow-y: auto;
+      text-align: left; /* Aligned left for readability */
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .confession-item {
+      background-color: rgba(0, 0, 0, 0.3); /* Darker glass */
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .confession-author {
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+    .confession-message {
+      color: var(--text-color);
+      margin-top: 10px;
+      word-wrap: break-word; /* Ensure long words don't break layout */
+    }
+
+    /* Privacy Caption */
+    .privacy-caption {
+      font-size: 0.9em; 
+      color: var(--text-color-secondary);
+      text-align: center; 
+      padding: 10px; 
+      margin-top: 20px; 
+      background: rgba(0, 0, 0, 0.2); 
+      border-radius: 10px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 20px 20px;
+      background: transparent; /* Removed background */
+      color: var(--text-color-secondary);
+      font-size: 0.9em;
+      border-top: 1px solid rgba(255, 255, 255, 0.1); /* Soft top border */
+      margin-top: 30px;
+    }
+    
+    /* Modal Design */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100; /* Ensure it's on top */
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.7); /* Darker overlay */
+      /* Center the modal content */
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .profile-image {
-      flex: 1;
-      min-width: 300px;
-      max-width: 400px;
-    }
-    .profile-image img {
-      width: 100%;
-      border-radius: 10px;
-      border: 2px solid #f54291;
-    }
-
-    .profile-details {
-      flex: 2;
-      min-width: 300px;
-      color: #f5f5f5;
-    }
-    .profile-details h3 {
-      font-size: 1.8em;
-      color: #f54291;
-    }
-    .profile-details p {
-      font-size: 1.1em;
-      line-height: 1.6;
-      margin: 15px 0;
-    }
-
-    /* Buttons */
-    .button-container {
-      margin-top: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-    .project-caption {
-      font-size: 1.2em;
-      font-weight: bold;
-      margin-bottom: 10px;
-      color: #f54291;
-    }
-    .button {
-      text-decoration: none;
-      color: #f5f5f5;
-      background: #f54291;
-      padding: 10px 20px;
-      border-radius: 5px;
-      transition: background 0.3s;
-      text-align: center;
-    }
-    .button:hover {
-      background: #e03a7f;
-    }
-
-    /* Social Media Section */
-    .social-media {
-      margin-top: 30px;
-      text-align: center;
-    }
-    .social-media h3 {
-      font-size: 1.6em;
-      color: #f54291;
-      margin-bottom: 15px;
-    }
-    .social-icons {
-      display: flex;
       justify-content: center;
-      gap: 20px;
-    }
-    .social-icons a {
-      text-decoration: none;
-      color: #f5f5f5;
-      font-size: 1.5em;
-      transition: color 0.3s;
-    }
-    .social-icons a:hover {
-      color: #f54291;
-    }
+    }
 
-    /* Cat Animation */
-    .cat-container {
+    .modal-content {
+      /* Apply the glass card style */
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: var(--card-radius);
+      border: var(--glass-border);
+      box-shadow: var(--shadow);
+      padding: 30px;
+      width: 90%;
+      max-width: 400px;
+      color: var(--text-color);
       text-align: center;
-      margin-top: 40px;
-      position: relative;
-    }
-    .cat-gif {
-      width: 200px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    .cat-gif:hover {
-      transform: scale(1.1);
-    }
-    .cat-message {
-      color: #f54291;
-      font-size: 1.2em;
-      margin-top: 10px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .cat-gif:hover + .cat-message {
-      opacity: 1;
-    }
+    }
 
-    /* Confession Box */
-.confession-section {
-      margin-top: 40px;
-      text-align: center;
-      position: relative;
-      background-color: #222;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
-    }
-    .confession-section h3 {
-      font-size: 1.8em;
-      color: #f54291;
-      margin-bottom: 20px;
-    }
-    .confession-input-container {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-    .confession-input-container input, .confession-input-container textarea {
-      padding: 10px;
-      font-size: 1.1em;
-      border: 2px solid #f54291;
-      border-radius: 5px;
-      background: #333;
-      color: #f5f5f5;
-    }
-    .confession-input-container button {
-      padding: 10px 20px;
-      background-color: #f54291;
-      border-radius: 5px;
-      color: #fff;
-      font-size: 1.1em;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    .confession-input-container button:hover {
-      background-color: #e03a7f;
-    }
+    .modal-content h3 {
+      color: var(--primary-color);
+      font-size: 1.8em;
+      font-weight: 600;
+    }
 
-    /* Cat Gif Section */
-    .cat-container {
-      margin-top: 20px;
-      text-align: center;
-    }
-    .cat-gif {
-      width: 200px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    .cat-gif:hover {
-      transform: scale(1.1);
-    }
+    .modal-content p {
+      font-size: 1.1em;
+      margin: 20px 0;
+    }
 
-    /* Confession Display */
-    .confession-display {
-      margin-top: 20px;
-      max-height: 300px;
-      overflow-y: auto;
-    }
-    .confession-item {
-      background-color: #333;
-      padding: 15px;
-      margin: 10px 0;
-      border-radius: 5px;
-    }
-    .confession-author {
-      color: #f54291;
-      font-weight: bold;
-    }
-    .confession-message {
-      color: #f5f5f5;
-      margin-top: 10px;
-    }
+    .modal-button {
+      background-color: var(--primary-color);
+      padding: 12px 25px;
+      border-radius: 10px;
+      border: none;
+      color: #fff;
+      font-size: 1.1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #121212;
-      color: #aaa;
-      font-size: 0.9em;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 2.2em;
+    .modal-button:hover {
+      background-color: var(--primary-color-hover);
+      box-shadow: 0 0 15px rgba(245, 66, 145, 0.7);
+    } 
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.2em;
+      }
+      header h2 {
+        font-size: 1.4em;
+      }
+      .profile-container {
+        flex-direction: column;
+        align-items: center; /* Center items on mobile */
+        padding: 20px;
+      }
+      main {
+        padding: 10px;
+        gap: 20px;
       }
-      header h2 {
-        font-size: 1.4em;
+      .glass-card, .profile-container, .button-container, .social-media, .confession-section {
+        padding: 20px;
       }
-      .profile-container {
-        flex-direction: column;
+      .social-icons {
+        gap: 15px;
       }
-      .profile-details h3 {
-        font-size: 1.6em;
+      .social-icons a {
+        font-size: 1.8em;
+        width: 50px;
+        height: 50px;
       }
-      .profile-details p {
-        font-size: 1em;
-      }
-      
-/* Modal Design */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.5);
-      padding-top: 100px;
-    }
-
-    .modal-content {
-      background-color: #222;
-      margin: auto;
-      padding: 20px;
-      border-radius: 10px;
-      width: 80%;
-      max-width: 400px;
-      color: #f5f5f5;
-    }
-
-    .modal-content h3 {
-      color: #f54291;
-      font-size: 1.8em;
-    }
-
-    .modal-content p {
-      font-size: 1.1em;
-      margin: 20px 0;
-    }
-
-    .modal-button {
-      background-color: #f54291;
-      padding: 10px 20px;
-      border-radius: 5px;
-      color: #fff;
-      font-size: 1.1em;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      text-align: center;
-    }
-
-    .modal-button:hover {
-      background-color: #e03a7f;
-    } 
-    
-  </style>
+    }
+  </style>
 </head>
 <body>
-  <!-- Header Section -->
-  <header>
-    <h1>Hi, I'm Marwen O. Deiparine</h1>
-    <h2>Aspiring Developer & Layout Artist</h2>
-    <p>I use creativity and technology to craft beautiful layouts and practical solutions. Swimming, coding, and designing are my passions!</p>
-  </header>
+    <header>
+    <h1>Hi, I'm Marwen O. Deiparine</h1>
+    <h2>Aspiring Developer & Layout Artist</h2>
+    <p>I use creativity and technology to craft beautiful layouts and practical solutions. Swimming, coding, and designing are my passions!</p>
+  </header>
 
-  <!-- Main Section -->
-  <main>
-    <div class="profile-container">
-      <!-- Profile Image -->
-      <div class="profile-image">
-        <img src="https://i.imgur.com/VQ6OsOO.png" alt="Marwen O. Deiparine">
-      </div>
-      
-      <!-- Profile Details -->
-      <div class="profile-details">
-        <h3>About Me</h3>
-        <p>
-          Hello! I'm Marwen, an 18-year-old BSIT student passionate about technology and design. As a layout artist, I enjoy transforming ideas into visuals. Outside of work, I'm a varsity swimmer and a music enthusiast, playing both guitar and bass guitar.
-        </p>
-        <p>
-          I believe in continuous learning and creativity, whether it's coding an innovative web application or crafting unique layouts. Let's create something amazing together!
-        </p>
-      </div>
+    <main>
+    <div class="profile-container">             <div class="profile-image">
+        <img src="https://i.imgur.com/VQ6OsOO.png" alt="Marwen O. Deiparine">
+      </div>
+      
+            <div class="profile-details">
+        <h3>About Me</h3>
+        <p>
+          Hello! I'm Marwen, an 18-year-old BSIT student passionate about technology and design. As a layout artist, I enjoy transforming ideas into visuals. Outside of work, I'm a varsity swimmer and a music enthusiast, playing both guitar and bass guitar.
+        </p>
+        <p>
+          I believe in continuous learning and creativity, whether it's coding an innovative web application or crafting unique layouts. Let's create something amazing together!
+        </p>
+      </div>
+    </div>
+
+        <div class="button-container">       <div class="project-caption">Here are my projects:</div>
+      <a href="https://kikuro12.github.io/kiur-login-page/" class="button" target="_blank">Kiur Login Page</a>
+      <a href="https://kikuro12.github.io/kikuro-calendar/" class="button" target="_blank">Kiur Calendar</a>
+      <a href="https://kikuro12.github.io/kiur-calculator/" class="button" target="_blank">Kiur Calculator</a>
+    </div>
+    
+    <div class="info-box">
+      This project is still a work in progress and is not yet officially completed. It was created primarily for practice purposes, so please manage your expectations. I encourage you to provide feedback, which you can submit through the confession box located at the bottom of the page. Your input will help me refine my skills and make improvements to the project as I continue to develop it.
     </div>
 
-    <!-- Projects Section -->
-    <div class="button-container">
-      <div class="project-caption">Here are my projects:</div>
-      <a href="https://kikuro12.github.io/kiur-login-page/" class="button" target="_blank">Kiur Login Page</a>
-      <a href="https://kikuro12.github.io/kikuro-calendar/" class="button" target="_blank">Kiur Calendar</a>
-      <a href="https://kikuro12.github.io/kiur-calculator/" class="button" target="_blank">Kiur Calculator</a>
+        <div class="cat-container">
+      <img src="https://i.gifer.com/nUq.gif" alt="Interactive Cat GIF" class="cat-gif">
+      <p class="cat-message">Meow! I'm your fun study buddy!</p>
+    </div>
+    
+    <div class="social-media">       <h3>Find Me On</h3>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/profile.php?id=100025231074173" target="_blank" title="Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://www.instagram.com/mhrwennn?igsh=OGQ5ZDc2ODk2ZA==" target="_blank" title="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="mailto:Kikuro112@gmail.com" target="_blank" title="Gmail">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://github.com/Kikuro12" target="_blank" title="GitHub">
+          <i class="fab fa-github"></i></a>
+      </div>
     </div>
-    
-  <!-- Caption -->
-  <p style="font-size: 0.9em; color: #aaa; text-align: center; padding: 10px; margin-top: 20px; margin-bottom: 20px; background: rgba(255, 255, 255, 0.1); border-radius: 10px;">
-    This project is still a work in progress and is not yet officially completed. It was created primarily for practice purposes, so please manage your expectations. I encourage you to provide feedback, which you can submit through the confession box located at the bottom of the page. Your input will help me refine my skills and make improvements to the project as I continue to develop it.
-   
- 
-<!-- Cat Animation -->
-    <div class="cat-container">
-      <img src="https://i.gifer.com/nUq.gif" alt="Interactive Cat GIF" class="cat-gif">
-      <p class="cat-message">Meow! I'm your fun study buddy!</p>
-    </div>
-    
-    <!-- Find Me On Section -->
-<div class="social-media">
-      <h3>Find Me On</h3>
-      <div class="social-icons">
-        <a href="https://www.facebook.com/profile.php?id=100025231074173" target="_blank" title="Facebook">
-          <i class="fab fa-facebook"></i>
-        </a>
-        <a href="https://www.instagram.com/mhrwennn?igsh=OGQ5ZDc2ODk2ZA==" target="_blank" title="Instagram">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="mailto:Kikuro112@gmail.com" target="_blank" title="Gmail">
-          <i class="fas fa-envelope"></i>
-        </a>
-        <a href="https://github.com/Kikuro12" target="_blank" title="GitHub">
-          <i class="fab fa-github"></i></a>
+  
+    <div class="confession-section"> <h3>Share Your Confession</h3>
+      <div class="confession-input-container">
+            <input type="text" id="acronym-input" placeholder="Enter your acronym <3">
+        
+            <textarea id="confession-input" placeholder="Write your confession..."></textarea>
+
+            <button onclick="submitConfession()">Submit Confession</button>
       </div>
-</div>
-  
-    <!-- Confession Box Section -->
-<div class="confession-section">
-  <h3>Share Your Confession</h3>
-  <div class="confession-input-container">
-    <!-- Acronym Input -->
-    <input type="text" id="acronym-input" placeholder="Enter your acronym <3">
-    
-    <!-- Confession Text Area -->
-    <textarea id="confession-input" placeholder="Write your confession..."></textarea>
 
-    <!-- Submit Button -->
-    <button onclick="submitConfession()">Submit Confession</button>
-  </div>
+        <div class="cat-container">
+        <img src="https://i.gifer.com/2iFb.gif" alt="Interactive Cat Gif" class="cat-gif">
+      </div>
 
-  <!-- Cat Gif -->
-  <div class="cat-container">
-    <img src="https://i.gifer.com/2iFb.gif" alt="Interactive Cat Gif" class="cat-gif">
-  </div>
-
-  <!-- Confession Display -->
-  <div class="confession-display" id="confession-display"></div>
-  
-  
-
-  <!-- Caption -->
-  <p style="font-size: 0.9em; color: #aaa; text-align: center; padding: 10px; margin-top: 20px; margin-bottom: 20px; background: rgba(255, 255, 255, 0.1); border-radius 10px;">
-    Your confession will be sent securely and stored privately on my server. Only you can see your results below. Rest assured, your privacy is guaranteed.
-    
-<!-- Modal for Success / Error -->
-    <div id="success-modal" class="modal">
-      <div class="modal-content">
-        <h3>Confession Submitted Successfully!</h3>
-        <p>Your confession has been successfully submitted. Thank you for sharing!</p>
-        <button class="modal-button" onclick="closeModal()">Close</button>
+        <div class="confession-display" id="confession-display"></div>
+  
+      <div class="privacy-caption">
+        Your confession will be sent securely and stored privately on my server. Only you can see your results below. Rest assured, your privacy is guaranteed.
       </div>
+    
+          <div id="success-modal" class="modal">
+      <div class="modal-content">
+        <h3>Confession Submitted Successfully!</h3>
+        <p>Your confession has been successfully submitted. Thank you for sharing!</p>
+        <button class="modal-button" onclick="closeModal()">Close</button>
+      </div>
+    </div>
     </div>
+  </main>
 
-
-</div>
-  </main>
-
-  <!-- Footer Section -->
-  <footer>
-    <p>&copy; 2024 Marwen O. Deiparine. All rights reserved.</p>
-  </footer>
-}
+    <footer>
+    <p>&copy; 2024 Marwen O. Deiparine. All rights reserved.</p>
+  </footer>
 
 <script>
-  // Webhook URL
-  const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1309141481038286939/ivcz2msx4Bqryx8d4GLWv9mrQANgEPbip_ExzPww96Vqky9MnEtk1k_1LqHnK2oi-1WH";
+  // Webhook URL
+  const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1309141481038286939/ivcz2msx4Bqryx8d4GLWv9mrQANgEPbip_ExzPww96Vqky9MnEtk1k_1LqHnK2oi-1WH";
 
-  function submitConfession() {
-    const acronymInput = document.getElementById("acronym-input").value.trim();
-    const confessionInput = document.getElementById("confession-input").value.trim();
+  function submitConfession() {
+    const acronymInput = document.getElementById("acronym-input").value.trim();
+    const confessionInput = document.getElementById("confession-input").value.trim();
 
-    if (acronymInput !== "" && confessionInput !== "") {
-      // Send confession to Discord
-      const payload = {
-        content: `**${acronymInput}**\n${confessionInput}`, // Discord message format
-        username: "Confession Bot",
-        avatar_url: "https://i.imgur.com/VQ6OsOO.png", // Optional avatar
-      };
+    if (acronymInput !== "" && confessionInput !== "") {
+      // Send confession to Discord
+      const payload = {
+        content: `**${acronymInput}**\n${confessionInput}`, // Discord message format
+        username: "Confession Bot",
+        avatar_url: "https://i.imgur.com/VQ6OsOO.png", // Optional avatar
+      };
 
-      fetch(DISCORD_WEBHOOK_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      })
-        .then((response) => {
-          if (response.ok) {
-            // Show locally on the webpage
-            const confessionDisplay = document.getElementById("confession-display");
-            const confessionItem = document.createElement("div");
-            confessionItem.classList.add("confession-item");
+      fetch(DISCORD_WEBHOOK_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+        .then((response) => {
+          if (response.ok) {
+            // Show locally on the webpage
+            const confessionDisplay = document.getElementById("confession-display");
+            const confessionItem = document.createElement("div");
+      	confessionItem.classList.add("confession-item");
 
-            const confessionAcronym = document.createElement("div");
-            confessionAcronym.classList.add("confession-author");
-            confessionAcronym.textContent = acronymInput;
+            const confessionAcronym = document.createElement("div");
+            confessionAcronym.classList.add("confession-author");
+            confessionAcronym.textContent = acronymInput;
 
-            const confessionMessage = document.createElement("div");
-            confessionMessage.classList.add("confession-message");
-            confessionMessage.textContent = confessionInput;
+            const confessionMessage = document.createElement("div");
+            confessionMessage.classList.add("confession-message");
+          	confessionMessage.textContent = confessionInput;
 
-            confessionItem.appendChild(confessionAcronym);
-            confessionItem.appendChild(confessionMessage);
-            confessionDisplay.appendChild(confessionItem);
+            confessionItem.appendChild(confessionAcronym);
+            confessionItem.appendChild(confessionMessage);
+          	confessionDisplay.appendChild(confessionItem);
 
-            // Clear inputs
-            document.getElementById("acronym-input").value = "";
-            document.getElementById("confession-input").value = "";
+            // Scroll to the new message
+            confessionDisplay.scrollTop = confessionDisplay.scrollHeight;
 
-            // Show success modal
-            document.getElementById("success-modal").style.display = "block";
-          } else {
-            throw new Error("Failed to send confession to Discord");
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          alert("An error occurred. Please try again.");
-        });
-    } else {
-      alert("Please fill in both fields before submitting!");
-    }
-  }
+            // Clear inputs
+            document.getElementById("acronym-input").value = "";
+          	document.getElementById("confession-input").value = "";
 
-  // Function to close the modal
-  function closeModal() {
-    document.getElementById("success-modal").style.display = "none";
-  }
+            // Show success modal
+            document.getElementById("success-modal").style.display = "flex";
+      	  } else {
+          	  throw new Error("Failed to send confession to Discord");
+        	  }
+        })
+        .catch((error) => {
+        	console.error("Error:", error);
+  	  alert("An error occurred. Please try again.");
+        });
+    } else {
+  	alert("Please fill in both fields before submitting!");
+    }
+  }
+
+  // Function to close the modal
+  function closeModal() {
+    document.getElementById("success-modal").style.display = "none";
+  }
 </script>
 
 </body>

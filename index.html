@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marwen O. Deiparine - Portfolio</title>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- "BAKE & TASTE" THEME --- */
+        :root {
+            /* Base Colors (Dark, Moody Purple) */
+            --bg-color: #100E17; /* Very dark purple-black */
+            --card-color: #161220; /* Slightly lighter card bg */
+            --text-color: #F0F0F0;
+            --text-color-secondary: #a09cb0; /* Faded purple-white */
+
+            /* New Accent Palette (Vibrant Purple) */
+            --accent-1: #c026d3; /* Vibrant Purple/Magenta */
+            --accent-2: #7c3aed; /* Deeper Purple */
+            --accent-3: #a855f7; /* Lighter Purple */
+            --terminal-color: #a855f7; /* Purple terminal */
+
+            /* Borders */
+            --border-color: rgba(230, 230, 230, 0.1); /* Very subtle border */
+            --border-style: 1px solid var(--border-color);
+            --border-style-accent: 1px solid var(--accent-1);
+        }
+        /* --- END OF NEW THEME --- */
+
+
+        /* Reset and base font */
+        body {
+            margin: 0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            
+            cursor: default;  
+
+            /* --- "Bake & Taste" Background Gradient --- */
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(ellipse at center, rgba(124, 58, 237, 0.15) 0%, transparent 60%);
+            background-attachment: fixed;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Remove custom cursor */
+        .cursor-dot,
+        .cursor-outline {
+            display: none;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        /* Utility classes */
+        .text-center { text-align: center; }
+        .mt-40 { margin-top: 40px; }
+        .mb-20 { margin-bottom: 20px; }
+        .py-30 { padding-top: 30px; padding-bottom: 30px; }
+
+        /* Card container style */
+        .card-container {
+            background: var(--card-color);
+            padding: 25px;
+            border: var(--border-style);
+            
+            /* 3D Card */
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                        border-color 0.4s ease;
+            transform-style: preserve-3d;
+            border-radius: 12px;
+        }
+
+        /* 3D Hover Effect */
+        .card-container:hover,
+        .project-card:hover,
+        .social-icons a:hover,
+        .cat-gif:hover {
+            border-color: var(--accent-1);
+            transform: translateZ(25px) rotateX(2deg) rotateY(-1deg);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        /* --- NEW: Sticky/Glass Navbar --- */
+        .top-nav {
+            background: rgba(16, 14, 23, 0.7); /* Transparent version of bg */
+            backdrop-filter: blur(10px);
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: var(--border-style);
+            text-transform: uppercase;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .top-nav .logo {
+            font-size: 1.5em;
+            color: var(--text-color);
+            font-weight: 700;
+        }
+        .top-nav .nav-links a {
+            color: var(--text-color-secondary);
+            text-decoration: none;
+            margin-left: 25px;
+            transition: color 0.3s ease;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        .top-nav .nav-links a:hover {
+            color: var(--accent-1);
+            text-decoration: none;
+        }
+        .top-nav .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Language Dropdown Styles */
+        .lang-menu {
+            position: relative;
+        }
+        .lang-menu-button {
+            color: var(--text-color-secondary);
+            font-size: 0.9em;
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-weight: 500;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            transition: background 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        .lang-menu-button:hover {
+            background: var(--accent-1);
+            color: #FFF;
+        }
+        .lang-menu-dropdown {
+            display: none;
+            position: absolute;
+            top: 120%;
+            right: 0;
+            background: var(--card-color);
+            border: var(--border-style);
+            width: 180px;
+            z-index: 100;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .lang-menu.active .lang-menu-dropdown {
+            display: block;
+        }
+        .lang-menu-dropdown a {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 0.9em;
+        }
+        .lang-menu-dropdown a:hover {
+            background: var(--accent-2);
+            color: #FFF;
+        }
+        .lang-menu-dropdown a.active {
+            color: var(--accent-1);
+            font-weight: bold;
+        }
+
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+        }
+        .glitch:hover::before,
+        .glitch:hover::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--card-color);
+            overflow: hidden;
+        }
+        .glitch:hover::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--accent-1);
+            animation: glitch-anim-1 1.5s infinite linear alternate-reverse;
+        }
+        .glitch:hover::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--accent-2), 2px 2px var(--accent-3);
+            animation: glitch-anim-2 1.5s infinite linear alternate-reverse;
+        }
+        @keyframes glitch-anim-1 {
+            0% { clip-path: inset(10% 0 80% 0); }
+            100% { clip-path: inset(70% 0 10% 0); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { clip-path: inset(50% 0 30% 0); }
+            100% { clip-path: inset(0% 0 90% 0); }
+        }
+
+
+        /* --- "BAKE & TASTE" HERO SECTION --- */
+        .hero-section {
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: var(--border-style);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            min-height: 70vh;
+        }
+        
+        .hero-content {
+            flex: 1;
+            max-width: 500px;
+            text-align: left;
+            z-index: 1;
+        }
+
+        .hero-section .hero-eyebrow { /* "HI, MY NAME IS" */
+            font-size: 1em;
+            color: var(--accent-1);
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .hero-section h1 { /* "MARWEN O. DEIPARINE" */
+            font-size: 3.5em;
+            color: var(--text-color);
+            margin: 0;
+            line-height: 1.1;
+            font-weight: 900;
+        }
+        
+        .hero-section h2 { /* "I'm a..." */
+            font-size: 1.8em;
+            color: var(--text-color-secondary);
+            margin: 20px 0;
+            height: 1.2em; /* Reserve space for the typing text */
+            font-weight: 400;
+        }
+
+        /* Animated Typing Effect Styles */
+        .hero-section .auto-type {
+            color: var(--text-color);
+        }
+        .hero-section .auto-type::after {
+            content: '_';
+            color: var(--accent-1);
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* --- Ghost Button Style --- */
+        .cta-button {
+            display: inline-block;
+            background: transparent;
+            color: var(--text-color);
+            padding: 12px 25px;
+            text-decoration: none;
+            font-family: inherit;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 8px;
+            transition: background 0.3s ease, color 0.3s ease;
+            border: 2px solid var(--text-color-secondary);
+            cursor: pointer;
+        }
+        .cta-button:hover {
+            background: var(--accent-1);
+            color: #FFF;
+            border-color: var(--accent-1);
+            transform: translateY(-2px);
+        }
+
+        /* --- Hero Image & Description Column --- */
+        .hero-details {
+            flex: 1;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            z-index: 1;
+        }
+
+        .hero-image-wrapper { /* Was .profile-image-wrapper */
+            width: 250px;
+            height: 250px;
+            overflow: hidden;
+            border: 2px solid var(--accent-1);
+            flex-shrink: 0;
+            padding: 8px;
+            background: #000;
+            border-radius: 50%;
+            box-shadow: 0 0 30px var(--accent-1);
+        }
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(30%);
+            border-radius: 50%;
+        }
+
+        .hero-section .hero-bio { /* Was hero-section p */
+            font-size: 1.1em;
+            color: var(--text-color-secondary);
+            text-align: left;
+        }
+        /* --- END OF NEW HERO SECTION --- */
+
+        /* Main Layout */
+        main {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            gap: 40px;
+            grid-template-columns: 1fr;
+            perspective: 1500px;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            text-align: center;
+            position: relative;
+            z-index: 5;
+        }
+
+        .profile-details {
+            flex-grow: 1;
+            max-width: 100%;
+        }
+        .profile-details h3 {
+            font-size: 1.8em;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .profile-details p {
+            font-size: 1.1em;
+            color: var(--text-color-secondary);
+            margin-bottom: 10px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 2.2em;
+            color: var(--text-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        .section-subtitle {
+            font-size: 1.1em;
+            color: var(--text-color-secondary);
+            text-align: center;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        /* Projects Section */
+        #projects {
+            position: relative;
+            z-index: 4;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .project-card {
+            background: var(--card-color);
+            padding: 25px;
+            border: var(--border-style);
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-color);
+            cursor: pointer;
+            border-radius: 12px;
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                        border-color 0.4s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .project-card .icon {
+            font-size: 3em;
+            color: var(--accent-1);
+            margin-bottom: 15px;
+        }
+        .project-card h4 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+        .project-card p {
+            font-size: 0.9em;
+            color: var(--text-color-secondary);
+        }
+
+        /* Cat Animation */
+        .cat-container {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        .cat-gif {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            cursor: pointer;
+            border: var(--border-style);
+            background: #000;
+            padding: 10px;
+            border-radius: 12px;
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                        border-color 0.4s ease;
+            transform-style: preserve-3d;
+        }
+
+        .cat-message {
+            color: var(--accent-1);
+            font-size: 1em;
+            margin-top: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .cat-gif:hover + .cat-message {
+            opacity: 1;
+        }
+
+        /* Social Media Section */
+        .social-media {
+            text-align: center;
+            position: relative;
+            z-index: 3;
+        }
+        .social-media h3 {
+            font-size: 1.8em;
+            color: var(--text-color);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .social-icons a {
+            text-decoration: none;
+            color: var(--text-color-secondary);
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border: var(--border-style);
+            background: var(--card-color);
+            cursor: pointer;
+            border-radius: 12px;
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                        border-color 0.4s ease, color 0.4s ease;
+            transform-style: preserve-3d;
+        }
+        .social-icons a i {
+            transition: all 0.2s ease-in-out;
+        }
+        .social-icons a:hover {
+            color: var(--accent-1);
+            background: #221a30; /* Dark purple hover */
+        }
+
+        /* Guestbook Section */
+        .guestbook-section {
+            background: var(--card-color);
+            border: var(--border-style);
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            border-radius: 12px;
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                        border-color 0.4s ease;
+            transform-style: preserve-3d;
+        }
+        .guestbook-section:hover {
+             border-color: var(--accent-1);
+            transform: translateZ(25px) rotateX(2deg) rotateY(-1deg);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .guestbook-section h3 {
+            font-size: 1.8em;
+            color: var(--text-color);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        .guestbook-input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto 30px auto;
+        }
+        .guestbook-input-container input,
+        .guestbook-input-container textarea {
+            padding: 15px;
+            border: var(--border-style);
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'Courier New', monospace;
+            font-size: 1em;
+            transition: border-color 0.3s ease, background 0.3s ease;
+            border-radius: 8px;
+        }
+        .guestbook-input-container input::placeholder,
+        .guestbook-input-container textarea::placeholder {
+            color: var(--text-color-secondary);
+            opacity: 1;
+        }
+        .guestbook-input-container input:focus,
+        .guestbook-input-container textarea:focus {
+            outline: none;
+            border-color: var(--accent-1);
+            background: #1a1a1a;
+        }
+        .guestbook-input-container textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .guestbook-input-container button {
+            padding: 15px 20px;
+            background-color: var(--accent-1);
+            color: #FFF;
+            font-size: 1em;
+            font-family: inherit;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            border-radius: 8px;
+        }
+        .guestbook-input-container button:hover {
+            background-color: var(--accent-2);
+            transform: translateY(-2px);
+        }
+
+        /* Guestbook Display */
+        .guestbook-display {
+            margin-top: 30px;
+            max-height: 350px;
+            overflow-y: auto;
+            text-align: left;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            border-top: var(--border-style);
+            padding-top: 20px;
+        }
+        .guestbook-item {
+            background-color: var(--bg-color);
+            padding: 15px;
+            margin: 15px 0;
+            border: var(--border-style);
+            border-radius: 8px;
+        }
+        .guestbook-author {
+            color: var(--accent-1);
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+        .guestbook-message {
+            color: var(--text-color);
+            font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'Courier New', monospace;
+            font-size: 1em;
+            word-wrap: break-word;
+        }
+        .privacy-caption {
+            font-size: 0.8em;
+            color: var(--text-color-secondary);
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+            background: var(--bg-color);
+            border: var(--border-style);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 8px;
+        }
+
+
+        /* --- START: New Light-Theme Music Player (images (6).jpg) --- */
+        
+        /* This is a new container class to avoid conflicts with .card-container's padding/bg */
+        .card-container-music {
+            padding: 25px 0; /* Only top/bottom padding */
+            overflow: visible; /* Allow overlapping */
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Make the h3 title centered */
+        .card-container-music .section-title {
+            text-align: center;
+            margin-bottom: 30px; /* Add space before the widget */
+        }
+
+        .music-widget-container {
+            position: relative;
+            max-width: 340px; /* Width of the widget */
+            margin: 40px auto 0; /* Margin-top to give album art space */
+            text-align: left; /* Reset text-align */
+            font-family: 'Inter', system-ui, sans-serif; /* Match body font */
+        }
+
+        .music-widget-album-art {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 4px solid #fff; /* White border as in example */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            
+            /* This is the magic for overlapping */
+            position: absolute;
+            z-index: 3;
+            top: -30px; /* Pulls it up */
+            left: 30px; /* Pushes it from the left */
+            
+            /* Add a subtle rotation on hover */
+            transition: transform 0.3s ease;
+        }
+        
+        .music-widget-container:hover .music-widget-album-art {
+            transform: rotate(10deg) scale(1.05);
+        }
+
+        .music-widget-info-box {
+            background: #FCEFF1; /* Light pink from example */
+            border-radius: 12px;
+            padding: 20px 20px 20px 140px; /* Left padding = art(90) + space(50) */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2; /* Above controls, below art */
+            min-height: 50px; /* Ensure it has height */
+        }
+        
+        .music-widget-song-title {
+            color: #333; /* Dark text */
+            font-size: 1.1em;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .music-widget-artist-name {
+            color: #777; /* Grey text */
+            font-size: 0.9em;
+            margin-top: 2px;
+            line-height: 1.3;
+        }
+
+        .music-widget-controls-box {
+            background: #FFFFFF; /* White control box */
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            
+            /* Pull it up to overlap the pink box */
+            position: relative;
+            z-index: 1; /* Sits at the bottom */
+            margin-top: -10px; /* The overlap amount */
+        }
+
+        .music-widget-audio-player {
+            width: 100%;
+            height: 40px; /* A cleaner, shorter height */
+            accent-color: var(--accent-1); /* Use user's theme color for the scrub bar */
+        }
+
+        /* Style the light-theme audio player (Chrome/Edge) */
+        .music-widget-audio-player::-webkit-media-controls-panel {
+            background-color: #FFFFFF;
+            color: #333;
+        }
+        .music-widget-audio-player::-webkit-media-controls-timeline {
+            background-color: #EFEFEF;
+            border-radius: 5px;
+            height: 4px;
+        }
+        .music-widget-audio-player::-webkit-media-controls-play-button {
+            color: var(--accent-2); /* Use your purple */
+        }
+        .music-widget-audio-player::-webkit-media-controls-volume-slider,
+        .music-widget-audio-player::-webkit-media-controls-mute-button {
+            color: #555;
+        }
+
+        /* Firefox */
+        .music-widget-audio-player {
+            color: #333;
+            background-color: #fff;
+        }
+        
+        /* --- END: New Light-Theme Music Player --- */
+
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: #000;
+            color: var(--text-color-secondary);
+            font-size: 0.9em;
+            border-top: var(--border-style);
+            margin-top: 50px;
+            position: relative;
+            z-index: 100;
+        }
+
+        /* Modal Design */
+        .modal {
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: var(--card-color);
+            padding: 30px;
+            border: var(--border-style-accent);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            color: var(--text-color);
+            border-radius: 12px;
+        }
+        .modal-content h3 {
+            color: var(--text-color);
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .modal-content p {
+            font-size: 1em;
+            margin: 20px 0;
+            color: var(--text-color-secondary);
+        }
+        .modal-button {
+            background-color: var(--accent-1);
+            padding: 12px 25px;
+            color: #FFF;
+            font-size: 1em;
+            font-family: inherit;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+            border-radius: 8px;
+        }
+        .modal-button:hover {
+            background-color: var(--accent-2);
+        }
+        
+        /* Interactive Terminal */
+        .terminal {
+            background: #000;
+            border: var(--border-style);
+            border-color: var(--terminal-color);
+            font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'Courier New', monospace;
+            font-size: 1.1em;
+            padding: 20px;
+            height: 350px;
+            overflow-y: auto;
+            color: var(--terminal-color);
+            position: relative;
+            z-index: 10;
+            border-radius: 12px;
+        }
+        .terminal-output {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        /* --- THIS IS THE <form> ELEMENT NOW --- */
+        .terminal-line {
+            display: flex;
+        }
+        .terminal-prompt {
+            color: var(--accent-1); /* Purple prompt */
+            margin-right: 10px;
+            white-space: nowrap;
+        }
+        .terminal-input {
+            background: none;
+            border: none;
+            color: var(--terminal-color);
+            font-family: inherit;
+            font-size: 1em;
+            width: 100%;
+            padding: 0;
+        }
+        .terminal-input:focus {
+            outline: none;
+        }
+        /* Blinking block cursor for terminal */
+        .terminal-input-cursor {
+            display: inline-block;
+            background: var(--terminal-color);
+            width: 0.5em;
+            height: 1.2em;
+            animation: blink 1s infinite;
+            margin-left: 2px;
+            position: relative;
+            top: 3px;
+        }
+
+        /* --- CSS FOR UPGRADED TERMINAL --- */
+        .terminal-dir {
+            color: var(--accent-2);
+            font-weight: bold;
+        }
+        .terminal-file {
+            color: var(--text-color);
+        }
+        .terminal-url {
+            color: var(--accent-3);
+            text-decoration: underline;
+        }
+        .terminal-cat-output {
+            color: var(--text-color);
+            padding-left: 10px;
+            border-left: 2px solid var(--border-color);
+            margin: 5px 0;
+            display: block;
+        }
+        
+        /* Player Stats Section */
+        .player-stats {
+            text-align: left;
+            position: relative;
+            z-index: 5;
+        }
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .stats-portrait {
+            width: 120px;
+            height: 120px;
+            border: var(--border-style);
+            border-color: var(--accent-2);
+            padding: 4px;
+            flex-shrink: 0;
+            background: #000;
+            border-radius: 8px;
+        }
+        .stats-portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .stats-info {
+            font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'Courier New', monospace;
+            font-size: 1.1em;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .stats-info p {
+            margin: 0 0 5px 0;
+        }
+
+        .stats-skills {
+            margin-top: 30px;
+        }
+        .skill-bar-wrapper {
+            margin-bottom: 20px;
+        }
+        .skill-title {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            color: var(--text-color-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .skill-bar {
+            width: 100%;
+            height: 24px;
+            background: #222;
+            border: var(--border-style);
+            padding: 2px;
+            border-radius: 8px;
+        }
+        .skill-level {
+            height: 100%;
+            width: 0; /* Animated by JavaScript */
+            background-color: var(--accent-1); /* Default color */
+            transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+            border-radius: 4px;
+        }
+        
+        /* --- START OF NEW SCROLL ANIMATION --- */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* --- END OF NEW SCROLL ANIMATION --- */
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                font-size: 15px;
+            }
+            .top-nav {
+                flex-direction: column;
+                gap: 15px;
+                position: static;
+            }
+            .top-nav .nav-links {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            .top-nav .nav-links a {
+                margin-left: 0;
+            }
+            
+            /* --- Responsive Hero --- */
+            .hero-section {
+                flex-direction: column;
+                padding-top: 40px;
+                padding-bottom: 40px;
+            }
+            .hero-content {
+                text-align: center;
+            }
+            .hero-details {
+                max-width: 100%;
+            }
+            .hero-image-wrapper {
+                width: 200px;
+                height: 200px;
+            }
+            .hero-section .hero-bio {
+                text-align: center;
+            }
+            
+            .hero-section h1 {
+                font-size: 2.5em;
+            }
+            .hero-section h2 {
+                font-size: 1.2em;
+            }
+            main {
+                padding: 20px 15px;
+            }
+            .profile-section {
+                text-align: center;
+            }
+            .profile-details {
+                text-align: center;
+            }
+            .section-title {
+                font-size: 1.8em;
+            }
+            .project-card h4 {
+                font-size: 1.1em;
+            }
+
+            /* Disable 3D on mobile */
+            .card-container:hover,
+            .project-card:hover,
+            .social-icons a:hover,
+            .cat-gif:hover,
+            .guestbook-section:hover {
+                transform: none;
+                box-shadow: none;
+            }
+
+            /* Music Player Responsive Adjustments */
+            .music-widget-container {
+                max-width: 280px; /* Make it a bit smaller on mobile */
+            }
+            .music-widget-info-box {
+                padding: 15px 15px 15px 120px; /* Adjust padding for smaller art */
+            }
+            .music-widget-album-art {
+                width: 80px;
+                height: 80px;
+                left: 20px;
+                top: -25px;
+            }
+            .music-widget-song-title {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="top-nav">
+        <div class="logo">MARWEN</div>
+        <div class="nav-links">
+            <a href="#about-me">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#socials">Socials</a>
+            <a href="#guestbook">Guestbook</a>
+        </div>
+        <div class="user-actions">
+            <div class="lang-menu">
+                <button class="lang-menu-button" id="lang-toggle">
+                    En <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="lang-menu-dropdown" id="lang-dropdown">
+                    <a href="#" class="active">English (En)</a>
+                    <a href="index-fil.html">Filipino (PH)</a>
+                    <a href="#">Español (ES)</a>
+                </div>
+            </div>
+            </div>
+    </nav>
+    
+    <section id="terminal" class="terminal reveal-on-scroll" onclick="document.getElementById('terminal-input').focus()">
+        <div class="terminal-output" id="terminal-output"></div>
+        <form id="terminal-form" class="terminal-line">
+            <span class="terminal-prompt" id="terminal-prompt"></span> <input type="text" class="terminal-input" id="terminal-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+            <span class="terminal-input-cursor" id="terminal-cursor"></span>
+        </form>
+    </section>
+    <header class="hero-section">
+        <div class="hero-content reveal-on-scroll">
+            <div class="hero-eyebrow">HI, MY NAME IS</div>
+            <h1 class="glitch" data-text="MARWEN O. DEIPARINE">MARWEN O. DEIPARINE</h1>
+            <h2>I'm <span class="auto-type"></span></h2>
+            <a href="#projects" class="cta-button">View My Projects</a>
+        </div>
+        <div class="hero-details reveal-on-scroll">
+            <div class="hero-image-wrapper">
+                <img src="https://i.imgur.com/VQ6OsOO.png" alt="Marwen O. Deiparine">
+            </div>
+            <p class="hero-bio">
+                I use creativity and technology to craft layouts and solutions. Swimming, coding, and designing are my passions!
+            </p>
+        </div>
+    </header>
+    <main>
+
+        
+        <section id="about-me" class="card-container profile-section reveal-on-scroll">
+            <div class="profile-details">
+                <h3 class="glitch" data-text="About Me">About Me</h3>
+                <p>
+                    Hello! I'm Marwen, an 18-year-old BSIT student passionate about technology and design. As a layout artist, I enjoy transforming ideas into visuals. Outside of work, I'm a varsity swimmer and a music enthusiast, playing both guitar and bass guitar.
+                </p>
+                <p>
+                    I believe in continuous learning and creativity. Let's create something amazing together!
+                </p>
+            </div>
+        </section>
+        
+        </section> <section id="stats" class="card-container player-stats reveal-on-scroll">
+            <h3 class="glitch" data-text="PLAYER_STATS">PLAYER_STATS</h3>
+            <div class="stats-container">
+                <div class="stats-portrait">
+                    <img src="https://i.imgur.com/VQ6OsOO.png" alt="Marwen's Portrait">
+                </div>
+                <div class="stats-info">
+                    <p>NAME: Marwen O. Deiparine</p>
+                    <p>CLASS: Developer / Artist</p>
+                    <p>LEVEL: 18 (BSIT Student)</p>
+                </div>
+            </div>
+            <div class="stats-skills">
+                <div class="skill-bar-wrapper">
+                    <span class="skill-title">CODING (HTML/CSS/JS)</span>
+                    <div class="skill-bar">
+                        <div class="skill-level" data-level="60%" data-color="accent-1"></div>
+                    </div>
+                </div>
+                <div class="skill-bar-wrapper">
+                    <span class="skill-title">DESIGN (Layout Art)</span>
+                    <div class="skill-bar">
+                        <div class="skill-level" data-level="75%" data-color="accent-2"></div>
+                    </div>
+                </div>
+                <div class="skill-bar-wrapper">
+                    <span class="skill-title">MUSIC (Guitar/Bass)</span>
+                    <div class="skill-bar">
+                        <div class="skill-level" data-level="50%" data-color="accent-3"></div>
+                    </div>
+                </div>
+                <div class="skill-bar-wrapper">
+                    <span class="skill-title">ATHLETICS (Swimming)</span>
+                    <div class="skill-bar">
+                        <div class="skill-level" data-level="85%" data-color="terminal-color"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="projects" class="py-30 reveal-on-scroll">
+            <h2 class="section-title glitch" data-text="My Projects">My Projects</h2>
+            <p class="section-subtitle">A collection of my recent work and practice projects.</p>
+
+            <div class="projects-grid">
+                <a href="https://kikuro12.github.io/kiur-login-page/" class="project-card" target="_blank">
+                    <i class="fas fa-lock icon"></i>
+                    <h4>Kiur Login Page</h4>
+                    <p>A sleek and functional login page design.</p>
+                </a>
+                <a href="https://kikuro12.github.io/kikuro-calendar/" class="project-card" target="_blank">
+                    <i class="fas fa-calendar-alt icon"></i>
+                    <h4>Kiur Calendar</h4>
+                    <p>An interactive calendar application.</p>
+                </a>
+                <a href="https://kikuro12.github.io/kiur-calculator/" class="project-card" target="_blank">
+                    <i class="fas fa-calculator icon"></i>
+                    <h4>Kiur Calculator</h4>
+                    <p>A basic calculator with a clean interface.</p>
+                </a>
+                 <div class="project-card">
+                    <i class="fas fa-code icon"></i>
+                    <h4>More Coming Soon!</h4>
+                    <p>Actively developing new projects.</p>
+                </div>
+            </div>
+
+            <div class="card-container mt-40">
+                This project is still a work in progress. It was created for practice, so please manage your expectations. I encourage you to provide feedback, which you can submit through the guestbook below.
+            </div>
+        </section>
+
+        
+        <div class="cat-container reveal-on-scroll">
+            <img src="https://i.gifer.com/nUq.gif" alt="Interactive Cat GIF" class="cat-gif">
+            <p class="cat-message">Meow! I'm your fun study buddy!</p>
+        </div>
+
+        
+        <section id="socials" class="card-container social-media reveal-on-scroll">
+            <h3 class="glitch" data-text="Find Me On">Find Me On</h3>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/profile.php?id=100025231074173" target="_blank" title="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.instagram.com/mhrwennn?igsh=OGQ5ZDc2ODk2ZA==" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" onclick="copyEmail(event)" title="Click to copy email" id="email-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://github.com/Kikuro12" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </section>
+
+        
+        <section id="guestbook" class="guestbook-section reveal-on-scroll">
+            <h3 class="glitch" data-text="Sign My Guestbook">Sign My Guestbook</h3>
+            <div class="guestbook-input-container">
+                <input type="text" id="guestbook-name" placeholder="Enter your name/alias <3">
+                <textarea id="guestbook-message" placeholder="Write your message..."></textarea>
+                <button onclick="submitGuestbook()">Submit Entry</button>
+            </div>
+
+            <div class="cat-container">
+                <img src="https://i.gifer.com/2iFb.gif" alt="Interactive Cat Gif" class="cat-gif">
+            </div>
+
+            <div class="guestbook-display" id="guestbook-display"></div>
+
+            <p class="privacy-caption">
+                Your entry will be sent securely to my private server. Only you can see your results below. Rest assured, your privacy is guaranteed.
+            </p>
+
+            
+            <div id="success-modal" class="modal">
+                <div class="modal-content">
+                    <h3>Entry Submitted!</h3>
+                    <p>Your guestbook entry has been submitted. Thank you for visiting!</p>
+                    <button class="modal-button" onclick="closeModal()">Close</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="music" class="card-container-music reveal-on-scroll">
+            <h3 class="glitch section-title" data-text="My Music">My Music</h3>
+            
+            <div class="music-widget-container">
+                <img src="https://i.imgur.com/VQ6OsOO.png" alt="Album Art" class="music-widget-album-art">
+                
+                <div class="music-widget-info-box">
+                    <div class="music-widget-song-title">Sugar</div>
+                    <div class="music-widget-artist-name">Maroon 5</div>
+                </div>
+                
+                <div class="music-widget-controls-box">
+                    <audio class="music-widget-audio-player" controls src="Maroon 5 - Sugar (Lyrics).mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+        </section>
+        </main>
+
+    
+    <footer>
+        <p>&copy; 2024-2025 Marwen O. Deiparine. All rights reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+    <script>
+        // Webhook URL (existing)
+        const DISCORD_WEBHOOK_URL = "httpsalhost://discord.com/api/webhooks/1309141481038286939/ivcz2msx4Bqryx8d4GLWv9mrQANgEPbip_ExzPww96Vqky9MnEtk1k_1LqHnK2oi-1WH";
+
+        // Guestbook submission function (renamed)
+        function submitGuestbook() {
+            const nameInput = document.getElementById("guestbook-name").value.trim();
+            const messageInput = document.getElementById("guestbook-message").value.trim();
+
+            if (nameInput !== "" && messageInput !== "") {
+                const payload = {
+                    content: `**${nameInput}**\n${messageInput}`,
+                    username: "Guestbook Bot",
+                    avatar_url: "https://i.imgur.com/VQ6OsOO.png",
+                };
+
+                fetch(DISCORD_WEBHOOK_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload),
+                })
+                .then((response) => {
+                    if (response.ok) {
+                        const display = document.getElementById("guestbook-display");
+                        const item = document.createElement("div");
+                        item.classList.add("guestbook-item");
+
+                        const author = document.createElement("div");
+                        author.classList.add("guestbook-author");
+                        author.textContent = nameInput;
+
+                        const message = document.createElement("div");
+                        message.classList.add("guestbook-message");
+                        message.textContent = messageInput;
+
+                        item.appendChild(author);
+                        item.appendChild(message);
+                        display.appendChild(item);
+                        display.scrollTop = display.scrollHeight;
+
+                        document.getElementById("guestbook-name").value = "";
+                        document.getElementById("guestbook-message").value = "";
+                        document.getElementById("success-modal").style.display = "flex";
+                    } else {
+                        throw new Error("Failed to send message to Discord");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    alert("An error occurred. Please try again.");
+                });
+            } else {
+                alert("Please fill in both fields before submitting!");
+            }
+        }
+
+        // Close modal function (existing)
+        function closeModal() {
+            document.getElementById("success-modal").style.display = "none";
+        }
+
+        // Click-to-Copy Email Function (existing)
+        function copyEmail(event) {
+            event.preventDefault();
+            const email = 'Kikuro112@gmail.com';
+            
+            navigator.clipboard.writeText(email).then(() => {
+                const emailLink = document.getElementById('email-link');
+                const emailIcon = emailLink.querySelector('i');
+                const originalTitle = emailLink.title;
+
+                emailIcon.classList.remove('fa-envelope');
+                emailIcon.classList.add('fa-check');
+                emailLink.title = 'Copied!';
+
+                setTimeout(() => {
+                    emailIcon.classList.remove('fa-check');
+                    emailIcon.classList.add('fa-envelope');
+                    emailLink.title = originalTitle;
+                }, 2000);
+
+            }).catch(err => {
+                console.error('Failed to copy email: ', err);
+                alert('Failed to copy email.');
+            });
+        }
+
+        // Wait for the DOM to load
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Typing Animation Script (existing)
+            new Typed('.auto-type', {
+                strings: ['Aspiring Developer', 'Layout Artist', 'Varsity Swimmer', 'Music Enthusiast'],
+                typeSpeed: 100,
+                backSpeed: 50,
+                loop: true,
+                backDelay: 1500,
+                smartBackspace: true
+            });
+            
+            // --- Language Menu Script (Restored) ---
+            const langMenu = document.querySelector('.lang-menu');
+            const langToggle = document.getElementById('lang-toggle');
+            
+            if(langToggle) {
+                langToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    langMenu.classList.toggle('active');
+                });
+            }
+
+            document.addEventListener('click', (e) => {
+                if (langMenu && langMenu.classList.contains('active') && !langMenu.contains(e.target)) {
+                    langMenu.classList.remove('active');
+                }
+            });
+            
+            // --- Skill Bar Animation on Scroll ---
+            const skillLevels = document.querySelectorAll('.skill-level');
+
+            const skillObserverOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5 // Start animation when 50% is visible
+            };
+
+            const skillObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const skillElement = entry.target;
+                        const level = skillElement.dataset.level;
+                        const colorVar = skillElement.dataset.color;
+                        
+                        if (colorVar) {
+                            skillElement.style.backgroundColor = `var(--${colorVar})`;
+                        }
+                        
+                        skillElement.style.width = level;
+                        
+                        observer.unobserve(skillElement);
+                    }
+                });
+            }, skillObserverOptions);
+
+            skillLevels.forEach(el => skillObserver.observe(el));
+            
+            // --- ========================================== ---
+            // --- 🚀 NEW: SCROLL ANIMATION LOGIC 🚀 ---
+            // --- ========================================== ---
+            const revealElements = document.querySelectorAll('.reveal-on-scroll');
+            
+            const revealObserverOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // Start when 10% is visible
+            };
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // One-time animation
+                    }
+                });
+            }, revealObserverOptions);
+
+            revealElements.forEach(el => revealObserver.observe(el));
+            // --- END OF SCROLL ANIMATION LOGIC ---
+
+            // --- ========================================== ---
+            // --- 🚀 UPGRADED INTERACTIVE TERMINAL LOGIC 🚀 ---
+            // --- ========================================== ---
+            const terminalOutput = document.getElementById('terminal-output');
+            const terminalInput = document.getElementById('terminal-input');
+            const terminalContainer = document.getElementById('terminal');
+            const terminalPrompt = document.getElementById('terminal-prompt');
+            
+            // --- BUG FIX: Get the new <form> element ---
+            const terminalForm = document.getElementById('terminal-form'); 
+
+            // --- 1. Define the File System ---
+            const fileSystem = {
+                'about.txt': "Hello! I'm Marwen, an 18-year-old BSIT student passionate about technology and design. As a layout artist, I enjoy transforming ideas into visuals. Outside of work, I'm a varsity swimmer and a music enthusiast, playing both guitar and bass guitar.",
+                'skills.txt': "CODING: 60%\nDESIGN: 75%\nMUSIC: 50%\nATHLETICS: 85%\n\n(View the animated bars at #stats)",
+                'projects': {
+                    'README.txt': "This folder contains my projects. Use 'open [filename]' to view them in a new tab.",
+                    'kiur-login.url': 'https://kikuro12.github.io/kiur-login-page/',
+                    'kiur-calendar.url': 'https://kikuro12.github.io/kikuro-calendar/',
+                    'kiur-calculator.url': 'https://kikuro12.github.io/kiur-calculator/'
+                },
+                'socials': {
+                    'facebook.url': 'https://www.facebook.com/profile.php?id=100025231074173',
+                    'instagram.url': 'https://www.instagram.com/mhrwennn?igsh=OGQ5ZDc2ODk2ZA==',
+                    'github.url': 'https://github.com/Kikuro12'
+                }
+            };
+            let currentDirectory = fileSystem;
+            let currentPath = ['~'];
+
+            // --- 2. Helper Functions ---
+            function printToTerminal(html, lineBreak = true) {
+                terminalOutput.innerHTML += html + (lineBreak ? '<br><br>' : '');
+                terminalContainer.scrollTop = terminalContainer.scrollHeight;
+            }
+            
+            function getCurrentDirFromPath() {
+                let dir = fileSystem;
+                for (let i = 1; i < currentPath.length; i++) {
+                    dir = dir[currentPath[i]];
+                }
+                return dir;
+            }
+            
+            function updatePrompt() {
+                terminalPrompt.textContent = `user@marwen.dev:${currentPath.join('/')}$`;
+            }
+
+            // --- 3. Command Handler ---
+            function handleCommand(command) {
+                const args = command.toLowerCase().split(' ').filter(Boolean);
+                const cmd = args[0];
+                const arg = args[1];
+                
+                printToTerminal(`<span>${terminalPrompt.textContent}</span> ${command}`, false);
+
+                switch(cmd) {
+                    case 'help':
+                        printToTerminal(
+                            "**Available commands:**\n" +
+                            "  'help'           - Shows this list\n" +
+                            "  'ls'             - Lists files and directories\n" +
+                            "  'cd [dir]'       - Changes directory (use 'cd ..' to go up)\n" +
+                            "  'cat [file]'     - Displays the content of a file\n" +
+                            "  'open [file.url]'- Opens a .url file in a new tab\n" +
+                            "  'scrollto [id]'  - Scrolls to a page section (e.g., 'scrollto about')\n" +
+                            "  'whoami'         - Displays user info\n" +
+                            "  'clear'          - Clears the terminal screen"
+                        );
+                        break;
+                        
+                    case 'ls':
+                        const items = Object.keys(currentDirectory);
+                        let output = '';
+                        items.forEach(item => {
+                            if (typeof currentDirectory[item] === 'object') {
+                                output += `<span class="terminal-dir">${item}/</span>  `;
+                            } else if (item.endsWith('.url')) {
+                                output += `<span class="terminal-url">${item}</span>  `;
+                            } else {
+                                output += `<span class="terminal-file">${item}</span>  `;
+                            }
+                        });
+                        printToTerminal(output || 'Directory is empty.');
+                        break;
+
+                    case 'cd':
+                        if (!arg) {
+                            printToTerminal("Usage: cd [directory]");
+                        } else if (arg === '..') {
+                            if (currentPath.length > 1) {
+                                currentPath.pop();
+                                currentDirectory = getCurrentDirFromPath();
+                            }
+                        } else if (currentDirectory[arg] && typeof currentDirectory[arg] === 'object') {
+                            currentDirectory = currentDirectory[arg];
+                            currentPath.push(arg);
+                        } else {
+                            printToTerminal(`Directory not found: ${arg}`);
+                        }
+                        updatePrompt();
+                        printToTerminal('', false);
+                        break;
+                        
+                    case 'cat':
+                        if (!arg) {
+                            printToTerminal(
+                                "    /\\_/\\\n" +
+                                "   ( o.o )\n" +
+                                "    > ^ <\n" +
+                                "   Meow!"
+                            );
+                        } else if (currentDirectory[arg] && typeof currentDirectory[arg] === 'string') {
+                            printToTerminal(`<pre class="terminal-cat-output">${currentDirectory[arg]}</pre>`);
+                        } else if (currentDirectory[arg]) {
+                            printToTerminal(`'${arg}' is a directory. Use 'cd ${arg}'.`);
+                        } else {
+                            printToTerminal(`File not found: ${arg}`);
+                        }
+                        break;
+                        
+                    case 'open':
+                        if (!arg) {
+                            printToTerminal("Usage: open [file.url]");
+                        } else if (currentDirectory[arg] && arg.endsWith('.url')) {
+                            window.open(currentDirectory[arg], '_blank');
+                            printToTerminal(`Opening ${arg}...`);
+                        } else {
+                            printToTerminal(`Not a valid .url file: ${arg}`);
+                        }
+                        break;
+
+                    case 'scrollto':
+                        const targetId = arg;
+                        const element = document.getElementById(targetId);
+                        if (element) {
+                            printToTerminal(`Navigating to #${targetId}...`);
+                            element.scrollIntoView();
+                        } else {
+                            printToTerminal(`Section not found: #${targetId}. Try 'about', 'projects', 'socials', or 'guestbook'.`);
+                        }
+                        break;
+                        
+                    case 'whoami':
+                        printToTerminal(
+                            "User: Marwen O. Deiparine\n" +
+                            "Title: BSIT Student\n" +
+                            "Skills: Layout Artist, Developer, Swimmer"
+                        );
+                        break;
+                        
+                    case 'clear':
+                        terminalOutput.innerHTML = '';
+                        printToTerminal('', false);
+                        break;
+
+                    default:
+                        printToTerminal(`Command not found: ${cmd}. Type 'help' for commands.`);
+                }
+            }
+
+        // --- 4. Event Listeners and Boot Sequence ---
+        
+        // --- BUG FIX: Replaced 'keydown' with 'submit' ---
+        terminalForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // This is the fix! It stops the form submission.
+            
+            const command = terminalInput.value.trim();
+            if (command) {
+                handleCommand(command);
+            } else {
+                // Print a new prompt line if user just hits enter
+                printToTerminal(`<span>${terminalPrompt.textContent}</span> `, false);
+                printToTerminal('', false);
+            }
+            terminalInput.value = '';
+            return false; // An extra failsafe
+        });
+        // --- END OF BUG FIX ---
+        
+        // Terminal focus logic
+        const cursor = document.getElementById('terminal-cursor');
+        terminalInput.addEventListener('focus', () => cursor.style.display = 'inline-block');
+        terminalInput.addEventListener('blur', () => cursor.style.display = 'none');
+        
+        // --- 5. Boot-up Sequence ---
+        async function bootSequence() {
+            const bootLines = [
+                "Booting MARWEN.OS v4.0 (Purple Haze)...",
+                "Loading kernel modules...",
+                "Initializing virtual file system...",
+                "Mounting /dev/portfolio...",
+                "Network interface connected.",
+                "All systems nominal.",
+                "",
+                "Welcome to Marwen.dev",
+                "Type 'help' to see a list of available commands.",
+            ];
+            
+            terminalInput.disabled = true;
+            terminalPrompt.textContent = "BOOTING...$";
+            
+            for (const line of bootLines) {
+                await new Promise(r => setTimeout(r, Math.random() * 100 + 20)); // Faster boot
+                printToTerminal(line, false);
+            }
+            
+            terminalInput.disabled = false;
+            terminalInput.placeholder = ""; // Remove placeholder after boot
+            updatePrompt();
+            terminalInput.focus();
+        }
+
+        // Start the boot sequence!
+        bootSequence();
+        // --- End of Upgraded Terminal Logic ---
+
+    });
+</script>
+
+</body>
+</html>

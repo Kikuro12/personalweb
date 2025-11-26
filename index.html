@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marwen O. Deiparine | System v2.5</title>
+    <title>Marwen O. Deiparine | Portfolio</title>
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -231,7 +231,7 @@
         .project-item span { font-size:0.85em; color:var(--text-muted); }
         .project-icon { font-size: 1.5em; color: var(--accent-primary); margin-bottom: 10px; }
 
-        /* --- MASONRY LAYOUT FOR SAMPLES (Fix for mixed sizes) --- */
+        /* --- MASONRY LAYOUT FOR SAMPLES --- */
         .layout-gallery {
             column-count: 3; /* 3 Columns for desktop */
             column-gap: 20px;
@@ -275,10 +275,15 @@
             border-left: 3px solid var(--accent-primary);
         }
         .guestbook-form { display: flex; gap: 10px; margin-bottom: 15px; }
+        
+        /* Updated Inputs for Mobile Compat */
         .gb-input {
             background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); color: white;
             padding: 12px; border-radius: 8px; font-family: var(--font-code); font-size: 0.9em;
         }
+        .gb-input-name { width: 35%; }
+        .gb-input-msg { flex-grow: 1; }
+
         .gb-input:focus { outline: none; border-color: var(--accent-primary); }
         .btn-glow {
             background: var(--accent-primary); color: white; border: none; padding: 0 25px;
@@ -343,12 +348,26 @@
         }
         .term-toggle:hover { transform: rotate(15deg) scale(1.1); background: var(--accent-primary); color: #fff; }
 
+        /* --- MOBILE RESPONSIVENESS --- */
         @media (max-width: 900px) {
             .main-container { grid-template-columns: 1fr; }
             .area-hero, .area-profile, .area-stats, .area-music, .area-cat, .area-projects, .area-layouts, .area-guestbook, .area-socials, .area-disclaimer { grid-column: span 1; }
             h1 { font-size: 2.5em; }
             .top-nav { padding: 20px; }
+            
             .layout-gallery { column-count: 1; } /* 1 Column on Mobile */
+            
+            /* --- GUESTBOOK MOBILE FIX --- */
+            .guestbook-form { 
+                flex-direction: column; /* Stack inputs */
+            }
+            .gb-input-name, .gb-input-msg {
+                width: 100%; /* Full width */
+            }
+            .btn-glow {
+                width: 100%; /* Full width button */
+                padding: 15px; /* Larger touch target */
+            }
         }
     </style>
 </head>
@@ -464,7 +483,7 @@
                 
                 <div class="layout-card">
                     <img src="https://i.imgur.com/gGg9QBR.jpeg" alt="Fallen Movie Poster">
-                    <div class="layout-overlay">Film Poster Design</div>
+                    <div class="layout-overlay">Film Poster</div>
                 </div>
 
                 <div class="layout-card">
@@ -474,7 +493,12 @@
 
                 <div class="layout-card">
                     <img src="https://i.imgur.com/BUOFk0G.png" alt="Ace-Tep Up Event">
-                    <div class="layout-overlay">Event Promo</div>
+                    <div class="layout-overlay">Event</div>
+                </div>
+                
+                <div class="layout-card">
+                    <img src="https://i.imgur.com/rjs5zGC.jpeg" alt="Ace-Tep Up Event">
+                    <div class="layout-overlay">Sports Graphic</div>
                 </div>
 
             </div>
@@ -488,8 +512,8 @@
             </p>
 
             <div class="guestbook-form">
-                <input type="text" id="gb-name" class="gb-input" placeholder="Name / Alias <3" style="width: 35%;">
-                <input type="text" id="gb-msg" class="gb-input" placeholder="Write your message..." style="flex-grow:1;">
+                <input type="text" id="gb-name" class="gb-input gb-input-name" placeholder="Name / Alias <3">
+                <input type="text" id="gb-msg" class="gb-input gb-input-msg" placeholder="Write your message...">
                 <button class="btn-glow" onclick="submitGuestbook()"><i class="fas fa-paper-plane"></i></button>
             </div>
             
@@ -621,7 +645,7 @@
 
         async function bootSequence() {
             const lines = [
-                "Booting MARWEN.OS v2.5...",
+                "Booting MARWEN.OS v2.7...",
                 "Loading kernel modules...",
                 "Mounting /dev/portfolio...",
                 "Initializing interface...",

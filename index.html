@@ -49,7 +49,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- IMMERSIVE BACKGROUND (Made highly noticeable) --- */
+        /* --- IMMERSIVE BACKGROUND --- */
         #tsparticles {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none;
         }
@@ -85,7 +85,7 @@
             display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px;
         }
 
-        /* Glassmorphism Cards with Cursor Spotlight */
+        /* Glassmorphism Cards */
         .card {
             background: var(--glass-bg);
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
@@ -98,7 +98,6 @@
             display: flex; flex-direction: column;
         }
         
-        /* Disable hover effects natively on touch devices */
         @media (hover: hover) {
             .card::before {
                 content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
@@ -111,7 +110,6 @@
 
         .card > * { position: relative; z-index: 1; }
 
-        /* Card Headers */
         .card-header {
             display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
             font-size: 0.9em; font-family: var(--font-code); text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);
@@ -121,20 +119,12 @@
         /* --- GRID AREAS --- */
         .area-hero { grid-column: span 8; grid-row: span 2; justify-content: center; padding: 50px;}
         .area-profile { grid-column: span 4; align-items: center; justify-content: center; text-align: center; }
-        
-        /* Skills, Tech, Socials Row */
         .area-skills { grid-column: span 4; }
         .area-tech { grid-column: span 4; }
         .area-socials { grid-column: span 4; }
-        
-        /* Projects & Hosting Row */
         .area-projects { grid-column: span 8; }
         .area-hosting { grid-column: span 4; }
-        
-        /* Layouts Row */
         .area-layouts { grid-column: span 12; }
-        
-        /* Interactive Row */
         .area-music { grid-column: span 6; }
         .area-guestbook { grid-column: span 6; }
 
@@ -157,13 +147,12 @@
         }
         .profile-title { font-family: var(--font-code); color: var(--accent-primary); font-size: 0.85em; margin-top: 5px; }
 
-        /* --- REALISTIC SKILLS --- */
+        /* --- SKILLS & TECH --- */
         .skill-item { margin-bottom: 15px; }
         .skill-info { display: flex; justify-content: space-between; font-family: var(--font-code); font-size: 0.85em; margin-bottom: 6px; }
         .skill-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; }
         .skill-fill { height: 100%; background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); border-radius: 4px; transform-origin: left; transform: scaleX(0); transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1); }
 
-        /* --- TECH ARSENAL --- */
         .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; }
         .tech-tag {
             padding: 6px 14px; background: rgba(255,255,255,0.03); 
@@ -175,12 +164,9 @@
             .tech-tag:hover { background: rgba(192, 38, 211, 0.15); border-color: var(--accent-primary); transform: translateY(-2px); }
         }
 
-        /* --- SOCIALS (CONNECT WITH ME) --- */
+        /* --- SOCIALS --- */
         .socials-grid { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px; 
-            flex-grow: 1;
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; flex-grow: 1;
         }
         .social-btn {
             display: flex; align-items: center; justify-content: center;
@@ -192,7 +178,7 @@
             .social-btn:hover { background: var(--text-main); color: var(--bg-base); transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
         }
 
-        /* --- PROJECTS & HOSTING --- */
+        /* --- ACADEMIC PROJECTS --- */
         .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
         .project-card {
             background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 20px;
@@ -204,17 +190,20 @@
         .project-icon { font-size: 2rem; color: var(--accent-primary); }
         .project-card h4 { font-size: 1.1rem; }
         .project-card p { font-size: 0.85em; color: var(--text-muted); line-height: 1.4; margin: 0; }
-        
-        .hosting-banner { text-align: center; padding: 15px 0; display: flex; flex-direction: column; align-items: center; }
-        .hosting-logo { font-size: 3rem; color: var(--accent-secondary); margin-bottom: 10px; text-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
-        .hosting-btn {
-            margin-top: 15px; padding: 10px 20px; background: rgba(59, 130, 246, 0.1); 
-            border: 1px solid rgba(59, 130, 246, 0.4); color: #fff; text-decoration: none; 
-            border-radius: 12px; font-size: 0.85em; font-weight: bold; transition: 0.3s;
-            display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-code);
+
+        /* --- ACTIVE PROJECTS (MINI-CARDS) --- */
+        .active-projects-wrapper { display: flex; flex-direction: column; gap: 15px; flex-grow: 1; justify-content: center; margin-top: 5px; }
+        .mini-card {
+            text-decoration: none; color: var(--text-main);
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px; padding: 15px; display: flex; align-items: center; gap: 15px; transition: 0.3s;
         }
+        .mini-card-icon { font-size: 2.2rem; }
+        .mini-card-info h4 { margin-bottom: 2px; font-size: 1.05rem; }
+        .mini-card-info p { font-size: 0.8em; color: var(--text-muted); margin: 0; line-height: 1.3; }
         @media (hover: hover) {
-            .hosting-btn:hover { background: var(--accent-secondary); box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); transform: translateY(-2px); }
+            .mini-card.kryos:hover { background: rgba(59, 130, 246, 0.05); border-color: rgba(59, 130, 246, 0.3); transform: translateY(-2px); }
+            .mini-card.pedi:hover { background: rgba(192, 38, 211, 0.05); border-color: rgba(192, 38, 211, 0.3); transform: translateY(-2px); }
         }
 
         /* --- LAYOUTS (MASONRY) --- */
@@ -274,17 +263,15 @@
         }
         .gb-btn:active { transform: scale(0.98); }
 
-        /* --- FOOTER --- */
+        /* --- FOOTER & TERMINAL --- */
         .site-footer {
-            max-width: 1400px; margin: 0 auto;
-            padding: 40px 20px; text-align: center;
+            max-width: 1400px; margin: 0 auto; padding: 40px 20px; text-align: center;
             border-top: 1px solid var(--glass-border);
             color: var(--text-muted); font-family: var(--font-code); font-size: 0.85em;
         }
         .site-footer a { color: var(--accent-primary); text-decoration: none; }
         .site-footer a:hover { text-decoration: underline; }
 
-        /* --- TERMINAL FLOAT & POPUP --- */
         .term-float {
             position: fixed; bottom: 30px; right: 30px; width: 55px; height: 55px;
             background: rgba(20,20,25,0.8); backdrop-filter: blur(10px); border: 1px solid var(--glass-border);
@@ -311,11 +298,9 @@
         .term-input-line { display: flex; margin-top: 10px; flex-wrap: wrap; }
         .term-input { background: transparent; border: none; color: #10b981; font-family: inherit; font-size: inherit; flex: 1; outline: none; min-width: 150px; }
 
-
         /* =========================================
            MOBILE & TABLET RESPONSIVE DESIGN
         ========================================= */
-        
         @media (max-width: 1024px) {
             .container { grid-template-columns: repeat(8, 1fr); margin-top: 90px; }
             .area-hero, .area-projects, .area-layouts { grid-column: span 8; }
@@ -447,15 +432,25 @@
         </div>
 
         <div class="card area-hosting">
-            <div class="card-header"><i class="fas fa-server"></i> Active Project</div>
-            <div class="hosting-banner">
-                <i class="fas fa-cloud hosting-logo"></i>
-                <h3 style="margin-bottom: 5px;">KryosCloud Hosting</h3>
-                <p style="font-size: 0.85em; color: var(--text-muted); line-height: 1.4;">Managing high-performance custom game servers, VPS infrastructure, and Pterodactyl panels. Turning tech hobby into a service.</p>
+            <div class="card-header"><i class="fas fa-server"></i> Active Projects</div>
+            <div class="active-projects-wrapper">
                 
-                <a href="https://kryoscloud.tech" target="_blank" class="hosting-btn">
-                    Visit KryosCloud <i class="fas fa-arrow-right" style="margin-left: 3px;"></i>
+                <a href="https://kryoscloud.tech" target="_blank" class="mini-card kryos">
+                    <i class="fas fa-cloud mini-card-icon" style="color: var(--accent-secondary); text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);"></i>
+                    <div class="mini-card-info">
+                        <h4>KryosCloud</h4>
+                        <p>Game servers & Jexactyl hosting.</p>
+                    </div>
                 </a>
+
+                <a href="https://betapedifare.kryoscloud.tech" target="_blank" class="mini-card pedi">
+                    <i class="fas fa-route mini-card-icon" style="color: var(--accent-primary); text-shadow: 0 0 15px rgba(192, 38, 211, 0.4);"></i>
+                    <div class="mini-card-info">
+                        <h4>Beta PediFare</h4>
+                        <p>Live custom web application.</p>
+                    </div>
+                </a>
+
             </div>
         </div>
 
@@ -479,7 +474,19 @@
                 </div>
                 <div class="masonry-item">
                     <img src="https://i.imgur.com/rjs5zGC.jpeg" alt="Sports Event">
-                    <div class="masonry-overlay">Ace-Tep Up Event Graphic</div>
+                    <div class="masonry-overlay">Basketball League Graphic</div>
+                </div>
+                <div class="masonry-item">
+                    <img src="https://i.imgur.com/f72VhNH.png" alt="Sublimation Polo Shirt Design 1">
+                    <div class="masonry-overlay">Sublimation Polo Design</div>
+                </div>
+                <div class="masonry-item">
+                    <img src="https://i.imgur.com/6Ht5cQH.png" alt="Sublimation Polo Shirt Design 2">
+                    <div class="masonry-overlay">Sublimation Polo Concept</div>
+                </div>
+                <div class="masonry-item">
+                    <img src="https://i.imgur.com/5PnLsUs.png" alt="Sublimation Polo Shirt Design 2">
+                    <div class="masonry-overlay">KryosCloud Graphic</div>
                 </div>
             </div>
         </div>
@@ -631,7 +638,7 @@
             }
         });
 
-        // --- GUESTBOOK LOGIC (Placeholder Webhook) ---
+        // --- GUESTBOOK LOGIC ---
         function submitGuestbook() {
             const name = document.getElementById('gb-name').value.trim();
             const msg = document.getElementById('gb-msg').value.trim();

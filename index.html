@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Marwen O. Deiparine — BSIS Student & Developer</title>
+    <meta name="description" content="Portfolio of Marwen O. Deiparine — 19-year-old BSIS student, UI/UX designer, server admin, varsity swimmer, and founder of KryosCloud.">
+    <meta name="author" content="Marwen O. Deiparine">
+    <meta name="theme-color" content="#090d16">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@300..600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Geist', 'system-ui', 'sans-serif'],
+                        mono: ['Geist Mono', 'ui-monospace', 'monospace'],
+                        pixel: ['Geist Pixel', 'Geist Mono', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+    @font-face {
+        font-family: 'Geist Pixel';
+        src: url('https://cdn.jsdelivr.net/gh/vercel/geist-pixel-font@main/fonts/webfonts/GeistPixel-Square.woff2') format('woff2');
+        font-display: swap;
+    }
+
+    :root {
+        --bg: 255 255 255;
+        --ink: 15 23 42;
+        --halftone: rgba(15, 23, 42, 0.85);
+    }
+    html.dark {
+        --bg: 9 13 22;
+        --ink: 248 250 252;
+        --halftone: rgba(248, 250, 252, 0.35);
+        color-scheme: dark;
+    }
+
+    html { background-color: rgb(var(--bg)); }
+    body { background-color: rgb(var(--bg)); color: rgb(var(--ink)); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    ::selection { background: #4f46e5; color: #ffffff; }
+
+    /* Halftone dot texture */
+    .halftone {
+        background-image: radial-gradient(circle at center, var(--halftone) 1px, transparent 1.6px);
+        background-size: 9px 9px;
+    }
+    .halftone-wide  { background-size: 13px 13px; }
+
+    .mask-tr { -webkit-mask-image: radial-gradient(ellipse 80% 80% at 100% 0%, #000 0%, transparent 65%); mask-image: radial-gradient(ellipse 80% 80% at 100% 0%, #000 0%, transparent 65%); }
+    .mask-bl { -webkit-mask-image: radial-gradient(ellipse 80% 80% at 0% 100%, #000 0%, transparent 65%); mask-image: radial-gradient(ellipse 80% 80% at 0% 100%, #000 0%, transparent 65%); }
+    .mask-fade-x { -webkit-mask-image: linear-gradient(to right, transparent, #000 30%, #000 70%, transparent); mask-image: linear-gradient(to right, transparent, #000 30%, #000 70%, transparent); }
+    .mask-up { -webkit-mask-image: linear-gradient(to top, #000, transparent 80%); mask-image: linear-gradient(to top, #000, transparent 80%); }
+
+    /* Theme Switcher */
+    .theme-switch { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border: 1px solid #cbd5e1; border-radius: 9999px; }
+    html.dark .theme-switch { border-color: #334155; }
+    .theme-opt { display: inline-flex; align-items: center; justify-content: center; width: 1.4rem; height: 1.4rem; border-radius: 9999px; color: #64748b; transition: all .2s; }
+    .theme-opt:hover { color: #0f172a; }
+    html.dark .theme-opt:hover { color: #f8fafc; }
+    .theme-opt.is-active { background: #e2e8f0; color: #0f172a; }
+    html.dark .theme-opt.is-active { background: #334155; color: #f8fafc; }
+    .theme-opt svg { width: 13px; height: 13px; }
+
+    /* Animations */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+    .reveal { opacity: 0; animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .d1{animation-delay:.05s}.d2{animation-delay:.12s}.d3{animation-delay:.19s}.d4{animation-delay:.26s}.d5{animation-delay:.33s}
+
+    a, button { transition: color .2s, background-color .2s, border-color .2s, opacity .2s, transform .2s; }
+
+    /* Spotlight Deck */
+    .deck { position: relative; height: 18.5rem; margin-inline: calc(50% - 50vw); overflow-x: clip; overflow-y: visible; }
+    @media (min-width: 640px) { .deck { height: 17rem; } }
+    @media (min-width: 768px) { .deck { margin-inline: 0; overflow: visible; } }
+    .deck-card {
+        position: absolute; top: 0.75rem; left: 50%; width: 18rem; margin-left: -9rem;
+        transform-origin: center bottom; transition: transform .5s cubic-bezier(.22,1,.36,1), box-shadow .35s ease;
+        will-change: transform; outline: none;
+    }
+    @media (min-width: 640px) { .deck-card { width: 20.5rem; margin-left: -10.25rem; } }
+    .deck-card.is-center { transform: translateY(0) rotate(0deg) scale(1); z-index: 30; box-shadow: 0 20px 40px -15px rgba(0,0,0,.25); }
+    .deck-card.is-left   { transform: translateX(-40%) translateY(14px) rotate(-14deg) scale(.88); z-index: 10; box-shadow: 0 12px 25px -15px rgba(0,0,0,.2); cursor: pointer; }
+    .deck-card.is-right  { transform: translateX(40%) translateY(14px) rotate(14deg) scale(.88); z-index: 20; box-shadow: 0 12px 25px -15px rgba(0,0,0,.2); cursor: pointer; }
+    .deck-card.is-center:hover { transform: translateY(-5px) scale(1.01); }
+    .deck-card:not(.is-center) a { pointer-events: none; }
+
+    /* Music Vinyl */
+    .vinyl-spin { animation: spin 4s linear infinite; animation-play-state: paused; }
+    .vinyl-spin.playing { animation-play-state: running; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    /* Custom Scrollbar for GitHub Graph */
+    .custom-scrollbar::-webkit-scrollbar { height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 6px; }
+    html.dark .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; }
+    </style>
+
+    <script>
+    (function () {
+        const KEY = 'theme';
+        const root = document.documentElement;
+        const mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+        function pref() { try { const v = localStorage.getItem(KEY); return (v === 'dark' || v === 'light' || v === 'system') ? v : 'dark'; } catch (e) { return 'dark'; } }
+        function isDark(p) { return p === 'dark' || (p === 'system' && !!mq && mq.matches); }
+        function setClass(p) {
+            root.classList.toggle('dark', isDark(p));
+            try {
+                document.querySelectorAll('[data-theme-opt]').forEach(function (el) {
+                    el.classList.toggle('is-active', el.getAttribute('data-theme-opt') === p);
+                });
+            } catch (e) {}
+        }
+        window.setTheme = function (p) {
+            try { localStorage.setItem(KEY, p); } catch (e) {}
+            setClass(p);
+        };
+        setClass(pref());
+        if (mq) mq.addEventListener('change', function () { if (pref() === 'system') setClass('system'); });
+        document.addEventListener('DOMContentLoaded', function () { setClass(pref()); });
+    })();
+    </script>
+</head>
+<body class="relative overflow-x-hidden bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased font-sans">
+
+    <!-- Background Texture -->
+    <div aria-hidden="true" class="pointer-events-none fixed inset-0 z-0">
+        <div class="halftone halftone-wide mask-tr absolute right-0 top-0 h-[70vh] w-[65vw] opacity-[0.12]"></div>
+        <div class="halftone mask-bl absolute bottom-0 left-0 h-[60vh] w-[55vw] opacity-[0.10]"></div>
+    </div>
+
+    <!-- Left Sidebar (Desktop Navigation) -->
+    <nav class="fixed inset-y-0 left-0 z-50 hidden w-56 flex-col border-r border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-7 py-8 lg:flex">
+        <a href="#top" class="shrink-0 font-pixel text-[15px] leading-none text-slate-900 dark:text-slate-100 hover:opacity-70">Marwen.dev</a>
+
+        <div class="mt-8 flex flex-1 flex-col gap-3 overflow-y-auto font-mono text-[13px]">
+            <a href="#projects" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center"><i class="fas fa-folder-open text-xs mr-2.5 text-slate-400"></i> Projects</a>
+            <a href="#active-hosting" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center"><i class="fas fa-server text-xs mr-2.5 text-slate-400"></i> KryosCloud</a>
+            <a href="#capabilities" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center"><i class="fas fa-microchip text-xs mr-2.5 text-slate-400"></i> Capabilities</a>
+            <a href="#design-archive" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center"><i class="fas fa-paint-brush text-xs mr-2.5 text-slate-400"></i> Design Archive</a>
+            <a href="#now-playing" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center"><i class="fas fa-headphones-alt text-xs mr-2.5 text-slate-400"></i> Now Playing</a>
+            
+            <div class="h-px my-2 bg-slate-200 dark:bg-slate-800"></div>
+
+            <a href="https://github.com/Kikuro12" target="_blank" rel="noopener" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center"><i class="fab fa-github text-xs mr-2.5 text-slate-400"></i> GitHub ↗</a>
+            <a href="https://instagram.com/mhrwennn" target="_blank" rel="noopener" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center"><i class="fab fa-instagram text-xs mr-2.5 text-slate-400"></i> Instagram ↗</a>
+            <a href="https://facebook.com/100025231074173" target="_blank" rel="noopener" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center"><i class="fab fa-facebook-f text-xs mr-2.5 text-slate-400"></i> Facebook ↗</a>
+        </div>
+
+        <button type="button" onclick="openAsk()" class="mt-4 inline-flex w-fit items-center gap-2 text-[12px] text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">
+            <span>Ask anything</span>
+            <span class="inline-flex items-center gap-1">
+                <kbd class="ask-mod-key rounded border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 font-mono text-[10px] text-slate-600 dark:text-slate-300">⌘</kbd>
+                <kbd class="rounded border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 font-mono text-[10px] text-slate-600 dark:text-slate-300">K</kbd>
+            </span>
+        </button>
+
+        <button type="button" onclick="openTyping()" class="mt-2 inline-flex w-fit items-center gap-2 text-[12px] text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">
+            <span>Typing test</span>
+            <span class="inline-flex items-center gap-1">
+                <kbd class="ask-mod-key rounded border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 font-mono text-[10px] text-slate-600 dark:text-slate-300">⌘</kbd>
+                <kbd class="rounded border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 font-mono text-[10px] text-slate-600 dark:text-slate-300">J</kbd>
+            </span>
+        </button>
+
+        <button type="button" onclick="toggleTerminal()" class="mt-2 inline-flex w-fit items-center gap-2 text-[12px] text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">
+            <span>CLI Terminal</span>
+            <i class="fas fa-terminal text-[10px] text-slate-400"></i>
+        </button>
+
+        <div class="mt-4 border-y border-slate-200 dark:border-slate-800 py-3">
+            <span class="presence-icons inline-flex items-center"><img class="presence-avatar h-5 w-5 rounded-full border border-slate-300 dark:border-slate-700" alt="" src="https://api.dicebear.com/9.x/notionists/svg?seed=Marwen&radius=50&backgroundColor=f1f1f1"></span>
+            <p class="presence-label mt-1 font-mono text-[10.5px] text-slate-500 dark:text-slate-400"><b class="presence-num text-slate-900 dark:text-slate-100">1</b> viewing live</p>
+        </div>
+
+        <div class="mt-5 shrink-0">
+            <div class="mb-3 flex items-center gap-2">
+                <div class="theme-switch" role="group" aria-label="Theme">
+                    <button type="button" data-theme-opt="system" onclick="setTheme('system')" class="theme-opt" title="System"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M9 21h6M12 17v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+                    <button type="button" data-theme-opt="light" onclick="setTheme('light')" class="theme-opt" title="Light"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+                    <button type="button" data-theme-opt="dark" onclick="setTheme('dark')" class="theme-opt" title="Dark"><svg viewBox="0 0 24 24" fill="none"><path d="M20 13.6A8 8 0 1 1 10.4 4a6.2 6.2 0 0 0 9.6 9.6z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></button>
+                </div>
+            </div>
+            <a href="mailto:Kikuro112@gmail.com" class="inline-flex w-fit items-center gap-2 font-mono text-[12px] text-slate-800 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400"><svg viewBox="0 0 24 24" fill="none" class="h-4 w-4 shrink-0"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Kikuro112@gmail.com</a>
+        </div>
+    </nav>
+
+    <!-- Mobile Top Header -->
+    <header class="sticky top-0 z-50 border-b border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md lg:hidden">
+        <div class="mx-auto flex max-w-3xl items-center justify-between px-6 py-3">
+            <a href="#top" class="font-pixel text-[14px] text-slate-900 dark:text-slate-100">Marwen.dev</a>
+            <button type="button" onclick="openMobileNav()" aria-label="Open menu" class="-mr-1 p-1 text-slate-700 dark:text-slate-300 hover:text-indigo-600">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileNav" class="fixed inset-0 z-[60] hidden flex-col bg-white dark:bg-slate-900 p-6 font-mono text-[15px] lg:hidden">
+        <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+            <span class="font-pixel text-[14px] text-slate-900 dark:text-slate-100">Marwen.dev</span>
+            <button type="button" onclick="closeMobileNav()" class="p-1 text-slate-600 dark:text-slate-300"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+        </div>
+        <div class="mt-6 flex flex-col gap-4 text-slate-700 dark:text-slate-300">
+            <a href="#projects" onclick="closeMobileNav()">Projects</a>
+            <a href="#active-hosting" onclick="closeMobileNav()">KryosCloud</a>
+            <a href="#capabilities" onclick="closeMobileNav()">Capabilities</a>
+            <a href="#design-archive" onclick="closeMobileNav()">Design Archive</a>
+            <a href="#now-playing" onclick="closeMobileNav()">Now Playing</a>
+            <div class="h-px bg-slate-200 dark:bg-slate-800 my-2"></div>
+            <button type="button" onclick="closeMobileNav(); openAsk();" class="text-left">Ask Anything (⌘K)</button>
+            <button type="button" onclick="closeMobileNav(); openTyping();" class="text-left">Typing Test (⌘J)</button>
+            <button type="button" onclick="closeMobileNav(); toggleTerminal();" class="text-left">CLI Terminal</button>
+        </div>
+    </div>
+
+    <!-- Main Section -->
+    <main id="top" class="relative z-10 lg:pl-56">
+        <div class="mx-auto max-w-2xl px-6">
+
+            <!-- Hero Section -->
+            <section class="relative pt-12 pb-12 sm:pt-20">
+                <div class="grid gap-8 sm:grid-cols-[16rem_1fr] sm:items-start">
+                    <!-- Profile Photo -->
+                    <div class="reveal d1 mx-auto w-full max-w-[16rem] sm:mx-0">
+                        <div class="relative overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm aspect-square bg-slate-100 dark:bg-slate-900">
+                            <img src="https://i.imgur.com/uCS4WfT.jpeg" alt="Marwen O. Deiparine" class="block w-full h-full object-cover select-none" draggable="false">
+                            <div aria-hidden="true" class="halftone-white mask-up pointer-events-none absolute inset-x-0 bottom-0 h-full opacity-60 dark:opacity-20"></div>
+                        </div>
+                    </div>
+
+                    <!-- Intro Text -->
+                    <div>
+                        <h1 class="reveal d2 mt-3 font-pixel text-2xl sm:text-3xl leading-tight text-slate-900 dark:text-slate-100">Marwen O. Deiparine</h1>
+                        <p class="reveal d3 mt-1 font-mono text-xs text-slate-500 dark:text-slate-400">LVL 19 · BSIS STUDENT & DEVELOPER</p>
+
+                        <p class="reveal d3 mt-4 text-[14.5px] leading-relaxed text-slate-700 dark:text-slate-300">
+                            Hello! I'm a 19-year-old <b class="font-semibold text-slate-900 dark:text-slate-100">BSIS student</b> passionate about bridging technology with creative design. I am constantly exploring modern web experiences, UI/UX layouts, and system administration.
+                        </p>
+
+                        <p class="reveal d4 mt-3 text-[14.5px] leading-relaxed text-slate-700 dark:text-slate-300">
+                            Beyond academics, I am a <b class="font-semibold text-slate-900 dark:text-slate-100">varsity long-distance swimmer</b> (400m, 800m, 1500m freestyle), a musician, and the founder of <b class="font-semibold text-slate-900 dark:text-slate-100">KryosCloud</b>.
+                        </p>
+
+                        <div class="reveal d5 mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[12px] text-slate-600 dark:text-slate-400">
+                            <a href="https://github.com/Kikuro12" target="_blank" rel="noopener" class="hover:text-indigo-600 dark:hover:text-indigo-400"><i class="fab fa-github mr-1"></i> github ↗</a>
+                            <a href="https://instagram.com/mhrwennn" target="_blank" rel="noopener" class="hover:text-indigo-600 dark:hover:text-indigo-400"><i class="fab fa-instagram mr-1"></i> instagram ↗</a>
+                            <a href="https://facebook.com/100025231074173" target="_blank" rel="noopener" class="hover:text-indigo-600 dark:hover:text-indigo-400"><i class="fab fa-facebook-f mr-1"></i> facebook ↗</a>
+                            <button type="button" onclick="openModal('email')" class="hover:text-indigo-600 dark:hover:text-indigo-400"><i class="fas fa-envelope mr-1"></i> email</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Metrics Bar -->
+            <section class="grid grid-cols-2 divide-x divide-y divide-slate-200 dark:divide-slate-800 border-t border-slate-200 dark:border-slate-800 sm:grid-cols-4 sm:divide-y-0">
+                <div class="py-5 pr-4 sm:px-4 sm:pl-0">
+                    <span class="font-pixel text-lg leading-none text-slate-900 dark:text-slate-100">19 y/o</span>
+                    <div class="mt-1 font-mono text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400">BSIS Student</div>
+                </div>
+                <div class="py-5 pl-4 sm:px-4">
+                    <span class="font-pixel text-lg leading-none text-slate-900 dark:text-slate-100">400m+</span>
+                    <div class="mt-1 font-mono text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400">Varsity Swim</div>
+                </div>
+                <div class="py-5 pr-4 sm:px-4">
+                    <a href="https://kryoscloud.tech" target="_blank" class="group block">
+                        <span class="font-pixel text-lg leading-none text-indigo-600 dark:text-indigo-400">Kryos</span>
+                        <div class="mt-1 font-mono text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Cloud Founder ↗</div>
+                    </a>
+                </div>
+                <div class="py-5 pl-4 sm:px-4">
+                    <button type="button" onclick="openModal('guestbook')" class="group block text-left">
+                        <span class="font-pixel text-lg leading-none text-slate-900 dark:text-slate-100">Guestbook</span>
+                        <div class="mt-1 font-mono text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Leave Feedback →</div>
+                    </button>
+                </div>
+            </section>
+
+            <div aria-hidden="true" class="halftone halftone-wide mask-fade-x my-2 h-6 w-full opacity-[0.18]"></div>
+
+            <!-- Section 01: Active Projects / Infrastructure -->
+            <section id="active-hosting" class="py-10">
+                <div class="mb-6 flex items-baseline justify-between">
+                    <h2 class="font-pixel text-sm text-slate-500 dark:text-slate-400">01 — active projects & infrastructure</h2>
+                    <a href="https://kryoscloud.tech" target="_blank" class="font-mono text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">kryoscloud.tech ↗</a>
+                </div>
+
+                <div class="grid gap-4 sm:grid-cols-2">
+                    <a href="https://kryoscloud.tech" target="_blank" rel="noopener" class="group rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-xs transition hover:border-indigo-500/50">
+                        <div class="flex items-center gap-3.5">
+                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400">
+                                <i class="fas fa-cloud text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-pixel text-base text-slate-900 dark:text-slate-100">KryosCloud</h3>
+                                <p class="font-mono text-[11px] text-slate-500 dark:text-slate-400">Game servers & Jexactyl hosting infrastructure.</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="https://betapedifare.kryoscloud.tech" target="_blank" rel="noopener" class="group rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-xs transition hover:border-indigo-500/50">
+                        <div class="flex items-center gap-3.5">
+                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                                <i class="fas fa-route text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-pixel text-base text-slate-900 dark:text-slate-100">Beta PediFare</h3>
+                                <p class="font-mono text-[11px] text-slate-500 dark:text-slate-400">Live custom fare calculation web application.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Section 02: Projects Spotlight Card Deck -->
+            <section id="projects" class="py-10">
+                <div class="mb-6 flex items-baseline justify-between">
+                    <h2 class="font-pixel text-sm text-slate-500 dark:text-slate-400">02 — academic & coding projects</h2>
+                    <a href="https://github.com/Kikuro12" target="_blank" class="font-mono text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">all github repos →</a>
+                </div>
+
+                <div class="deck" data-deck>
+                    <!-- Card 1 Center -->
+                    <article class="deck-card is-center rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-lg" role="button" tabindex="0" onclick="activateCard(this)">
+                        <span class="inline-flex items-center rounded-full bg-indigo-600 text-white px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider">Featured Concept</span>
+                        <div class="mt-3 flex items-center gap-3">
+                            <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100"><i class="fas fa-shield-alt text-sm"></i></div>
+                            <h3 class="font-pixel text-base text-slate-900 dark:text-slate-100">Kiur Login Page</h3>
+                        </div>
+                        <p class="mt-2 text-[12.5px] leading-relaxed text-slate-600 dark:text-slate-300">Secure UI concept exploring authentication layouts and modern glassmorphism design principles.</p>
+                        <div class="mt-4">
+                            <a href="https://kikuro12.github.io/kiur-login-page/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">View Live Demo ↗</a>
+                        </div>
+                    </article>
+
+                    <!-- Card 2 Left -->
+                    <article class="deck-card is-left rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-lg" role="button" tabindex="0" onclick="activateCard(this)">
+                        <span class="inline-flex items-center rounded-full border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider text-slate-600 dark:text-slate-300">Interactive Logic</span>
+                        <div class="mt-3 flex items-center gap-3">
+                            <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100"><i class="fas fa-calendar-alt text-sm"></i></div>
+                            <h3 class="font-pixel text-base text-slate-900 dark:text-slate-100">Kiur Calendar</h3>
+                        </div>
+                        <p class="mt-2 text-[12.5px] leading-relaxed text-slate-600 dark:text-slate-300">Dynamic date and event application built for mastering JavaScript state logic.</p>
+                        <div class="mt-4">
+                            <a href="https://kikuro12.github.io/kikuro-calendar/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">View Live Demo ↗</a>
+                        </div>
+                    </article>
+
+                    <!-- Card 3 Right -->
+                    <article class="deck-card is-right rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-lg" role="button" tabindex="0" onclick="activateCard(this)">
+                        <span class="inline-flex items-center rounded-full border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider text-slate-600 dark:text-slate-300">Web App</span>
+                        <div class="mt-3 flex items-center gap-3">
+                            <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100"><i class="fas fa-calculator text-sm"></i></div>
+                            <h3 class="font-pixel text-base text-slate-900 dark:text-slate-100">Kiur Calculator</h3>
+                        </div>
+                        <p class="mt-2 text-[12.5px] leading-relaxed text-slate-600 dark:text-slate-300">Pure JavaScript math operations implementation with clean responsive UI styling.</p>
+                        <div class="mt-4">
+                            <a href="https://kikuro12.github.io/kiur-calculator/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">View Live Demo ↗</a>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="mt-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 p-4 font-mono text-[12px] text-slate-600 dark:text-slate-400">
+                    <div class="flex items-center gap-2 text-slate-900 dark:text-slate-100 font-medium"><i class="fas fa-users text-indigo-500"></i> IT Community Immersion Project</div>
+                    <p class="mt-1 text-slate-500 dark:text-slate-400">Academic outreach initiative promoting digital literacy, online safety, and responsible mobile usage in local barangay communities.</p>
+                </div>
+
+                <!-- GitHub Contributions Graph Integration -->
+                <div class="mt-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-xs">
+                    <div class="mb-4 flex items-center justify-between">
+                        <h3 class="font-pixel text-base text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                            <i class="fab fa-github text-slate-700 dark:text-slate-300"></i> Contribution Graph
+                        </h3>
+                        <a href="https://github.com/Kikuro12" target="_blank" class="font-mono text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">@Kikuro12 ↗</a>
+                    </div>
+                    <div class="w-full overflow-x-auto pb-2 custom-scrollbar">
+                        <img src="https://ghchart.rshah.org/4f46e5/Kikuro12" alt="Kikuro12's GitHub Contributions" class="min-w-[650px] w-full opacity-90 transition-all duration-300 dark:invert dark:hue-rotate-180">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 03: System Capabilities & Stack -->
+            <section id="capabilities" class="py-10">
+                <div class="mb-6 flex items-baseline justify-between">
+                    <h2 class="font-pixel text-sm text-slate-500 dark:text-slate-400">03 — system capabilities & tech stack</h2>
+                </div>
+
+                <!-- Minimalist Progress Bars -->
+                <div class="space-y-3.5 font-mono text-[12px]">
+                    <div>
+                        <div class="flex justify-between text-slate-700 dark:text-slate-300 mb-1"><span>Frontend Dev (Learning)</span><span class="font-semibold text-indigo-600 dark:text-indigo-400">65%</span></div>
+                        <div class="h-1.5 w-full rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden"><div class="h-full bg-indigo-600 dark:bg-indigo-500 rounded-full" style="width: 65%;"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-slate-700 dark:text-slate-300 mb-1"><span>UI Layout & Graphic Design</span><span class="font-semibold text-indigo-600 dark:text-indigo-400">70%</span></div>
+                        <div class="h-1.5 w-full rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden"><div class="h-full bg-indigo-600 dark:bg-indigo-500 rounded-full" style="width: 70%;"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-slate-700 dark:text-slate-300 mb-1"><span>Hosting & Server Administration</span><span class="font-semibold text-indigo-600 dark:text-indigo-400">75%</span></div>
+                        <div class="h-1.5 w-full rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden"><div class="h-full bg-indigo-600 dark:bg-indigo-500 rounded-full" style="width: 75%;"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-slate-700 dark:text-slate-300 mb-1"><span>Varsity Long-Distance Swimming</span><span class="font-semibold text-indigo-600 dark:text-indigo-400">90%</span></div>
+                        <div class="h-1.5 w-full rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden"><div class="h-full bg-indigo-600 dark:bg-indigo-500 rounded-full" style="width: 90%;"></div></div>
+                    </div>
+                </div>
+
+                <!-- Minimalist Tech Badges -->
+                <div class="mt-6 flex flex-wrap gap-2">
+                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fab fa-html5 text-indigo-500 mr-1.5"></i> HTML5</span>
+                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fab fa-css3-alt text-indigo-500 mr-1.5"></i> CSS3</span>
+                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fab fa-js text-indigo-500 mr-1.5"></i> JavaScript</span>
+                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fab fa-java text-indigo-500 mr-1.5"></i> Java</span>
+                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fas fa-database text-indigo-500 mr-1.5"></i> SQL / DBs</span>
+                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fab fa-figma text-indigo-500 mr-1.5"></i> Figma</span>
+                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fas fa-paint-brush text-indigo-500 mr-1.5"></i> Photoshop</span>
+                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fab fa-linux text-indigo-500 mr-1.5"></i> Linux Server</span>
+                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fas fa-network-wired text-indigo-500 mr-1.5"></i> Networking</span>
+                </div>
+            </section>
+
+            <!-- Section 04: Design Archive (HIGH CONTRAST GRID + ZOOM MODAL) -->
+            <section id="design-archive" class="py-10">
+                <div class="mb-2 flex items-baseline justify-between">
+                    <h2 class="font-pixel text-sm text-slate-500 dark:text-slate-400">04 — design & layout archive</h2>
+                </div>
+                <p class="mb-6 font-mono text-[11px] text-slate-600 dark:text-slate-400">Academic & creative layout practice, sports graphics, film concepts, and sublimation apparel design.</p>
+
+                <!-- Clean 3-Column Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <!-- Design Item 1 -->
+                    <div class="flex flex-col gap-2">
+                        <div class="group relative overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 aspect-[4/3] cursor-pointer" onclick="zoomImage('https://i.imgur.com/gGg9QBR.jpeg', 'Fallen Film Poster Concept')">
+                            <img src="https://i.imgur.com/gGg9QBR.jpeg" alt="Fallen Film Poster Concept" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-end p-3">
+                                <span class="font-mono text-xs text-white flex items-center justify-between w-full">Preview <i class="fas fa-search-plus text-xs"></i></span>
+                            </div>
+                        </div>
+                        <span class="font-mono text-xs font-medium text-slate-800 dark:text-slate-200 truncate">Fallen Film Poster Concept</span>
+                    </div>
+
+                    <!-- Design Item 2 -->
+                    <div class="flex flex-col gap-2">
+                        <div class="group relative overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 aspect-[4/3] cursor-pointer" onclick="zoomImage('https://i.imgur.com/5KJNqzq.png', 'Sports Graphic Exploration')">
+                            <img src="https://i.imgur.com/5KJNqzq.png" alt="Sports Graphic Exploration" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-end p-3">
+                                <span class="font-mono text-xs text-white flex items-center justify-between w-full">Preview <i class="fas fa-search-plus text-xs"></i></span>
+                            </div>
+                        </div>
+                        <span class="font-mono text-xs font-medium text-slate-800 dark:text-slate-200 truncate">Sports Graphic Exploration</span>
+                    </div>
+
+                    <!-- Design Item 3 -->
+                    <div class="flex flex-col gap-2">
+                        <div class="group relative overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 aspect-[4/3] cursor-pointer" onclick="zoomImage('https://i.imgur.com/BUOFk0G.png', 'Academic Event Poster')">
+                            <img src="https://i.imgur.com/BUOFk0G.png" alt="Academic Event Poster" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-end p-3">
+                                <span class="font-mono text-xs text-white flex items-center justify-between w-full">Preview <i class="fas fa-search-plus text-xs"></i></span>
+                            </div>
+                        </div>
+                        <span class="font-mono text-xs font-medium text-slate-800 dark:text-slate-200 truncate">Academic Event Poster</span>
+                    </div>
+
+                    <!-- Design Item 4 -->
+                    <div class="flex flex-col gap-2">
+                        <div class="group relative overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 aspect-[4/3] cursor-pointer" onclick="zoomImage('https://i.imgur.com/rjs5zGC.jpeg', 'Basketball League Graphic')">
+                            <img src="https://i.imgur.com/rjs5zGC.jpeg" alt="Basketball League Graphic" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-end p-3">
+                                <span class="font-mono text-xs text-white flex items-center justify-between w-full">Preview <i class="fas fa-search-plus text-xs"></i></span>
+                            </div>
+                        </div>
+                        <span class="font-mono text-xs font-medium text-slate-800 dark:text-slate-200 truncate">Basketball League Graphic</span>
+                    </div>
+
+                    <!-- Design Item 5 -->
+                    <div class="flex flex-col gap-2">
+                        <div class="group relative overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 aspect-[4/3] cursor-pointer" onclick="zoomImage('https://i.imgur.com/f72VhNH.png', 'Sublimation Polo Design')">
+                            <img src="https://i.imgur.com/f72VhNH.png" alt="Sublimation Polo Design" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-end p-3">
+                                <span class="font-mono text-xs text-white flex items-center justify-between w-full">Preview <i class="fas fa-search-plus text-xs"></i></span>
+                            </div>
+                        </div>
+                        <span class="font-mono text-xs font-medium text-slate-800 dark:text-slate-200 truncate">Sublimation Polo Design</span>
+                    </div>
+
+                    <!-- Design Item 6 -->
+                    <div class="flex flex-col gap-2">
+                        <div class="group relative overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 aspect-[4/3] cursor-pointer" onclick="zoomImage('https://i.imgur.com/6Ht5cQH.png', 'Sublimation Polo Concept')">
+                            <img src="https://i.imgur.com/6Ht5cQH.png" alt="Sublimation Polo Concept" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-end p-3">
+                                <span class="font-mono text-xs text-white flex items-center justify-between w-full">Preview <i class="fas fa-search-plus text-xs"></i></span>
+                            </div>
+                        </div>
+                        <span class="font-mono text-xs font-medium text-slate-800 dark:text-slate-200 truncate">Sublimation Polo Concept</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 05: Now Playing Music -->
+            <section id="now-playing" class="py-10">
+                <div class="mb-4 flex items-baseline justify-between">
+                    <h2 class="font-pixel text-sm text-slate-500 dark:text-slate-400">05 — music & inspiration</h2>
+                </div>
+
+                <div class="flex items-center gap-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-xs">
+                    <div class="relative h-14 w-16 shrink-0 rounded-full border border-slate-300 dark:border-slate-700 bg-slate-950 shadow-xs flex items-center justify-center overflow-hidden">
+                        <img id="vinylImg" src="764636577_4081845515280762_3798175889070813378_n.jpg" class="vinyl-spin h-9 w-9 rounded-full object-cover" alt="Vinyl album art">
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-pixel text-base text-slate-900 dark:text-slate-100">Sugar</h3>
+                        <p class="font-mono text-xs text-slate-500 dark:text-slate-400">Maroon 5</p>
+                        <div class="mt-3 flex items-center gap-3">
+                            <button type="button" id="playAudioBtn" onclick="toggleAudio()" class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-white hover:bg-indigo-700">
+                                <i id="playIcon" class="fas fa-play text-xs"></i>
+                            </button>
+                            <span class="font-mono text-[10px] uppercase text-slate-500 dark:text-slate-400">Audio Loop</span>
+                        </div>
+                    </div>
+                </div>
+                <audio id="audio-player" src="https://cdn.jsdelivr.net/gh/rafaelreeves/media/sugar.mp3" loop></audio>
+            </section>
+
+            <div aria-hidden="true" class="halftone halftone-wide mask-fade-x mb-12 mt-2 h-10 w-full opacity-[0.15]"></div>
+        </div>
+    </main>
+
+    <!-- ─────────────── ASK OVERLAY (⌘K) ─────────────── -->
+    <div id="askOverlay" role="dialog" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+        <div class="ask-backdrop fixed inset-0 bg-slate-900/60 backdrop-blur-md" onclick="closeAsk()"></div>
+        <div class="relative z-10 flex flex-col gap-4 max-w-xl w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-2xl">
+            <div id="askBubble" class="hidden rounded-xl bg-slate-100 dark:bg-slate-800 px-4 py-2 font-mono text-sm text-slate-900 dark:text-slate-100"><span id="askBubbleText"></span></div>
+            <div class="ask-head">
+                <h2 class="ask-title font-pixel text-2xl text-slate-900 dark:text-slate-100">what do you want to ask?</h2>
+            </div>
+            <div id="askReveal" class="hidden"></div>
+            <div class="ask-field inline-flex items-center font-mono text-base text-slate-600 dark:text-slate-300">
+                <span id="askText"></span><span class="ask-caret ml-1 h-5 w-0.5 bg-indigo-600 animate-pulse"></span>
+            </div>
+            <input id="askInput" class="sr-only" type="text" autocomplete="off" aria-label="Type your question">
+        </div>
+    </div>
+
+    <!-- ─────────────── TYPING TEST OVERLAY (⌘J) ─────────────── -->
+    <div id="typingOverlay" role="dialog" class="fixed inset-0 z-[115] hidden items-center justify-center p-4">
+        <div class="tt-backdrop fixed inset-0 bg-slate-900/60 backdrop-blur-md" onclick="closeTyping()"></div>
+        <div class="relative z-10 flex flex-col items-center gap-6 max-w-xl w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-8 shadow-2xl text-center">
+            <div class="flex gap-8 font-mono">
+                <div><span id="ttWpm" class="text-3xl font-bold text-indigo-600 dark:text-indigo-400">0</span><div class="text-[10px] text-slate-500 dark:text-slate-400 uppercase">WPM</div></div>
+                <div><span id="ttAcc" class="text-3xl font-bold text-indigo-600 dark:text-indigo-400">100</span><div class="text-[10px] text-slate-500 dark:text-slate-400 uppercase">% ACC</div></div>
+                <div><span id="ttTime" class="text-3xl font-bold text-indigo-600 dark:text-indigo-400">0</span><div class="text-[10px] text-slate-500 dark:text-slate-400 uppercase">Sec</div></div>
+            </div>
+            <div id="ttWords" class="font-pixel text-xl sm:text-2xl text-slate-700 dark:text-slate-300 leading-relaxed min-h-[4rem]"></div>
+            <div class="font-mono text-xs text-slate-500 dark:text-slate-400"><kbd class="border border-slate-300 dark:border-slate-700 px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800">Tab</kbd> restart · <kbd class="border border-slate-300 dark:border-slate-700 px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800">Esc</kbd> close</div>
+        </div>
+    </div>
+
+    <!-- ─────────────── CLI TERMINAL MODAL ─────────────── -->
+    <div id="term-modal" class="fixed inset-0 z-[120] hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div class="w-full max-w-2xl h-[450px] bg-slate-950 border border-slate-800 rounded-2xl flex flex-col overflow-hidden font-mono shadow-2xl">
+            <div class="flex items-center justify-between px-4 py-3 bg-slate-900 border-b border-slate-800 text-xs text-slate-400">
+                <div class="flex gap-2">
+                    <span onclick="toggleTerminal()" class="h-3 w-3 rounded-full bg-red-500 cursor-pointer"></span>
+                    <span class="h-3 w-3 rounded-full bg-yellow-500"></span>
+                    <span class="h-3 w-3 rounded-full bg-green-500"></span>
+                </div>
+                <span>user@marwen.dev:~</span>
+                <span></span>
+            </div>
+            <div id="term-body" class="p-4 flex-1 overflow-y-auto text-emerald-400 text-xs space-y-2">
+                <div id="term-output"></div>
+                <div class="flex items-center gap-2">
+                    <span>guest@marwen:~$</span>
+                    <input id="term-input" type="text" class="flex-1 bg-transparent border-none text-emerald-400 outline-none focus:outline-none">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─────────────── LIGHTBOX ZOOM MODAL ─────────────── -->
+    <div id="imageZoomModal" class="fixed inset-0 z-[130] hidden items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md" onclick="closeImageZoom()">
+        <div class="relative max-w-3xl w-full flex flex-col items-center" onclick="event.stopPropagation()">
+            <button type="button" onclick="closeImageZoom()" class="absolute -top-10 right-0 text-slate-200 hover:text-white font-mono text-sm"><i class="fas fa-times mr-1"></i> Close</button>
+            <img id="zoomedImg" src="" alt="Zoomed view" class="max-h-[80vh] w-auto rounded-xl border border-slate-700 shadow-2xl object-contain">
+            <span id="zoomedCaption" class="mt-3 font-mono text-xs text-slate-200 font-medium"></span>
+        </div>
+    </div>
+
+    <!-- ─────────────── GENERAL MODALS ─────────────── -->
+    <div id="modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-5">
+        <div data-modal-backdrop class="absolute inset-0 bg-slate-950/60 backdrop-blur-md" onclick="closeModal()"></div>
+
+        <!-- Email Modal -->
+        <div data-panel="email" class="relative hidden w-full max-w-sm rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-2xl">
+            <button type="button" onclick="closeModal()" class="absolute right-4 top-4 text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"><i class="fas fa-times"></i></button>
+            <p class="font-mono text-[10px] uppercase text-slate-400">Get in touch</p>
+            <h2 class="mt-2 font-pixel text-xl text-slate-900 dark:text-slate-100">Say Hello</h2>
+            <p class="mt-2 text-xs text-slate-600 dark:text-slate-400">For work, collaborations, or inquiries — drop me a message.</p>
+            <div class="mt-4 flex items-center gap-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 p-2">
+                <span class="flex-1 truncate font-mono text-xs text-slate-900 dark:text-slate-100">Kikuro112@gmail.com</span>
+                <button type="button" onclick="copyEmail(event)" class="rounded-md bg-indigo-600 hover:bg-indigo-700 px-3 py-1 font-mono text-xs text-white">Copy</button>
+            </div>
+        </div>
+
+        <!-- Guestbook Modal -->
+        <div data-panel="guestbook" class="relative hidden w-full max-w-sm rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-2xl">
+            <button type="button" onclick="closeModal()" class="absolute right-4 top-4 text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"><i class="fas fa-times"></i></button>
+            <p class="font-mono text-[10px] uppercase text-slate-400">Feedback</p>
+            <h2 class="mt-2 font-pixel text-xl text-slate-900 dark:text-slate-100">Guestbook</h2>
+            <div class="mt-4 flex flex-col gap-2">
+                <input type="text" id="gb-name" placeholder="Name / Alias" class="rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 px-3 py-2 font-mono text-xs text-slate-900 dark:text-slate-100 focus:outline-none focus:border-indigo-500">
+                <input type="text" id="gb-msg" placeholder="Your feedback message..." class="rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 px-3 py-2 font-mono text-xs text-slate-900 dark:text-slate-100 focus:outline-none focus:border-indigo-500">
+                <button type="button" onclick="submitGuestbook()" class="mt-1 rounded-lg bg-indigo-600 hover:bg-indigo-700 py-2 font-mono text-xs text-white">Initialize Transfer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Logic Scripts -->
+    <script>
+    // Audio Player
+    let isPlaying = false;
+    function toggleAudio() {
+        const audio = document.getElementById('audio-player');
+        const icon = document.getElementById('playIcon');
+        const vinyl = document.getElementById('vinylImg');
+        if (isPlaying) {
+            audio.pause();
+            icon.className = 'fas fa-play text-xs';
+            vinyl.classList.remove('playing');
+        } else {
+            audio.play().catch(()=>{});
+            icon.className = 'fas fa-pause text-xs';
+            vinyl.classList.add('playing');
+        }
+        isPlaying = !isPlaying;
+    }
+
+    // Spotlight Deck Card Rotation
+    function activateCard(card) {
+        if (card.classList.contains('is-center')) return;
+        const deck = card.closest('[data-deck]');
+        const center = deck.querySelector('.deck-card.is-center');
+        const slot = card.classList.contains('is-left') ? 'is-left' : 'is-right';
+        center.classList.remove('is-center');
+        center.classList.add(slot);
+        card.classList.remove('is-left', 'is-right');
+        card.classList.add('is-center');
+    }
+
+    // Modals
+    const modal = document.getElementById('modal');
+    function openModal(name) {
+        const panel = modal.querySelector('[data-panel="' + name + '"]');
+        if (!panel) return;
+        modal.querySelectorAll('[data-panel]').forEach(p => p.classList.add('hidden'));
+        modal.classList.remove('hidden'); modal.classList.add('flex');
+        panel.classList.remove('hidden');
+    }
+    function closeModal() {
+        modal.classList.add('hidden'); modal.classList.remove('flex');
+        modal.querySelectorAll('[data-panel]').forEach(p => p.classList.add('hidden'));
+    }
+    function copyEmail(e) {
+        navigator.clipboard.writeText('Kikuro112@gmail.com');
+        const btn = e.currentTarget;
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 1500);
+    }
+
+    // Image Zoom Lightbox
+    function zoomImage(src, caption) {
+        document.getElementById('zoomedImg').src = src;
+        document.getElementById('zoomedCaption').textContent = caption;
+        document.getElementById('imageZoomModal').classList.remove('hidden');
+        document.getElementById('imageZoomModal').classList.add('flex');
+    }
+    function closeImageZoom() {
+        document.getElementById('imageZoomModal').classList.add('hidden');
+        document.getElementById('imageZoomModal').classList.remove('flex');
+    }
+
+    // Mobile Navigation
+    function openMobileNav() { document.getElementById('mobileNav').classList.remove('hidden'); document.getElementById('mobileNav').classList.add('flex'); }
+    function closeMobileNav() { document.getElementById('mobileNav').classList.add('hidden'); document.getElementById('mobileNav').classList.remove('flex'); }
+
+    // Ask Overlay ⌘K
+    const askOverlay = document.getElementById('askOverlay');
+    const askInput = document.getElementById('askInput');
+    const askText = document.getElementById('askText');
+    const askBubble = document.getElementById('askBubble');
+    const askBubbleText = document.getElementById('askBubbleText');
+    const askTitle = askOverlay.querySelector('.ask-title');
+
+    function openAsk() { askOverlay.classList.remove('hidden'); askOverlay.classList.add('flex'); askInput.focus(); }
+    function closeAsk() { askOverlay.classList.add('hidden'); askOverlay.classList.remove('flex'); askInput.value = ''; askText.textContent = ''; askBubble.classList.add('hidden'); askTitle.textContent = "what do you want to ask?"; }
+    askInput.addEventListener('input', () => { askText.textContent = askInput.value; });
+    askInput.addEventListener('keydown', async (e) => {
+        if (e.key === 'Enter' && askInput.value.trim()) {
+            const query = askInput.value.trim();
+            askBubbleText.textContent = query;
+            askBubble.classList.remove('hidden');
+            askTitle.textContent = "thinking...";
+            
+            setTimeout(async () => {
+                const platform = navigator.platform;
+                askTitle.textContent = `before I answer: you are viewing from a ${platform} device on ${navigator.language}...`;
+                setTimeout(() => {
+                    askTitle.textContent = "searching google for you...";
+                    setTimeout(() => {
+                        window.open('https://www.google.com/search?q=' + encodeURIComponent(query), '_blank');
+                        closeAsk();
+                    }, 1500);
+                }, 2500);
+            }, 1200);
+        }
+    });
+
+    // Typing Test ⌘J
+    const typingOverlay = document.getElementById('typingOverlay');
+    const wordBank = ['marwen', 'developer', 'bsis', 'swimming', 'kryoscloud', 'javascript', 'html5', 'figma', 'design', 'hosting', 'server', 'layout'];
+    let ttIndex = 0, ttTimer = null;
+
+    function openTyping() {
+        typingOverlay.classList.remove('hidden'); typingOverlay.classList.add('flex');
+        resetTyping();
+    }
+    function closeTyping() {
+        typingOverlay.classList.add('hidden'); typingOverlay.classList.remove('flex');
+        clearInterval(ttTimer);
+    }
+    function resetTyping() {
+        ttIndex = 0; clearInterval(ttTimer);
+        document.getElementById('ttWpm').textContent = '0';
+        document.getElementById('ttAcc').textContent = '100';
+        document.getElementById('ttTime').textContent = '0';
+        const wordsEl = document.getElementById('ttWords');
+        wordsEl.innerHTML = wordBank.map((w, i) => `<span id="tw-${i}" class="mr-2">${w}</span>`).join('');
+    }
+
+    // Terminal Logic
+    const termModal = document.getElementById('term-modal');
+    const termInput = document.getElementById('term-input');
+    const termOutput = document.getElementById('term-output');
+
+    function toggleTerminal() {
+        termModal.classList.toggle('hidden');
+        termModal.classList.toggle('flex');
+        if (!termModal.classList.contains('hidden')) {
+            termInput.focus();
+            if (!termOutput.innerHTML) {
+                termOutput.innerHTML = '<div>Initializing Marwen.OS...</div><div>Type "help" for a list of commands.</div>';
+            }
+        }
+    }
+    termInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            const cmd = termInput.value.toLowerCase().trim();
+            termInput.value = '';
+            termOutput.innerHTML += `<div><span class="text-slate-500">guest@marwen:~$</span> ${cmd}</div>`;
+            switch(cmd) {
+                case 'help': termOutput.innerHTML += '<div>Commands: whoami, skills, projects, kryoscloud, clear, exit</div>'; break;
+                case 'whoami': termOutput.innerHTML += '<div>Marwen O. Deiparine | 19 y/o | BSIS Student & Developer.</div>'; break;
+                case 'skills': termOutput.innerHTML += '<div>HTML5, CSS3, JavaScript, Java, SQL, Figma, Photoshop, Linux Server Admin.</div>'; break;
+                case 'projects': termOutput.innerHTML += '<div>Kiur Login Page, Kiur Calendar, Kiur Calculator, PediFare.</div>'; break;
+                case 'kryoscloud': termOutput.innerHTML += '<div>Game servers & Jexactyl hosting infrastructure. Visit https://kryoscloud.tech</div>'; break;
+                case 'clear': termOutput.innerHTML = ''; break;
+                case 'exit': toggleTerminal(); break;
+                default: termOutput.innerHTML += `<div>Command not found: ${cmd}</div>`;
+            }
+        }
+    });
+
+    // Guestbook
+    function submitGuestbook() {
+        const name = document.getElementById('gb-name').value;
+        const msg = document.getElementById('gb-msg').value;
+        if (!name || !msg) return alert('Please enter both name and message.');
+        alert('Thank you! Feedback received.');
+        closeModal();
+    }
+
+    // Keyboard Shortcuts Listener
+    document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.altKey) && e.code === 'KeyK') { e.preventDefault(); openAsk(); }
+        if ((e.metaKey || e.altKey) && e.code === 'KeyJ') { e.preventDefault(); openTyping(); }
+        if (e.key === 'Escape') { closeAsk(); closeTyping(); closeModal(); closeImageZoom(); if(!termModal.classList.contains('hidden')) toggleTerminal(); }
+    });
+    </script>
+</body>
+</html>

@@ -53,6 +53,7 @@
     html { background-color: rgb(var(--bg)); }
     body { background-color: rgb(var(--bg)); color: rgb(var(--ink)); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
     ::selection { background: #4f46e5; color: #ffffff; }
+    html.dark ::selection { background: #e2e8f0; color: #0f172a; }
 
     /* Halftone dot texture */
     .halftone {
@@ -116,7 +117,7 @@
         const KEY = 'theme';
         const root = document.documentElement;
         const mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
-        function pref() { try { const v = localStorage.getItem(KEY); return (v === 'dark' || v === 'light' || v === 'system') ? v : 'dark'; } catch (e) { return 'dark'; } }
+        function pref() { try { const v = localStorage.getItem(KEY); return (v === 'dark' || v === 'light' || v === 'system') ? v : 'light'; } catch (e) { return 'light'; } }
         function isDark(p) { return p === 'dark' || (p === 'system' && !!mq && mq.matches); }
         function setClass(p) {
             root.classList.toggle('dark', isDark(p));
@@ -149,20 +150,20 @@
         <a href="#top" class="shrink-0 font-pixel text-[15px] leading-none text-slate-900 dark:text-slate-100 hover:opacity-70">Marwen.dev</a>
 
         <div class="mt-8 flex flex-1 flex-col gap-3 overflow-y-auto font-mono text-[13px]">
-            <a href="#projects" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center"><i class="fas fa-folder-open text-xs mr-2.5 text-slate-400"></i> Projects</a>
-            <a href="#active-hosting" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center"><i class="fas fa-server text-xs mr-2.5 text-slate-400"></i> KryosCloud</a>
-            <a href="#capabilities" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center"><i class="fas fa-microchip text-xs mr-2.5 text-slate-400"></i> Capabilities</a>
-            <a href="#design-archive" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center"><i class="fas fa-paint-brush text-xs mr-2.5 text-slate-400"></i> Design Archive</a>
-            <a href="#now-playing" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center"><i class="fas fa-headphones-alt text-xs mr-2.5 text-slate-400"></i> Now Playing</a>
+            <a href="#projects" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fas fa-folder-open text-xs mr-2.5 text-slate-400"></i> Projects</a>
+            <a href="#active-hosting" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fas fa-server text-xs mr-2.5 text-slate-400"></i> KryosCloud</a>
+            <a href="#capabilities" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fas fa-microchip text-xs mr-2.5 text-slate-400"></i> Capabilities</a>
+            <a href="#design-archive" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fas fa-paint-brush text-xs mr-2.5 text-slate-400"></i> Design Archive</a>
+            <a href="#now-playing" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fas fa-headphones-alt text-xs mr-2.5 text-slate-400"></i> Now Playing</a>
             
             <div class="h-px my-2 bg-slate-200 dark:bg-slate-800"></div>
 
-            <a href="https://github.com/Kikuro12" target="_blank" rel="noopener" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center"><i class="fab fa-github text-xs mr-2.5 text-slate-400"></i> GitHub ↗</a>
-            <a href="https://instagram.com/mhrwennn" target="_blank" rel="noopener" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center"><i class="fab fa-instagram text-xs mr-2.5 text-slate-400"></i> Instagram ↗</a>
-            <a href="https://facebook.com/100025231074173" target="_blank" rel="noopener" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center"><i class="fab fa-facebook-f text-xs mr-2.5 text-slate-400"></i> Facebook ↗</a>
+            <a href="https://github.com/Kikuro12" target="_blank" rel="noopener" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fab fa-github text-xs mr-2.5 text-slate-400"></i> GitHub ↗</a>
+            <a href="https://instagram.com/mhrwennn" target="_blank" rel="noopener" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fab fa-instagram text-xs mr-2.5 text-slate-400"></i> Instagram ↗</a>
+            <a href="https://facebook.com/100025231074173" target="_blank" rel="noopener" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fab fa-facebook-f text-xs mr-2.5 text-slate-400"></i> Facebook ↗</a>
         </div>
 
-        <button type="button" onclick="openAsk()" class="mt-4 inline-flex w-fit items-center gap-2 text-[12px] text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">
+        <button type="button" onclick="openAsk()" class="mt-4 inline-flex w-fit items-center gap-2 text-[12px] text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white">
             <span>Ask anything</span>
             <span class="inline-flex items-center gap-1">
                 <kbd class="ask-mod-key rounded border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 font-mono text-[10px] text-slate-600 dark:text-slate-300">⌘</kbd>
@@ -170,7 +171,7 @@
             </span>
         </button>
 
-        <button type="button" onclick="openTyping()" class="mt-2 inline-flex w-fit items-center gap-2 text-[12px] text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">
+        <button type="button" onclick="openTyping()" class="mt-2 inline-flex w-fit items-center gap-2 text-[12px] text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white">
             <span>Typing test</span>
             <span class="inline-flex items-center gap-1">
                 <kbd class="ask-mod-key rounded border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 font-mono text-[10px] text-slate-600 dark:text-slate-300">⌘</kbd>
@@ -178,7 +179,7 @@
             </span>
         </button>
 
-        <button type="button" onclick="toggleTerminal()" class="mt-2 inline-flex w-fit items-center gap-2 text-[12px] text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">
+        <button type="button" onclick="toggleTerminal()" class="mt-2 inline-flex w-fit items-center gap-2 text-[12px] text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white">
             <span>CLI Terminal</span>
             <i class="fas fa-terminal text-[10px] text-slate-400"></i>
         </button>
@@ -196,7 +197,7 @@
                     <button type="button" data-theme-opt="dark" onclick="setTheme('dark')" class="theme-opt" title="Dark"><svg viewBox="0 0 24 24" fill="none"><path d="M20 13.6A8 8 0 1 1 10.4 4a6.2 6.2 0 0 0 9.6 9.6z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></button>
                 </div>
             </div>
-            <a href="mailto:Kikuro112@gmail.com" class="inline-flex w-fit items-center gap-2 font-mono text-[12px] text-slate-800 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400"><svg viewBox="0 0 24 24" fill="none" class="h-4 w-4 shrink-0"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Kikuro112@gmail.com</a>
+            <a href="mailto:Kikuro112@gmail.com" class="inline-flex w-fit items-center gap-2 font-mono text-[12px] text-slate-800 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-white"><svg viewBox="0 0 24 24" fill="none" class="h-4 w-4 shrink-0"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Kikuro112@gmail.com</a>
         </div>
     </nav>
 
@@ -204,7 +205,7 @@
     <header class="sticky top-0 z-50 border-b border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md lg:hidden">
         <div class="mx-auto flex max-w-3xl items-center justify-between px-6 py-3">
             <a href="#top" class="font-pixel text-[14px] text-slate-900 dark:text-slate-100">Marwen.dev</a>
-            <button type="button" onclick="openMobileNav()" aria-label="Open menu" class="-mr-1 p-1 text-slate-700 dark:text-slate-300 hover:text-indigo-600">
+            <button type="button" onclick="openMobileNav()" aria-label="Open menu" class="-mr-1 p-1 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white">
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
             </button>
         </div>
@@ -258,10 +259,10 @@
                         </p>
 
                         <div class="reveal d5 mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[12px] text-slate-600 dark:text-slate-400">
-                            <a href="https://github.com/Kikuro12" target="_blank" rel="noopener" class="hover:text-indigo-600 dark:hover:text-indigo-400"><i class="fab fa-github mr-1"></i> github ↗</a>
-                            <a href="https://instagram.com/mhrwennn" target="_blank" rel="noopener" class="hover:text-indigo-600 dark:hover:text-indigo-400"><i class="fab fa-instagram mr-1"></i> instagram ↗</a>
-                            <a href="https://facebook.com/100025231074173" target="_blank" rel="noopener" class="hover:text-indigo-600 dark:hover:text-indigo-400"><i class="fab fa-facebook-f mr-1"></i> facebook ↗</a>
-                            <button type="button" onclick="openModal('email')" class="hover:text-indigo-600 dark:hover:text-indigo-400"><i class="fas fa-envelope mr-1"></i> email</button>
+                            <a href="https://github.com/Kikuro12" target="_blank" rel="noopener" class="hover:text-indigo-600 dark:hover:text-white"><i class="fab fa-github mr-1"></i> github ↗</a>
+                            <a href="https://instagram.com/mhrwennn" target="_blank" rel="noopener" class="hover:text-indigo-600 dark:hover:text-white"><i class="fab fa-instagram mr-1"></i> instagram ↗</a>
+                            <a href="https://facebook.com/100025231074173" target="_blank" rel="noopener" class="hover:text-indigo-600 dark:hover:text-white"><i class="fab fa-facebook-f mr-1"></i> facebook ↗</a>
+                            <button type="button" onclick="openModal('email')" class="hover:text-indigo-600 dark:hover:text-white"><i class="fas fa-envelope mr-1"></i> email</button>
                         </div>
                     </div>
                 </div>
@@ -279,14 +280,14 @@
                 </div>
                 <div class="py-5 pr-4 sm:px-4">
                     <a href="https://kryoscloud.tech" target="_blank" class="group block">
-                        <span class="font-pixel text-lg leading-none text-indigo-600 dark:text-indigo-400">Kryos</span>
-                        <div class="mt-1 font-mono text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Cloud Founder ↗</div>
+                        <span class="font-pixel text-lg leading-none text-indigo-600 dark:text-white">Kryos</span>
+                        <div class="mt-1 font-mono text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-white">Cloud Founder ↗</div>
                     </a>
                 </div>
                 <div class="py-5 pl-4 sm:px-4">
                     <button type="button" onclick="openModal('guestbook')" class="group block text-left">
                         <span class="font-pixel text-lg leading-none text-slate-900 dark:text-slate-100">Guestbook</span>
-                        <div class="mt-1 font-mono text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Leave Feedback →</div>
+                        <div class="mt-1 font-mono text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-white">Leave Feedback →</div>
                     </button>
                 </div>
             </section>
@@ -297,13 +298,13 @@
             <section id="active-hosting" class="py-10">
                 <div class="mb-6 flex items-baseline justify-between">
                     <h2 class="font-pixel text-sm text-slate-500 dark:text-slate-400">01 — active projects & infrastructure</h2>
-                    <a href="https://kryoscloud.tech" target="_blank" class="font-mono text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">kryoscloud.tech ↗</a>
+                    <a href="https://kryoscloud.tech" target="_blank" class="font-mono text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white">kryoscloud.tech ↗</a>
                 </div>
 
                 <div class="grid gap-4 sm:grid-cols-2">
-                    <a href="https://kryoscloud.tech" target="_blank" rel="noopener" class="group rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-xs transition hover:border-indigo-500/50">
+                    <a href="https://kryoscloud.tech" target="_blank" rel="noopener" class="group rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-xs transition hover:border-indigo-500/50 dark:hover:border-slate-500">
                         <div class="flex items-center gap-3.5">
-                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400">
+                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-indigo-200 dark:border-slate-700 bg-indigo-50 dark:bg-slate-800/60 text-indigo-600 dark:text-white">
                                 <i class="fas fa-cloud text-sm"></i>
                             </div>
                             <div>
@@ -313,7 +314,7 @@
                         </div>
                     </a>
 
-                    <a href="https://betapedifare.kryoscloud.tech" target="_blank" rel="noopener" class="group rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-xs transition hover:border-indigo-500/50">
+                    <a href="https://betapedifare.kryoscloud.tech" target="_blank" rel="noopener" class="group rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-xs transition hover:border-indigo-500/50 dark:hover:border-slate-500">
                         <div class="flex items-center gap-3.5">
                             <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
                                 <i class="fas fa-route text-sm"></i>
@@ -331,20 +332,20 @@
             <section id="projects" class="py-10">
                 <div class="mb-6 flex items-baseline justify-between">
                     <h2 class="font-pixel text-sm text-slate-500 dark:text-slate-400">02 — academic & coding projects</h2>
-                    <a href="https://github.com/Kikuro12" target="_blank" class="font-mono text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">all github repos →</a>
+                    <a href="https://github.com/Kikuro12" target="_blank" class="font-mono text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white">all github repos →</a>
                 </div>
 
                 <div class="deck" data-deck>
                     <!-- Card 1 Center -->
                     <article class="deck-card is-center rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-lg" role="button" tabindex="0" onclick="activateCard(this)">
-                        <span class="inline-flex items-center rounded-full bg-indigo-600 text-white px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider">Featured Concept</span>
+                        <span class="inline-flex items-center rounded-full bg-indigo-600 dark:bg-slate-200 text-white dark:text-slate-900 px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider">Featured Concept</span>
                         <div class="mt-3 flex items-center gap-3">
                             <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100"><i class="fas fa-shield-alt text-sm"></i></div>
                             <h3 class="font-pixel text-base text-slate-900 dark:text-slate-100">Kiur Login Page</h3>
                         </div>
                         <p class="mt-2 text-[12.5px] leading-relaxed text-slate-600 dark:text-slate-300">Secure UI concept exploring authentication layouts and modern glassmorphism design principles.</p>
                         <div class="mt-4">
-                            <a href="https://kikuro12.github.io/kiur-login-page/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">View Live Demo ↗</a>
+                            <a href="https://kikuro12.github.io/kiur-login-page/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold text-indigo-600 dark:text-white hover:underline">View Live Demo ↗</a>
                         </div>
                     </article>
 
@@ -357,7 +358,7 @@
                         </div>
                         <p class="mt-2 text-[12.5px] leading-relaxed text-slate-600 dark:text-slate-300">Dynamic date and event application built for mastering JavaScript state logic.</p>
                         <div class="mt-4">
-                            <a href="https://kikuro12.github.io/kikuro-calendar/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">View Live Demo ↗</a>
+                            <a href="https://kikuro12.github.io/kikuro-calendar/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold text-indigo-600 dark:text-white hover:underline">View Live Demo ↗</a>
                         </div>
                     </article>
 
@@ -370,13 +371,13 @@
                         </div>
                         <p class="mt-2 text-[12.5px] leading-relaxed text-slate-600 dark:text-slate-300">Pure JavaScript math operations implementation with clean responsive UI styling.</p>
                         <div class="mt-4">
-                            <a href="https://kikuro12.github.io/kiur-calculator/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">View Live Demo ↗</a>
+                            <a href="https://kikuro12.github.io/kiur-calculator/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold text-indigo-600 dark:text-white hover:underline">View Live Demo ↗</a>
                         </div>
                     </article>
                 </div>
 
                 <div class="mt-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 p-4 font-mono text-[12px] text-slate-600 dark:text-slate-400">
-                    <div class="flex items-center gap-2 text-slate-900 dark:text-slate-100 font-medium"><i class="fas fa-users text-indigo-500"></i> IT Community Immersion Project</div>
+                    <div class="flex items-center gap-2 text-slate-900 dark:text-slate-100 font-medium"><i class="fas fa-users text-indigo-500 dark:text-slate-300"></i> IT Community Immersion Project</div>
                     <p class="mt-1 text-slate-500 dark:text-slate-400">Academic outreach initiative promoting digital literacy, online safety, and responsible mobile usage in local barangay communities.</p>
                 </div>
 
@@ -386,10 +387,10 @@
                         <h3 class="font-pixel text-base text-slate-900 dark:text-slate-100 flex items-center gap-2">
                             <i class="fab fa-github text-slate-700 dark:text-slate-300"></i> Contribution Graph
                         </h3>
-                        <a href="https://github.com/Kikuro12" target="_blank" class="font-mono text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">@Kikuro12 ↗</a>
+                        <a href="https://github.com/Kikuro12" target="_blank" class="font-mono text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white">@Kikuro12 ↗</a>
                     </div>
                     <div class="w-full overflow-x-auto pb-2 custom-scrollbar">
-                        <img src="https://ghchart.rshah.org/4f46e5/Kikuro12" alt="Kikuro12's GitHub Contributions" class="min-w-[650px] w-full opacity-90 transition-all duration-300 dark:invert dark:hue-rotate-180">
+                        <img src="https://ghchart.rshah.org/4f46e5/Kikuro12" alt="Kikuro12's GitHub Contributions" class="min-w-[650px] w-full opacity-90 transition-all duration-300 dark:invert dark:grayscale">
                     </div>
                 </div>
             </section>
@@ -403,34 +404,34 @@
                 <!-- Minimalist Progress Bars -->
                 <div class="space-y-3.5 font-mono text-[12px]">
                     <div>
-                        <div class="flex justify-between text-slate-700 dark:text-slate-300 mb-1"><span>Frontend Dev (Learning)</span><span class="font-semibold text-indigo-600 dark:text-indigo-400">65%</span></div>
-                        <div class="h-1.5 w-full rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden"><div class="h-full bg-indigo-600 dark:bg-indigo-500 rounded-full" style="width: 65%;"></div></div>
+                        <div class="flex justify-between text-slate-700 dark:text-slate-300 mb-1"><span>Frontend Dev (Learning)</span><span class="font-semibold text-indigo-600 dark:text-white">65%</span></div>
+                        <div class="h-1.5 w-full rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden"><div class="h-full bg-indigo-600 dark:bg-slate-300 rounded-full" style="width: 65%;"></div></div>
                     </div>
                     <div>
-                        <div class="flex justify-between text-slate-700 dark:text-slate-300 mb-1"><span>UI Layout & Graphic Design</span><span class="font-semibold text-indigo-600 dark:text-indigo-400">70%</span></div>
-                        <div class="h-1.5 w-full rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden"><div class="h-full bg-indigo-600 dark:bg-indigo-500 rounded-full" style="width: 70%;"></div></div>
+                        <div class="flex justify-between text-slate-700 dark:text-slate-300 mb-1"><span>UI Layout & Graphic Design</span><span class="font-semibold text-indigo-600 dark:text-white">70%</span></div>
+                        <div class="h-1.5 w-full rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden"><div class="h-full bg-indigo-600 dark:bg-slate-300 rounded-full" style="width: 70%;"></div></div>
                     </div>
                     <div>
-                        <div class="flex justify-between text-slate-700 dark:text-slate-300 mb-1"><span>Hosting & Server Administration</span><span class="font-semibold text-indigo-600 dark:text-indigo-400">75%</span></div>
-                        <div class="h-1.5 w-full rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden"><div class="h-full bg-indigo-600 dark:bg-indigo-500 rounded-full" style="width: 75%;"></div></div>
+                        <div class="flex justify-between text-slate-700 dark:text-slate-300 mb-1"><span>Hosting & Server Administration</span><span class="font-semibold text-indigo-600 dark:text-white">75%</span></div>
+                        <div class="h-1.5 w-full rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden"><div class="h-full bg-indigo-600 dark:bg-slate-300 rounded-full" style="width: 75%;"></div></div>
                     </div>
                     <div>
-                        <div class="flex justify-between text-slate-700 dark:text-slate-300 mb-1"><span>Varsity Long-Distance Swimming</span><span class="font-semibold text-indigo-600 dark:text-indigo-400">90%</span></div>
-                        <div class="h-1.5 w-full rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden"><div class="h-full bg-indigo-600 dark:bg-indigo-500 rounded-full" style="width: 90%;"></div></div>
+                        <div class="flex justify-between text-slate-700 dark:text-slate-300 mb-1"><span>Varsity Long-Distance Swimming</span><span class="font-semibold text-indigo-600 dark:text-white">90%</span></div>
+                        <div class="h-1.5 w-full rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden"><div class="h-full bg-indigo-600 dark:bg-slate-300 rounded-full" style="width: 90%;"></div></div>
                     </div>
                 </div>
 
                 <!-- Minimalist Tech Badges -->
                 <div class="mt-6 flex flex-wrap gap-2">
-                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fab fa-html5 text-indigo-500 mr-1.5"></i> HTML5</span>
-                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fab fa-css3-alt text-indigo-500 mr-1.5"></i> CSS3</span>
-                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fab fa-js text-indigo-500 mr-1.5"></i> JavaScript</span>
-                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fab fa-java text-indigo-500 mr-1.5"></i> Java</span>
-                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fas fa-database text-indigo-500 mr-1.5"></i> SQL / DBs</span>
-                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fab fa-figma text-indigo-500 mr-1.5"></i> Figma</span>
-                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fas fa-paint-brush text-indigo-500 mr-1.5"></i> Photoshop</span>
-                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fab fa-linux text-indigo-500 mr-1.5"></i> Linux Server</span>
-                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fas fa-network-wired text-indigo-500 mr-1.5"></i> Networking</span>
+                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fab fa-html5 text-indigo-500 dark:text-slate-300 mr-1.5"></i> HTML5</span>
+                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fab fa-css3-alt text-indigo-500 dark:text-slate-300 mr-1.5"></i> CSS3</span>
+                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fab fa-js text-indigo-500 dark:text-slate-300 mr-1.5"></i> JavaScript</span>
+                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fab fa-java text-indigo-500 dark:text-slate-300 mr-1.5"></i> Java</span>
+                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fas fa-database text-indigo-500 dark:text-slate-300 mr-1.5"></i> SQL / DBs</span>
+                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fab fa-figma text-indigo-500 dark:text-slate-300 mr-1.5"></i> Figma</span>
+                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fas fa-paint-brush text-indigo-500 dark:text-slate-300 mr-1.5"></i> Photoshop</span>
+                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fab fa-linux text-indigo-500 dark:text-slate-300 mr-1.5"></i> Linux Server</span>
+                    <span class="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1 font-mono text-[12px] text-slate-700 dark:text-slate-300 shadow-xs"><i class="fas fa-network-wired text-indigo-500 dark:text-slate-300 mr-1.5"></i> Networking</span>
                 </div>
             </section>
 
@@ -519,20 +520,20 @@
 
                 <div class="flex items-center gap-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-xs">
                     <div class="relative h-14 w-16 shrink-0 rounded-full border border-slate-300 dark:border-slate-700 bg-slate-950 shadow-xs flex items-center justify-center overflow-hidden">
-                        <img id="vinylImg" src="764636577_4081845515280762_3798175889070813378_n.jpg" class="vinyl-spin h-9 w-9 rounded-full object-cover" alt="Vinyl album art">
+                        <img id="vinylImg" src="https://i.imgur.com/ANMBoMe.jpeg" class="vinyl-spin h-9 w-9 rounded-full object-cover" alt="Vinyl album art">
                     </div>
                     <div class="flex-1 min-w-0">
                         <h3 class="font-pixel text-base text-slate-900 dark:text-slate-100">Sugar</h3>
                         <p class="font-mono text-xs text-slate-500 dark:text-slate-400">Maroon 5</p>
                         <div class="mt-3 flex items-center gap-3">
-                            <button type="button" id="playAudioBtn" onclick="toggleAudio()" class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-white hover:bg-indigo-700">
+                            <button type="button" id="playAudioBtn" onclick="toggleAudio()" class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 dark:bg-slate-200 text-white dark:text-slate-900 hover:bg-indigo-700 dark:hover:bg-white">
                                 <i id="playIcon" class="fas fa-play text-xs"></i>
                             </button>
                             <span class="font-mono text-[10px] uppercase text-slate-500 dark:text-slate-400">Audio Loop</span>
                         </div>
                     </div>
                 </div>
-                <audio id="audio-player" src="https://cdn.jsdelivr.net/gh/rafaelreeves/media/sugar.mp3" loop></audio>
+                <audio id="audio-player" src="Maroon 5 - Sugar (Lyrics).mp3" loop></audio>
             </section>
 
             <div aria-hidden="true" class="halftone halftone-wide mask-fade-x mb-12 mt-2 h-10 w-full opacity-[0.15]"></div>
@@ -549,7 +550,7 @@
             </div>
             <div id="askReveal" class="hidden"></div>
             <div class="ask-field inline-flex items-center font-mono text-base text-slate-600 dark:text-slate-300">
-                <span id="askText"></span><span class="ask-caret ml-1 h-5 w-0.5 bg-indigo-600 animate-pulse"></span>
+                <span id="askText"></span><span class="ask-caret ml-1 h-5 w-0.5 bg-indigo-600 dark:bg-white animate-pulse"></span>
             </div>
             <input id="askInput" class="sr-only" type="text" autocomplete="off" aria-label="Type your question">
         </div>
@@ -560,9 +561,9 @@
         <div class="tt-backdrop fixed inset-0 bg-slate-900/60 backdrop-blur-md" onclick="closeTyping()"></div>
         <div class="relative z-10 flex flex-col items-center gap-6 max-w-xl w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-8 shadow-2xl text-center">
             <div class="flex gap-8 font-mono">
-                <div><span id="ttWpm" class="text-3xl font-bold text-indigo-600 dark:text-indigo-400">0</span><div class="text-[10px] text-slate-500 dark:text-slate-400 uppercase">WPM</div></div>
-                <div><span id="ttAcc" class="text-3xl font-bold text-indigo-600 dark:text-indigo-400">100</span><div class="text-[10px] text-slate-500 dark:text-slate-400 uppercase">% ACC</div></div>
-                <div><span id="ttTime" class="text-3xl font-bold text-indigo-600 dark:text-indigo-400">0</span><div class="text-[10px] text-slate-500 dark:text-slate-400 uppercase">Sec</div></div>
+                <div><span id="ttWpm" class="text-3xl font-bold text-indigo-600 dark:text-white">0</span><div class="text-[10px] text-slate-500 dark:text-slate-400 uppercase">WPM</div></div>
+                <div><span id="ttAcc" class="text-3xl font-bold text-indigo-600 dark:text-white">100</span><div class="text-[10px] text-slate-500 dark:text-slate-400 uppercase">% ACC</div></div>
+                <div><span id="ttTime" class="text-3xl font-bold text-indigo-600 dark:text-white">0</span><div class="text-[10px] text-slate-500 dark:text-slate-400 uppercase">Sec</div></div>
             </div>
             <div id="ttWords" class="font-pixel text-xl sm:text-2xl text-slate-700 dark:text-slate-300 leading-relaxed min-h-[4rem]"></div>
             <div class="font-mono text-xs text-slate-500 dark:text-slate-400"><kbd class="border border-slate-300 dark:border-slate-700 px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800">Tab</kbd> restart · <kbd class="border border-slate-300 dark:border-slate-700 px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800">Esc</kbd> close</div>
@@ -612,7 +613,7 @@
             <p class="mt-2 text-xs text-slate-600 dark:text-slate-400">For work, collaborations, or inquiries — drop me a message.</p>
             <div class="mt-4 flex items-center gap-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 p-2">
                 <span class="flex-1 truncate font-mono text-xs text-slate-900 dark:text-slate-100">Kikuro112@gmail.com</span>
-                <button type="button" onclick="copyEmail(event)" class="rounded-md bg-indigo-600 hover:bg-indigo-700 px-3 py-1 font-mono text-xs text-white">Copy</button>
+                <button type="button" onclick="copyEmail(event)" class="rounded-md bg-indigo-600 dark:bg-slate-200 dark:text-slate-900 hover:bg-indigo-700 dark:hover:bg-white px-3 py-1 font-mono text-xs text-white">Copy</button>
             </div>
         </div>
 
@@ -622,9 +623,9 @@
             <p class="font-mono text-[10px] uppercase text-slate-400">Feedback</p>
             <h2 class="mt-2 font-pixel text-xl text-slate-900 dark:text-slate-100">Guestbook</h2>
             <div class="mt-4 flex flex-col gap-2">
-                <input type="text" id="gb-name" placeholder="Name / Alias" class="rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 px-3 py-2 font-mono text-xs text-slate-900 dark:text-slate-100 focus:outline-none focus:border-indigo-500">
-                <input type="text" id="gb-msg" placeholder="Your feedback message..." class="rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 px-3 py-2 font-mono text-xs text-slate-900 dark:text-slate-100 focus:outline-none focus:border-indigo-500">
-                <button type="button" onclick="submitGuestbook()" class="mt-1 rounded-lg bg-indigo-600 hover:bg-indigo-700 py-2 font-mono text-xs text-white">Initialize Transfer</button>
+                <input type="text" id="gb-name" placeholder="Name / Alias" class="rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 px-3 py-2 font-mono text-xs text-slate-900 dark:text-slate-100 focus:outline-none focus:border-indigo-500 dark:focus:border-slate-400">
+                <input type="text" id="gb-msg" placeholder="Your feedback message..." class="rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 px-3 py-2 font-mono text-xs text-slate-900 dark:text-slate-100 focus:outline-none focus:border-indigo-500 dark:focus:border-slate-400">
+                <button type="button" onclick="submitGuestbook()" class="mt-1 rounded-lg bg-indigo-600 dark:bg-slate-200 dark:text-slate-900 hover:bg-indigo-700 dark:hover:bg-white py-2 font-mono text-xs text-white">Initialize Transfer</button>
             </div>
         </div>
     </div>

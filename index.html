@@ -110,6 +110,10 @@
     .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
     .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 6px; }
     html.dark .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; }
+    
+    /* Typing Test Cursors */
+    .tt-word.is-active { border-bottom: 2px solid #4f46e5; }
+    html.dark .tt-word.is-active { border-bottom: 2px solid #ffffff; }
     </style>
 
     <script>
@@ -137,7 +141,20 @@
     })();
     </script>
 </head>
-<body class="relative overflow-x-hidden bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased font-sans">
+<body class="relative overflow-hidden bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased font-sans">
+
+    <!-- ─────────────── MYSTERIOUS INTRO OVERLAY ─────────────── -->
+    <div id="introOverlay" class="fixed inset-0 z-[200] flex items-center justify-center bg-slate-50 dark:bg-slate-950 transition-opacity duration-1000">
+        <!-- Background Texture Match -->
+        <div aria-hidden="true" class="pointer-events-none absolute inset-0 z-0">
+            <div class="halftone halftone-wide mask-tr absolute right-0 top-0 h-[70vh] w-[65vw] opacity-[0.12]"></div>
+            <div class="halftone mask-bl absolute bottom-0 left-0 h-[60vh] w-[55vw] opacity-[0.10]"></div>
+        </div>
+        
+        <div class="relative z-10 flex items-center font-mono text-sm sm:text-base text-slate-800 dark:text-slate-200 tracking-widest text-center px-4">
+            <span id="introText"></span><span class="inline-block w-2 h-4 ml-1.5 bg-slate-800 dark:bg-slate-200 animate-pulse"></span>
+        </div>
+    </div>
 
     <!-- Background Texture -->
     <div aria-hidden="true" class="pointer-events-none fixed inset-0 z-0">
@@ -150,6 +167,7 @@
         <a href="#top" class="shrink-0 font-pixel text-[15px] leading-none text-slate-900 dark:text-slate-100 hover:opacity-70">Marwen.dev</a>
 
         <div class="mt-8 flex flex-1 flex-col gap-3 overflow-y-auto font-mono text-[13px]">
+            <a href="#blog" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fas fa-book-open text-xs mr-2.5 text-slate-400"></i> Blog</a>
             <a href="#projects" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fas fa-folder-open text-xs mr-2.5 text-slate-400"></i> Projects</a>
             <a href="#active-hosting" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fas fa-server text-xs mr-2.5 text-slate-400"></i> KryosCloud</a>
             <a href="#capabilities" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fas fa-microchip text-xs mr-2.5 text-slate-400"></i> Capabilities</a>
@@ -218,6 +236,7 @@
             <button type="button" onclick="closeMobileNav()" class="p-1 text-slate-600 dark:text-slate-300"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
         </div>
         <div class="mt-6 flex flex-col gap-4 text-slate-700 dark:text-slate-300">
+            <a href="#blog" onclick="closeMobileNav()">Blog</a>
             <a href="#projects" onclick="closeMobileNav()">Projects</a>
             <a href="#active-hosting" onclick="closeMobileNav()">KryosCloud</a>
             <a href="#capabilities" onclick="closeMobileNav()">Capabilities</a>
@@ -294,10 +313,47 @@
 
             <div aria-hidden="true" class="halftone halftone-wide mask-fade-x my-2 h-6 w-full opacity-[0.18]"></div>
 
-            <!-- Section 01: Active Projects / Infrastructure -->
+            <!-- Section 01: Blog (Breaking Bad / Calculated Intelligence Theme) -->
+            <section id="blog" class="py-10">
+                <div class="mb-6 flex items-baseline justify-between">
+                    <h2 class="font-pixel text-sm text-slate-500 dark:text-slate-400">01 — field notes & reflections</h2>
+                    <span class="font-mono text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400">The Chemistry of Systems</span>
+                </div>
+
+                <div class="divide-y divide-slate-200 dark:divide-slate-800 border-y border-slate-200 dark:border-slate-800">
+                    <!-- Blog Post 1 -->
+                    <article onclick="openBlog('The Purity of Control', 'July 2026', 'In any system—whether a Linux VPS routing traffic behind Nginx or an underground chemical reaction—chaos is the default state. Control is not given; it is engineered piece by meticulous piece. If your architecture depends on hope rather than immutable logic, it is already failing.')" class="group flex items-baseline justify-between gap-6 py-5 cursor-pointer hover:bg-slate-100/50 dark:hover:bg-slate-900/50 px-2 transition">
+                        <div class="min-w-0">
+                            <h3 class="text-[15px] font-medium text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">The Purity of Control: Why Infrastructure Demands Absolute Precision</h3>
+                            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400 line-clamp-1">In any system—whether a Linux VPS routing traffic or an underground reaction—chaos is default. Control is engineered.</p>
+                        </div>
+                        <time class="shrink-0 font-mono text-[12px] text-slate-400">Jul 2026</time>
+                    </article>
+
+                    <!-- Blog Post 2 -->
+                    <article onclick="openBlog('Variables and Consequences', 'June 2026', 'Every variable you introduce into code or life creates a vector for failure. Amateurs optimize for speed; professionals optimize for containment. When you tighten your error-handling and secure your endpoints, you realize that safety isn’t a feature—it’s the entire foundation.')" class="group flex items-baseline justify-between gap-6 py-5 cursor-pointer hover:bg-slate-100/50 dark:hover:bg-slate-900/50 px-2 transition">
+                        <div class="min-w-0">
+                            <h3 class="text-[15px] font-medium text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">Variables and Consequences: The Calculus of Error Handling</h3>
+                            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400 line-clamp-1">Every variable introduces a vector for failure. Amateurs optimize for speed; professionals optimize for containment.</p>
+                        </div>
+                        <time class="shrink-0 font-mono text-[12px] text-slate-400">Jun 2026</time>
+                    </article>
+
+                    <!-- Blog Post 3 -->
+                    <article onclick="openBlog('The Alchemist Mindset', 'May 2026', 'They call it genius when things work, but they call it reckless when you test the boundaries. True engineering requires staring down a complex server crash or an intractable routing problem without blinking, dismantling it down to its atomic components, and rebuilding it stronger.')" class="group flex items-baseline justify-between gap-6 py-5 cursor-pointer hover:bg-slate-100/50 dark:hover:bg-slate-900/50 px-2 transition">
+                        <div class="min-w-0">
+                            <h3 class="text-[15px] font-medium text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">The Alchemist Mindset: Dismantling Complexity Down to the Metal</h3>
+                            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400 line-clamp-1">True engineering requires staring down a complex system failure, dismantling it, and rebuilding it stronger.</p>
+                        </div>
+                        <time class="shrink-0 font-mono text-[12px] text-slate-400">May 2026</time>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Section 02: Active Projects / Infrastructure -->
             <section id="active-hosting" class="py-10">
                 <div class="mb-6 flex items-baseline justify-between">
-                    <h2 class="font-pixel text-sm text-slate-500 dark:text-slate-400">01 — active projects & infrastructure</h2>
+                    <h2 class="font-pixel text-sm text-slate-500 dark:text-slate-400">02 — active projects & infrastructure</h2>
                     <a href="https://kryoscloud.tech" target="_blank" class="font-mono text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white">kryoscloud.tech ↗</a>
                 </div>
 
@@ -328,10 +384,10 @@
                 </div>
             </section>
 
-            <!-- Section 02: Projects Spotlight Card Deck -->
+            <!-- Section 03: Projects Spotlight Card Deck -->
             <section id="projects" class="py-10">
                 <div class="mb-6 flex items-baseline justify-between">
-                    <h2 class="font-pixel text-sm text-slate-500 dark:text-slate-400">02 — academic & coding projects</h2>
+                    <h2 class="font-pixel text-sm text-slate-500 dark:text-slate-400">03 — academic & coding projects</h2>
                     <a href="https://github.com/Kikuro12" target="_blank" class="font-mono text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white">all github repos →</a>
                 </div>
 
@@ -395,10 +451,10 @@
                 </div>
             </section>
 
-            <!-- Section 03: System Capabilities & Stack -->
+            <!-- Section 04: System Capabilities & Stack -->
             <section id="capabilities" class="py-10">
                 <div class="mb-6 flex items-baseline justify-between">
-                    <h2 class="font-pixel text-sm text-slate-500 dark:text-slate-400">03 — system capabilities & tech stack</h2>
+                    <h2 class="font-pixel text-sm text-slate-500 dark:text-slate-400">04 — system capabilities & tech stack</h2>
                 </div>
 
                 <!-- Minimalist Progress Bars -->
@@ -435,10 +491,10 @@
                 </div>
             </section>
 
-            <!-- Section 04: Design Archive (HIGH CONTRAST GRID + ZOOM MODAL) -->
+            <!-- Section 05: Design Archive -->
             <section id="design-archive" class="py-10">
                 <div class="mb-2 flex items-baseline justify-between">
-                    <h2 class="font-pixel text-sm text-slate-500 dark:text-slate-400">04 — design & layout archive</h2>
+                    <h2 class="font-pixel text-sm text-slate-500 dark:text-slate-400">05 — design & layout archive</h2>
                 </div>
                 <p class="mb-6 font-mono text-[11px] text-slate-600 dark:text-slate-400">Academic & creative layout practice, sports graphics, film concepts, and sublimation apparel design.</p>
 
@@ -512,10 +568,10 @@
                 </div>
             </section>
 
-            <!-- Section 05: Now Playing Music -->
+            <!-- Section 06: Now Playing Music -->
             <section id="now-playing" class="py-10">
                 <div class="mb-4 flex items-baseline justify-between">
-                    <h2 class="font-pixel text-sm text-slate-500 dark:text-slate-400">05 — music & inspiration</h2>
+                    <h2 class="font-pixel text-sm text-slate-500 dark:text-slate-400">06 — music & inspiration</h2>
                 </div>
 
                 <div class="flex items-center gap-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-xs">
@@ -540,6 +596,17 @@
         </div>
     </main>
 
+    <!-- ─────────────── BLOG MODAL READER ─────────────── -->
+    <div id="blogModal" class="fixed inset-0 z-[125] hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md" onclick="closeBlog()">
+        <div class="relative max-w-xl w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 shadow-2xl flex flex-col" onclick="event.stopPropagation()">
+            <button type="button" onclick="closeBlog()" class="absolute right-4 top-4 text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"><i class="fas fa-times"></i></button>
+            <span id="blogModalDate" class="font-mono text-xs text-indigo-600 dark:text-indigo-400 uppercase tracking-widest"></span>
+            <h2 id="blogModalTitle" class="mt-2 font-pixel text-xl sm:text-2xl text-slate-900 dark:text-slate-100"></h2>
+            <div class="h-px w-full bg-slate-200 dark:bg-slate-800 my-4"></div>
+            <p id="blogModalBody" class="font-mono text-sm leading-relaxed text-slate-700 dark:text-slate-300"></p>
+        </div>
+    </div>
+
     <!-- ─────────────── ASK OVERLAY (⌘K) ─────────────── -->
     <div id="askOverlay" role="dialog" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
         <div class="ask-backdrop fixed inset-0 bg-slate-900/60 backdrop-blur-md" onclick="closeAsk()"></div>
@@ -563,30 +630,30 @@
             <div class="flex gap-8 font-mono">
                 <div><span id="ttWpm" class="text-3xl font-bold text-indigo-600 dark:text-white">0</span><div class="text-[10px] text-slate-500 dark:text-slate-400 uppercase">WPM</div></div>
                 <div><span id="ttAcc" class="text-3xl font-bold text-indigo-600 dark:text-white">100</span><div class="text-[10px] text-slate-500 dark:text-slate-400 uppercase">% ACC</div></div>
-                <div><span id="ttTime" class="text-3xl font-bold text-indigo-600 dark:text-white">0</span><div class="text-[10px] text-slate-500 dark:text-slate-400 uppercase">Sec</div></div>
+                <div><span id="ttTime" class="text-3xl font-bold text-indigo-600 dark:text-white">30</span><div class="text-[10px] text-slate-500 dark:text-slate-400 uppercase">Sec</div></div>
             </div>
-            <div id="ttWords" class="font-pixel text-xl sm:text-2xl text-slate-700 dark:text-slate-300 leading-relaxed min-h-[4rem]"></div>
-            <div class="font-mono text-xs text-slate-500 dark:text-slate-400"><kbd class="border border-slate-300 dark:border-slate-700 px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800">Tab</kbd> restart · <kbd class="border border-slate-300 dark:border-slate-700 px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800">Esc</kbd> close</div>
+            <div id="ttWords" class="font-pixel text-xl sm:text-2xl text-slate-700 dark:text-slate-300 leading-relaxed min-h-[4rem] flex flex-wrap justify-center gap-x-3 gap-y-2"></div>
+            <div class="font-mono text-xs text-slate-500 dark:text-slate-400 mt-2"><kbd class="border border-slate-300 dark:border-slate-700 px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800">Tab</kbd> restart · <kbd class="border border-slate-300 dark:border-slate-700 px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800">Esc</kbd> close</div>
         </div>
     </div>
 
     <!-- ─────────────── CLI TERMINAL MODAL ─────────────── -->
-    <div id="term-modal" class="fixed inset-0 z-[120] hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
-        <div class="w-full max-w-2xl h-[450px] bg-slate-950 border border-slate-800 rounded-2xl flex flex-col overflow-hidden font-mono shadow-2xl">
-            <div class="flex items-center justify-between px-4 py-3 bg-slate-900 border-b border-slate-800 text-xs text-slate-400">
+    <div id="term-modal" class="fixed inset-0 z-[120] hidden items-center justify-center p-4 bg-slate-900/60 dark:bg-slate-950/80 backdrop-blur-md" onclick="if(event.target === this) toggleTerminal()">
+        <div class="w-full max-w-2xl h-[450px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl flex flex-col overflow-hidden font-mono shadow-2xl transition-colors">
+            <div class="flex items-center justify-between px-4 py-3 bg-slate-100 dark:bg-slate-950/50 border-b border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
                 <div class="flex gap-2">
-                    <span onclick="toggleTerminal()" class="h-3 w-3 rounded-full bg-red-500 cursor-pointer"></span>
+                    <span onclick="toggleTerminal()" class="h-3 w-3 rounded-full bg-red-500 cursor-pointer hover:bg-red-600"></span>
                     <span class="h-3 w-3 rounded-full bg-yellow-500"></span>
                     <span class="h-3 w-3 rounded-full bg-green-500"></span>
                 </div>
                 <span>user@marwen.dev:~</span>
                 <span></span>
             </div>
-            <div id="term-body" class="p-4 flex-1 overflow-y-auto text-emerald-400 text-xs space-y-2">
+            <div id="term-body" class="p-4 flex-1 overflow-y-auto text-slate-700 dark:text-slate-300 text-xs space-y-2">
                 <div id="term-output"></div>
                 <div class="flex items-center gap-2">
-                    <span>guest@marwen:~$</span>
-                    <input id="term-input" type="text" class="flex-1 bg-transparent border-none text-emerald-400 outline-none focus:outline-none">
+                    <span class="text-indigo-600 dark:text-indigo-400 font-semibold">guest@marwen:~$</span>
+                    <input id="term-input" type="text" class="flex-1 bg-transparent border-none text-slate-900 dark:text-slate-100 outline-none focus:outline-none focus:ring-0 p-0" autocomplete="off" spellcheck="false">
                 </div>
             </div>
         </div>
@@ -632,6 +699,32 @@
 
     <!-- JS Logic Scripts -->
     <script>
+    // Intro Overlay Logic
+    document.addEventListener('DOMContentLoaded', () => {
+        const introOverlay = document.getElementById('introOverlay');
+        const introTextEl = document.getElementById('introText');
+        const message = "the best way to lie is to tell the truth.";
+        let i = 0;
+
+        function typeWriter() {
+            if (i < message.length) {
+                introTextEl.textContent += message.charAt(i);
+                i++;
+                setTimeout(typeWriter, Math.random() * 50 + 50); // slight variance in typing speed
+            } else {
+                setTimeout(() => {
+                    introOverlay.classList.add('opacity-0');
+                    setTimeout(() => {
+                        introOverlay.style.display = 'none';
+                        document.body.classList.remove('overflow-hidden');
+                    }, 1000);
+                }, 1200); // delay before fade out
+            }
+        }
+
+        setTimeout(typeWriter, 500); // delay before typing starts
+    });
+
     // Audio Player
     let isPlaying = false;
     function toggleAudio() {
@@ -648,6 +741,21 @@
             vinyl.classList.add('playing');
         }
         isPlaying = !isPlaying;
+    }
+
+    // Blog Reader Modal
+    function openBlog(title, date, body) {
+        document.getElementById('blogModalTitle').textContent = title;
+        document.getElementById('blogModalDate').textContent = date;
+        document.getElementById('blogModalBody').textContent = body;
+        const modal = document.getElementById('blogModal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+    function closeBlog() {
+        const modal = document.getElementById('blogModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
     }
 
     // Spotlight Deck Card Rotation
@@ -708,48 +816,149 @@
 
     function openAsk() { askOverlay.classList.remove('hidden'); askOverlay.classList.add('flex'); askInput.focus(); }
     function closeAsk() { askOverlay.classList.add('hidden'); askOverlay.classList.remove('flex'); askInput.value = ''; askText.textContent = ''; askBubble.classList.add('hidden'); askTitle.textContent = "what do you want to ask?"; }
+    
     askInput.addEventListener('input', () => { askText.textContent = askInput.value; });
     askInput.addEventListener('keydown', async (e) => {
         if (e.key === 'Enter' && askInput.value.trim()) {
-            const query = askInput.value.trim();
-            askBubbleText.textContent = query;
+            const query = askInput.value.trim().toLowerCase();
+            askBubbleText.textContent = askInput.value.trim();
             askBubble.classList.remove('hidden');
             askTitle.textContent = "thinking...";
+            askInput.value = '';
             
-            setTimeout(async () => {
-                const platform = navigator.platform;
-                askTitle.textContent = `before I answer: you are viewing from a ${platform} device on ${navigator.language}...`;
-                setTimeout(() => {
-                    askTitle.textContent = "searching google for you...";
-                    setTimeout(() => {
-                        window.open('https://www.google.com/search?q=' + encodeURIComponent(query), '_blank');
-                        closeAsk();
-                    }, 1500);
-                }, 2500);
-            }, 1200);
+            setTimeout(() => {
+                let response = "I'm a bit busy coding right now, but feel free to hit the email button!";
+
+                if (query.includes('age') || query.includes('old')) {
+                    response = "I'm 19 years old.";
+                } else if (query.includes('school') || query.includes('study') || query.includes('college') || query.includes('degree')) {
+                    response = "I'm a 1st-year BSIS student studying at Davao del Norte State College (DNSC).";
+                } else if (query.includes('kryos') || query.includes('hosting')) {
+                    response = "KryosCloud is my game hosting infrastructure project powered by Jexactyl and Tailwind CSS. It used to be called EternalPlay!";
+                } else if (query.includes('swim') || query.includes('sport')) {
+                    response = "I'm a varsity long-distance swimmer! I compete in 400m, 800m, and 1500m freestyle.";
+                } else if (query.includes('music') || query.includes('instrument') || query.includes('play')) {
+                    response = "I'm a huge music enthusiast. I play both the guitar and the bass guitar, and I love listening to IVOS.";
+                } else if (query.includes('project') || query.includes('pedifare') || query.includes('kidlap')) {
+                    response = "I manage Kidlap Creatives for design, KryosCloud for hosting, and I recently built PediFare, a tricycle fare calculator web app for Panabo City.";
+                } else if (query.includes('hello') || query.includes('hi')) {
+                    response = "Hello! Thanks for checking out my portfolio. What would you like to know?";
+                }
+
+                askTitle.innerHTML = `<span class="text-indigo-600 dark:text-indigo-400 font-sans font-semibold text-lg">Marwen AI:</span> <span class="font-sans text-lg">${response}</span>`;
+            }, 800);
         }
     });
 
-    // Typing Test ⌘J
+    // Working Typing Test ⌘J
     const typingOverlay = document.getElementById('typingOverlay');
-    const wordBank = ['marwen', 'developer', 'bsis', 'swimming', 'kryoscloud', 'javascript', 'html5', 'figma', 'design', 'hosting', 'server', 'layout'];
-    let ttIndex = 0, ttTimer = null;
+    const baseWordBank = ['marwen', 'developer', 'bsis', 'swimming', 'kryoscloud', 'javascript', 'html5', 'figma', 'design', 'hosting', 'server', 'layout', 'college', 'creative', 'network'];
+    let ttWords = [], ttCurrentWord = 0, ttCurrentChar = 0;
+    let ttTimer = null, ttTimeLeft = 30, ttErrors = 0, ttTotalChars = 0, ttActive = false;
 
     function openTyping() {
         typingOverlay.classList.remove('hidden'); typingOverlay.classList.add('flex');
         resetTyping();
+        document.addEventListener('keydown', handleTyping);
     }
     function closeTyping() {
         typingOverlay.classList.add('hidden'); typingOverlay.classList.remove('flex');
         clearInterval(ttTimer);
+        document.removeEventListener('keydown', handleTyping);
+        ttActive = false;
     }
     function resetTyping() {
-        ttIndex = 0; clearInterval(ttTimer);
+        clearInterval(ttTimer);
+        ttActive = false;
+        ttTimeLeft = 30;
+        ttErrors = 0;
+        ttTotalChars = 0;
+        ttCurrentWord = 0;
+        ttCurrentChar = 0;
+
         document.getElementById('ttWpm').textContent = '0';
         document.getElementById('ttAcc').textContent = '100';
-        document.getElementById('ttTime').textContent = '0';
+        document.getElementById('ttTime').textContent = '30';
+
+        ttWords = [...baseWordBank].sort(() => 0.5 - Math.random());
         const wordsEl = document.getElementById('ttWords');
-        wordsEl.innerHTML = wordBank.map((w, i) => `<span id="tw-${i}" class="mr-2">${w}</span>`).join('');
+        wordsEl.innerHTML = ttWords.map((w, i) => `<span id="tw-${i}" class="tt-word text-slate-400 dark:text-slate-600 inline-block transition-colors pb-1 px-1">${w.split('').map(c => `<span>${c}</span>`).join('')}</span>`).join('');
+        updateWordHighlight();
+    }
+
+    function updateWordHighlight() {
+        document.querySelectorAll('#ttWords > span').forEach((el, i) => {
+            if (i === ttCurrentWord) {
+                el.classList.add('is-active', 'text-slate-900', 'dark:text-slate-100');
+                el.classList.remove('text-slate-400', 'dark:text-slate-600');
+            } else {
+                el.classList.remove('is-active', 'text-slate-900', 'dark:text-slate-100');
+                el.classList.add('text-slate-400', 'dark:text-slate-600');
+            }
+        });
+    }
+
+    function handleTyping(e) {
+        if (typingOverlay.classList.contains('hidden')) return;
+        
+        if (e.key === 'Tab') { e.preventDefault(); resetTyping(); return; }
+        if (e.key === ' ' || e.key === 'Backspace') e.preventDefault();
+        
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+        if (e.key.length > 1 && e.key !== 'Backspace' && e.key !== ' ') return;
+
+        if (!ttActive && e.key.length === 1 && e.key !== ' ') {
+            ttActive = true;
+            ttTimer = setInterval(() => {
+                ttTimeLeft--;
+                document.getElementById('ttTime').textContent = ttTimeLeft;
+                if (ttTimeLeft <= 0) endTyping();
+            }, 1000);
+        }
+
+        if (!ttActive && e.key !== 'Backspace') return;
+
+        const currentWordEl = document.getElementById(`tw-${ttCurrentWord}`);
+        if (!currentWordEl) return;
+        const charEls = currentWordEl.querySelectorAll('span');
+        const expectedWord = ttWords[ttCurrentWord];
+
+        if (e.key === 'Backspace') {
+            if (ttCurrentChar > 0) {
+                ttCurrentChar--;
+                charEls[ttCurrentChar].classList.remove('text-emerald-500', 'text-red-500');
+            }
+        } else if (e.key === ' ') {
+            if (ttCurrentChar > 0) {
+                ttCurrentWord++;
+                ttCurrentChar = 0;
+                if (ttCurrentWord >= ttWords.length) endTyping();
+                else updateWordHighlight();
+            }
+        } else {
+            if (ttCurrentChar < expectedWord.length) {
+                ttTotalChars++;
+                if (e.key.toLowerCase() === expectedWord[ttCurrentChar].toLowerCase()) {
+                    charEls[ttCurrentChar].classList.add('text-emerald-500');
+                } else {
+                    charEls[ttCurrentChar].classList.add('text-red-500');
+                    ttErrors++;
+                }
+                ttCurrentChar++;
+            }
+        }
+    }
+
+    function endTyping() {
+        clearInterval(ttTimer);
+        ttActive = false;
+        const timeElapsedMin = (30 - ttTimeLeft) / 60 || 0.5;
+        const wpm = Math.round((ttTotalChars / 5) / timeElapsedMin);
+        const acc = ttTotalChars === 0 ? 100 : Math.round(((ttTotalChars - ttErrors) / ttTotalChars) * 100);
+        document.getElementById('ttWpm').textContent = wpm;
+        document.getElementById('ttAcc').textContent = acc;
+        
+        document.querySelectorAll('#ttWords > span').forEach(el => el.classList.remove('is-active'));
     }
 
     // Terminal Logic
@@ -771,7 +980,7 @@
         if (e.key === 'Enter') {
             const cmd = termInput.value.toLowerCase().trim();
             termInput.value = '';
-            termOutput.innerHTML += `<div><span class="text-slate-500">guest@marwen:~$</span> ${cmd}</div>`;
+            termOutput.innerHTML += `<div class="mt-1"><span class="text-indigo-600 dark:text-indigo-400 font-semibold">guest@marwen:~$</span> ${cmd}</div>`;
             switch(cmd) {
                 case 'help': termOutput.innerHTML += '<div>Commands: whoami, skills, projects, kryoscloud, clear, exit</div>'; break;
                 case 'whoami': termOutput.innerHTML += '<div>Marwen O. Deiparine | 19 y/o | BSIS Student & Developer.</div>'; break;
@@ -780,8 +989,11 @@
                 case 'kryoscloud': termOutput.innerHTML += '<div>Game servers & Jexactyl hosting infrastructure. Visit https://kryoscloud.tech</div>'; break;
                 case 'clear': termOutput.innerHTML = ''; break;
                 case 'exit': toggleTerminal(); break;
+                case '': break;
                 default: termOutput.innerHTML += `<div>Command not found: ${cmd}</div>`;
             }
+            const termBody = document.getElementById('term-body');
+            termBody.scrollTop = termBody.scrollHeight;
         }
     });
 
@@ -796,9 +1008,9 @@
 
     // Keyboard Shortcuts Listener
     document.addEventListener('keydown', (e) => {
-        if ((e.metaKey || e.altKey) && e.code === 'KeyK') { e.preventDefault(); openAsk(); }
-        if ((e.metaKey || e.altKey) && e.code === 'KeyJ') { e.preventDefault(); openTyping(); }
-        if (e.key === 'Escape') { closeAsk(); closeTyping(); closeModal(); closeImageZoom(); if(!termModal.classList.contains('hidden')) toggleTerminal(); }
+        if ((e.metaKey || e.altKey || e.ctrlKey) && e.code === 'KeyK') { e.preventDefault(); openAsk(); }
+        if ((e.metaKey || e.altKey || e.ctrlKey) && e.code === 'KeyJ') { e.preventDefault(); openTyping(); }
+        if (e.key === 'Escape') { closeAsk(); closeTyping(); closeModal(); closeImageZoom(); closeBlog(); if(!termModal.classList.contains('hidden')) toggleTerminal(); }
     });
     </script>
 </body>

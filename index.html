@@ -8,6 +8,10 @@
     <meta name="author" content="Marwen O. Deiparine">
     <meta name="theme-color" content="#090d16">
 
+    <!-- Favicon (Browser Tab Icon) -->
+    <link rel="icon" type="image/jpeg" href="https://i.imgur.com/uCS4WfT.jpeg">
+    <link rel="apple-touch-icon" href="https://i.imgur.com/uCS4WfT.jpeg">
+
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -114,6 +118,42 @@
     /* Typing Test Cursors */
     .tt-word.is-active { border-bottom: 2px solid #4f46e5; }
     html.dark .tt-word.is-active { border-bottom: 2px solid #ffffff; }
+
+    /* Mobile Drawer Animation */
+    .drawer-enter { transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .drawer-enter-active { transform: translateX(0); }
+    .drawer-exit { transform: translateX(-100%); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
+
+    /* ── Ask overlay (⌘K / Alt+K) ─────────────────────────── */
+    #askOverlay { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: flex-start; padding: 1.5rem; }
+    #askOverlay.is-visible { display: flex; }
+    .ask-backdrop { position: absolute; inset: 0; background: rgba(248, 250, 252, 0.82); backdrop-filter: blur(12px); opacity: 0; transition: opacity .4s ease; }
+    html.dark .ask-backdrop { background: rgba(9, 13, 22, 0.82); }
+    #askOverlay.is-open .ask-backdrop { opacity: 1; }
+    .ask-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 1.5rem; width: 100%; max-width: 760px; padding-left: clamp(1.5rem, 9vw, 8rem); opacity: 0; transform: translateY(12px); transition: opacity .45s ease .1s, transform .55s cubic-bezier(.16,1,.3,1) .1s; }
+    #askOverlay.is-open .ask-content { opacity: 1; transform: none; }
+    .ask-title { font-family: 'Geist Pixel', 'Geist Mono', monospace; font-size: clamp(1.9rem, 5.5vw, 3.4rem); line-height: 1.05; letter-spacing: -0.01em; text-transform: lowercase; white-space: normal; transition: opacity .25s ease, transform .3s cubic-bezier(.16,1,.3,1); }
+    @keyframes askSweep { from { mask-position: 100% 0; } to { mask-position: 0% 0; } }
+    .ask-head.is-shimmer { mask-image: linear-gradient(90deg, #000 0 38%, rgba(0,0,0,0.22) 50%, #000 62% 100%); mask-size: 300% 100%; animation: askSweep 1.8s linear infinite; }
+    .ask-title.is-small { font-size: clamp(1.25rem, 3.4vw, 1.95rem); line-height: 1.3; }
+    .ask-head { display: flex; align-items: center; gap: 0.5em; max-width: 100%; }
+    .loader { width: 0.85em; aspect-ratio: 1; --_g: no-repeat radial-gradient(farthest-side, currentColor 94%, #0000); background: var(--_g) 0 0, var(--_g) 100% 0, var(--_g) 100% 100%, var(--_g) 0 100%; background-size: 40% 40%; animation: l38 1s infinite; }
+    @keyframes l38 { 100% { background-position: 100% 0, 100% 100%, 0 100%, 0 0; } }
+    #askLoader { display: none; flex: 0 0 auto; transform: translateY(0.08em); color: #64748b; }
+    html.dark #askLoader { color: #94a3b8; }
+    #askLoader.is-on { display: block; }
+    .ask-bubble { display: none; position: relative; margin-left: 11px; max-width: min(85vw, 600px); font-family: 'Geist Mono', ui-monospace, 'SF Mono', monospace; font-size: clamp(0.95rem, 2.6vw, 1.2rem); line-height: 1.45; padding: 10px 15px; border-radius: 14px; border-top-left-radius: 5px; word-break: break-word; background: #e2e8f0; color: #0f172a; }
+    html.dark .ask-bubble { background: #1e293b; color: #f8fafc; }
+    .ask-bubble.is-on { display: block; transform-origin: 0 50%; animation: bubbleIn .24s cubic-bezier(.16,1,.3,1); }
+    .ask-bubble::before { content: ''; position: absolute; left: -7px; top: 13px; width: 0; height: 0; border-style: solid; border-width: 6px 8px 6px 0; border-color: transparent #e2e8f0 transparent transparent; }
+    html.dark .ask-bubble::before { border-color: transparent #1e293b transparent transparent; }
+    @keyframes bubbleIn { from { opacity: 0; transform: translateY(3px) scale(.94); } to { opacity: 1; transform: none; } }
+    .ask-field { display: inline-flex; align-items: center; min-height: 2.4rem; max-width: 90vw; font-family: 'Geist Mono', ui-monospace, 'SF Mono', monospace; font-size: clamp(1.05rem, 3vw, 1.5rem); color: #64748b; cursor: text; }
+    html.dark .ask-field { color: #94a3b8; }
+    #askText { white-space: pre-wrap; word-break: break-word; }
+    .ask-caret { display: inline-block; width: 2px; height: 1.2em; margin-left: 3px; vertical-align: middle; animation: caretBlink 1.06s step-end infinite; }
+    @keyframes caretBlink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
+    .ask-hidden-input { position: absolute; opacity: 0; width: 1px; height: 1px; border: 0; padding: 0; }
     </style>
 
     <script>
@@ -230,22 +270,74 @@
     </header>
 
     <!-- Mobile Navigation Drawer -->
-    <div id="mobileNav" class="fixed inset-0 z-[60] hidden flex-col bg-white dark:bg-slate-900 p-6 font-mono text-[15px] lg:hidden">
-        <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
-            <span class="font-pixel text-[14px] text-slate-900 dark:text-slate-100">Marwen.dev</span>
-            <button type="button" onclick="closeMobileNav()" class="p-1 text-slate-600 dark:text-slate-300"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
-        </div>
-        <div class="mt-6 flex flex-col gap-4 text-slate-700 dark:text-slate-300">
-            <a href="#blog" onclick="closeMobileNav()">Blog</a>
-            <a href="#projects" onclick="closeMobileNav()">Projects</a>
-            <a href="#active-hosting" onclick="closeMobileNav()">KryosCloud</a>
-            <a href="#capabilities" onclick="closeMobileNav()">Capabilities</a>
-            <a href="#design-archive" onclick="closeMobileNav()">Design Archive</a>
-            <a href="#now-playing" onclick="closeMobileNav()">Now Playing</a>
-            <div class="h-px bg-slate-200 dark:bg-slate-800 my-2"></div>
-            <button type="button" onclick="closeMobileNav(); openAsk();" class="text-left">Ask Anything (⌘K)</button>
-            <button type="button" onclick="closeMobileNav(); openTyping();" class="text-left">Typing Test (⌘J)</button>
-            <button type="button" onclick="closeMobileNav(); toggleTerminal();" class="text-left">CLI Terminal</button>
+    <div id="mobileNav" class="fixed inset-0 z-[60] hidden lg:hidden">
+        <!-- Blur Backdrop -->
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-300" onclick="closeMobileNav()"></div>
+        
+        <!-- Sliding Panel -->
+        <div id="mobileDrawer" class="relative flex flex-col w-64 h-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-r border-slate-200 dark:border-slate-800 shadow-2xl px-7 py-8 drawer-enter">
+            <!-- Header -->
+            <div class="flex items-center justify-between shrink-0 mb-8">
+                <span class="font-pixel text-[15px] text-slate-900 dark:text-slate-100">Marwen.dev</span>
+                <button type="button" onclick="closeMobileNav()" class="-mr-2 p-2 text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white">
+                    <i class="fas fa-times text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Nav Links -->
+            <div class="flex flex-1 flex-col gap-4 overflow-y-auto font-mono text-[13px]">
+                <a href="#blog" onclick="closeMobileNav()" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fas fa-book-open text-xs mr-2.5 text-slate-400"></i> Blog</a>
+                <a href="#projects" onclick="closeMobileNav()" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fas fa-folder-open text-xs mr-2.5 text-slate-400"></i> Projects</a>
+                <a href="#active-hosting" onclick="closeMobileNav()" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fas fa-server text-xs mr-2.5 text-slate-400"></i> KryosCloud</a>
+                <a href="#capabilities" onclick="closeMobileNav()" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fas fa-microchip text-xs mr-2.5 text-slate-400"></i> Capabilities</a>
+                <a href="#design-archive" onclick="closeMobileNav()" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fas fa-paint-brush text-xs mr-2.5 text-slate-400"></i> Design Archive</a>
+                <a href="#now-playing" onclick="closeMobileNav()" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fas fa-headphones-alt text-xs mr-2.5 text-slate-400"></i> Now Playing</a>
+                
+                <div class="h-px my-2 bg-slate-200 dark:bg-slate-800"></div>
+
+                <a href="https://github.com/Kikuro12" target="_blank" rel="noopener" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fab fa-github text-xs mr-2.5 text-slate-400"></i> GitHub ↗</a>
+                <a href="https://instagram.com/mhrwennn" target="_blank" rel="noopener" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fab fa-instagram text-xs mr-2.5 text-slate-400"></i> Instagram ↗</a>
+                <a href="https://facebook.com/100025231074173" target="_blank" rel="noopener" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white flex items-center"><i class="fab fa-facebook-f text-xs mr-2.5 text-slate-400"></i> Facebook ↗</a>
+            </div>
+
+            <!-- Modals/Features -->
+            <button type="button" onclick="closeMobileNav(); openAsk();" class="mt-4 inline-flex w-fit items-center gap-2 text-[12px] text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white">
+                <span>Ask anything</span>
+                <span class="inline-flex items-center gap-1">
+                    <kbd class="ask-mod-key rounded border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 font-mono text-[10px] text-slate-600 dark:text-slate-300">⌘</kbd>
+                    <kbd class="rounded border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 font-mono text-[10px] text-slate-600 dark:text-slate-300">K</kbd>
+                </span>
+            </button>
+
+            <button type="button" onclick="closeMobileNav(); openTyping();" class="mt-2 inline-flex w-fit items-center gap-2 text-[12px] text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white">
+                <span>Typing test</span>
+                <span class="inline-flex items-center gap-1">
+                    <kbd class="ask-mod-key rounded border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 font-mono text-[10px] text-slate-600 dark:text-slate-300">⌘</kbd>
+                    <kbd class="rounded border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 font-mono text-[10px] text-slate-600 dark:text-slate-300">J</kbd>
+                </span>
+            </button>
+
+            <button type="button" onclick="closeMobileNav(); toggleTerminal();" class="mt-2 inline-flex w-fit items-center gap-2 text-[12px] text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white">
+                <span>CLI Terminal</span>
+                <i class="fas fa-terminal text-[10px] text-slate-400"></i>
+            </button>
+
+            <!-- Bottom Presence & Controls -->
+            <div class="mt-4 border-y border-slate-200 dark:border-slate-800 py-3">
+                <span class="presence-icons inline-flex items-center"><img class="presence-avatar h-5 w-5 rounded-full border border-slate-300 dark:border-slate-700" alt="" src="https://api.dicebear.com/9.x/notionists/svg?seed=Marwen&radius=50&backgroundColor=f1f1f1"></span>
+                <p class="presence-label mt-1 font-mono text-[10.5px] text-slate-500 dark:text-slate-400"><b class="presence-num text-slate-900 dark:text-slate-100">1</b> viewing live</p>
+            </div>
+
+            <div class="mt-5 shrink-0">
+                <div class="mb-3 flex items-center gap-2">
+                    <div class="theme-switch" role="group" aria-label="Theme">
+                        <button type="button" data-theme-opt="system" onclick="setTheme('system')" class="theme-opt" title="System"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M9 21h6M12 17v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+                        <button type="button" data-theme-opt="light" onclick="setTheme('light')" class="theme-opt" title="Light"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+                        <button type="button" data-theme-opt="dark" onclick="setTheme('dark')" class="theme-opt" title="Dark"><svg viewBox="0 0 24 24" fill="none"><path d="M20 13.6A8 8 0 1 1 10.4 4a6.2 6.2 0 0 0 9.6 9.6z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></button>
+                    </div>
+                </div>
+                <a href="mailto:Kikuro112@gmail.com" class="inline-flex w-fit items-center gap-2 font-mono text-[12px] text-slate-800 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-white"><svg viewBox="0 0 24 24" fill="none" class="h-4 w-4 shrink-0"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Kikuro112@gmail.com</a>
+            </div>
         </div>
     </div>
 
@@ -608,18 +700,16 @@
     </div>
 
     <!-- ─────────────── ASK OVERLAY (⌘K) ─────────────── -->
-    <div id="askOverlay" role="dialog" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
-        <div class="ask-backdrop fixed inset-0 bg-slate-900/60 backdrop-blur-md" onclick="closeAsk()"></div>
-        <div class="relative z-10 flex flex-col gap-4 max-w-xl w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-2xl">
-            <div id="askBubble" class="hidden rounded-xl bg-slate-100 dark:bg-slate-800 px-4 py-2 font-mono text-sm text-slate-900 dark:text-slate-100"><span id="askBubbleText"></span></div>
+    <div id="askOverlay" role="dialog" aria-modal="true" aria-label="Ask" class="hidden">
+        <div class="ask-backdrop" onclick="closeAsk()"></div>
+        <div class="ask-content" onclick="focusAsk()">
+            <div class="ask-bubble" id="askBubble"><span id="askBubbleText"></span></div>
             <div class="ask-head">
-                <h2 class="ask-title font-pixel text-2xl text-slate-900 dark:text-slate-100">what do you want to ask?</h2>
+                <div class="loader" id="askLoader"></div>
+                <h2 class="ask-title text-slate-900 dark:text-slate-100">what do you want to ask?</h2>
             </div>
-            <div id="askReveal" class="hidden"></div>
-            <div class="ask-field inline-flex items-center font-mono text-base text-slate-600 dark:text-slate-300">
-                <span id="askText"></span><span class="ask-caret ml-1 h-5 w-0.5 bg-indigo-600 dark:bg-white animate-pulse"></span>
-            </div>
-            <input id="askInput" class="sr-only" type="text" autocomplete="off" aria-label="Type your question">
+            <div class="ask-field"><span id="askText"></span><span class="ask-caret bg-indigo-600 dark:bg-white"></span></div>
+            <input id="askInput" class="ask-hidden-input" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Type your question">
         </div>
     </div>
 
@@ -802,52 +892,285 @@
         document.getElementById('imageZoomModal').classList.remove('flex');
     }
 
-    // Mobile Navigation
-    function openMobileNav() { document.getElementById('mobileNav').classList.remove('hidden'); document.getElementById('mobileNav').classList.add('flex'); }
-    function closeMobileNav() { document.getElementById('mobileNav').classList.add('hidden'); document.getElementById('mobileNav').classList.remove('flex'); }
+    // Mobile Navigation (Drawer Style)
+    function openMobileNav() {
+        const nav = document.getElementById('mobileNav');
+        const drawer = document.getElementById('mobileDrawer');
+        nav.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+        
+        setTimeout(() => {
+            drawer.classList.remove('drawer-enter');
+            drawer.classList.add('drawer-enter-active');
+        }, 10);
+    }
+    
+    function closeMobileNav() {
+        const nav = document.getElementById('mobileNav');
+        const drawer = document.getElementById('mobileDrawer');
+        
+        drawer.classList.remove('drawer-enter-active');
+        drawer.classList.add('drawer-exit');
+        
+        setTimeout(() => {
+            nav.classList.add('hidden');
+            drawer.classList.remove('drawer-exit');
+            drawer.classList.add('drawer-enter');
+            document.body.classList.remove('overflow-hidden');
+        }, 300);
+    }
 
-    // Ask Overlay ⌘K
+    // Ask Overlay ⌘K (Reference style)
     const askOverlay = document.getElementById('askOverlay');
     const askInput = document.getElementById('askInput');
     const askText = document.getElementById('askText');
+    const askContent = askOverlay.querySelector('.ask-content');
+    const askTitle = askOverlay.querySelector('.ask-title');
+    const askCaret = askOverlay.querySelector('.ask-caret');
+    const askLoader = document.getElementById('askLoader');
+    const askHead = askOverlay.querySelector('.ask-head');
+    const askField = askOverlay.querySelector('.ask-field');
     const askBubble = document.getElementById('askBubble');
     const askBubbleText = document.getElementById('askBubbleText');
-    const askTitle = askOverlay.querySelector('.ask-title');
+    const ASK_DEFAULT_TITLE = 'what do you want to ask?';
+    let askSeq = 0;
+    let askBusy = false;
 
-    function openAsk() { askOverlay.classList.remove('hidden'); askOverlay.classList.add('flex'); askInput.focus(); }
-    function closeAsk() { askOverlay.classList.add('hidden'); askOverlay.classList.remove('flex'); askInput.value = ''; askText.textContent = ''; askBubble.classList.add('hidden'); askTitle.textContent = "what do you want to ask?"; }
-    
-    askInput.addEventListener('input', () => { askText.textContent = askInput.value; });
-    askInput.addEventListener('keydown', async (e) => {
-        if (e.key === 'Enter' && askInput.value.trim()) {
-            const query = askInput.value.trim().toLowerCase();
-            askBubbleText.textContent = askInput.value.trim();
-            askBubble.classList.remove('hidden');
-            askTitle.textContent = "thinking...";
-            askInput.value = '';
-            
-            setTimeout(() => {
-                let response = "I'm a bit busy coding right now, but feel free to hit the email button!";
+    const askSleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-                if (query.includes('age') || query.includes('old')) {
-                    response = "I'm 19 years old.";
-                } else if (query.includes('school') || query.includes('study') || query.includes('college') || query.includes('degree')) {
-                    response = "I'm a 1st-year BSIS student studying at Davao del Norte State College (DNSC).";
-                } else if (query.includes('kryos') || query.includes('hosting')) {
-                    response = "KryosCloud is my game hosting infrastructure project powered by Jexactyl and Tailwind CSS. It used to be called EternalPlay!";
-                } else if (query.includes('swim') || query.includes('sport')) {
-                    response = "I'm a varsity long-distance swimmer! I compete in 400m, 800m, and 1500m freestyle.";
-                } else if (query.includes('music') || query.includes('instrument') || query.includes('play')) {
-                    response = "I'm a huge music enthusiast. I play both the guitar and the bass guitar, and I love listening to IVOS.";
-                } else if (query.includes('project') || query.includes('pedifare') || query.includes('kidlap')) {
-                    response = "I manage Kidlap Creatives for design, KryosCloud for hosting, and I recently built PediFare, a tricycle fare calculator web app for Panabo City.";
-                } else if (query.includes('hello') || query.includes('hi')) {
-                    response = "Hello! Thanks for checking out my portfolio. What would you like to know?";
-                }
+    function askResetState() {
+        askBusy = false;
+        askInput.removeAttribute('readonly');
+        askInput.value = '';
+        askText.textContent = '';
+        askCaret.style.display = '';
+        askField.style.display = '';
+        askBubble.classList.remove('is-on');
+        askBubble.style.opacity = '';
+        askBubble.style.filter = '';
+        askBubble.style.transition = '';
+        askBubbleText.textContent = '';
+        askTitle.classList.remove('is-small');
+        askHead.classList.remove('is-shimmer');
+        askLoader.classList.remove('is-on');
+        askTitle.style.transition = '';
+        askTitle.style.opacity = '';
+        askTitle.style.transform = '';
+        askTitle.style.filter = '';
+        askTitle.textContent = ASK_DEFAULT_TITLE;
+        askHead.style.display = '';
+        askHead.style.opacity = '';
+        askHead.style.transition = '';
+        askHead.style.filter = '';
+    }
 
-                askTitle.innerHTML = `<span class="text-indigo-600 dark:text-indigo-400 font-sans font-semibold text-lg">Marwen AI:</span> <span class="font-sans text-lg">${response}</span>`;
-            }, 800);
+    async function askSetTitle(text, pulse) {
+        askTitle.style.transition = 'opacity .25s ease, transform .3s cubic-bezier(.16,1,.3,1)';
+        askTitle.style.opacity = '0';
+        askTitle.style.transform = 'translateY(6px)';
+        await askSleep(250);
+        askTitle.textContent = text;
+        if (pulse) {
+            askTitle.classList.add('is-small');
+            askLoader.classList.add('is-on');
+            askHead.classList.add('is-shimmer');
+            askTitle.style.transition = '';
+            askTitle.style.opacity = '';
+            askTitle.style.transform = '';
+        } else {
+            askLoader.classList.remove('is-on');
+            askHead.classList.remove('is-shimmer');
+            askTitle.classList.add('is-small');
+            askTitle.style.opacity = '1';
+            askTitle.style.transform = 'none';
+            await askSleep(300);
         }
+    }
+
+    function detectBrowser(ua) {
+        if (/Edg\//.test(ua)) return 'Edge ' + ((ua.match(/Edg\/(\d+)/) || [])[1] || '');
+        if (/OPR\//.test(ua)) return 'Opera ' + ((ua.match(/OPR\/(\d+)/) || [])[1] || '');
+        if (/Firefox\//.test(ua)) return 'Firefox ' + ((ua.match(/Firefox\/(\d+)/) || [])[1] || '');
+        if (/Chrome\//.test(ua)) return 'Chrome ' + ((ua.match(/Chrome\/(\d+)/) || [])[1] || '');
+        if (/Safari\//.test(ua) && /Version\//.test(ua)) return 'Safari ' + ((ua.match(/Version\/(\d+)/) || [])[1] || '');
+        return 'your browser';
+    }
+    
+    function detectOS(ua) {
+        if (/Windows/.test(ua)) return 'Windows';
+        if (/iPhone|iPad|iPod/.test(ua)) return 'iOS';
+        if (/Mac OS X/.test(ua)) return 'macOS';
+        if (/Android/.test(ua)) return 'Android';
+        if (/Linux/.test(ua)) return 'Linux';
+        return 'your device';
+    }
+    
+    async function collectData() {
+        const ua = navigator.userAgent;
+        const data = {
+            ip: '', city: '', region: '', country: '', isp: '', lat: '', lon: '',
+            os: detectOS(ua),
+            browser: detectBrowser(ua),
+            cores: navigator.hardwareConcurrency || '?',
+            ramNum: navigator.deviceMemory || null,
+            lang: navigator.language || (navigator.languages && navigator.languages[0]) || '—',
+            tz: (Intl.DateTimeFormat().resolvedOptions().timeZone) || '—',
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            conn: (navigator.connection && navigator.connection.effectiveType) || '',
+            referrer: '',
+        };
+        try { if (document.referrer) data.referrer = new URL(document.referrer).hostname; } catch (e) {}
+        try {
+            const ctrl = new AbortController();
+            const to = setTimeout(() => ctrl.abort(), 3500);
+            const res = await fetch('https://ipwho.is/', { signal: ctrl.signal });
+            clearTimeout(to);
+            const j = await res.json();
+            if (j && j.success !== false) {
+                data.ip = j.ip || '';
+                data.city = j.city || '';
+                data.region = j.region || '';
+                data.country = j.country || '';
+                data.isp = (j.connection && j.connection.isp) || j.org || '';
+                data.lat = j.latitude; data.lon = j.longitude;
+                if ((!data.tz || data.tz === '—') && j.timezone && j.timezone.id) data.tz = j.timezone.id;
+            }
+        } catch (e) {}
+        return data;
+    }
+
+    async function askInterrupt(data, mySeq) {
+        askBubble.style.transition = 'opacity .55s ease, filter .55s ease';
+        askBubble.style.filter = 'blur(8px)';
+        askBubble.style.opacity = '0';
+        askHead.style.transition = 'opacity .55s ease, filter .55s ease';
+        askHead.style.filter = 'blur(8px)';
+        askHead.style.opacity = '0';
+        await askSleep(600);
+        if (mySeq !== askSeq) return;
+
+        askBubble.classList.remove('is-on');
+        askBubble.style.transition = '';
+        askBubble.style.filter = '';
+        askBubble.style.opacity = '';
+        askLoader.classList.remove('is-on');
+        askHead.classList.remove('is-shimmer');
+        askTitle.textContent = '';
+        askTitle.classList.remove('is-small');
+        askTitle.style.opacity = '';
+        askTitle.style.transform = '';
+        askTitle.style.filter = '';
+        askHead.style.transition = '';
+        askHead.style.filter = '';
+        askHead.style.opacity = '';
+        await askSleep(300);
+        if (mySeq !== askSeq) return;
+
+        const loc = [data.city, data.region, data.country].filter(Boolean).join(', ');
+        const msgs = [
+            'before i answer',
+            'here is what your browser already shared the moment you opened this site',
+        ];
+        if (loc) msgs.push('you are currently in ' + loc);
+        if (data.ip) msgs.push('your public ip address is ' + data.ip);
+        if (data.isp) msgs.push('you are connected through ' + data.isp);
+        if (data.lat && data.lon) msgs.push('your approximate coordinates are around ' + (+data.lat).toFixed(2) + ', ' + (+data.lon).toFixed(2));
+        msgs.push('you are on a ' + data.os + ' device with ' + data.cores + ' processor cores' + (data.ramNum ? ' and ' + data.ramNum + 'gb of memory' : ''));
+        msgs.push('you are browsing with ' + data.browser + ' set to ' + data.lang);
+        msgs.push('your timezone is ' + data.tz + ' and it is around ' + String(data.time).toLowerCase() + ' where you are');
+        if (data.conn) msgs.push('you are on a ' + data.conn + ' connection');
+        if (data.referrer) msgs.push('you arrived here from ' + data.referrer);
+        msgs.push('none of this needed your permission');
+        msgs.push('your browser shares it with every website you open, automatically');
+        msgs.push('so be mindful of what you click, and who you trust online');
+
+        // Bypassing IDE infinite loop protection by using recursion instead of a for-loop
+        const playMessages = async (idx) => {
+            if (idx >= msgs.length || mySeq !== askSeq) return;
+            await askSetTitle(msgs[idx], false);
+            if (mySeq !== askSeq) return;
+            await askSleep(2500);
+            if (mySeq !== askSeq) return;
+            await playMessages(idx + 1);
+        };
+        await playMessages(0);
+    }
+
+    async function askSubmit() {
+        if (askBusy) return;
+        const query = askInput.value.trim();
+        if (!query) return;
+
+        askBusy = true;
+        const mySeq = askSeq;
+        askInput.setAttribute('readonly', '');
+        askCaret.style.display = 'none';
+
+        askBubbleText.textContent = query;
+        askBubble.classList.add('is-on');
+        askField.style.display = 'none';
+
+        const dataPromise = collectData();
+
+        await askSetTitle('thinking...', true);
+        await askSleep(1900);
+        if (mySeq !== askSeq) return;
+
+        await askSetTitle('analyzing...', true);
+        await askSleep(1500);
+        if (mySeq !== askSeq) return;
+
+        const data = await dataPromise;
+        if (mySeq !== askSeq) return;
+        await askInterrupt(data, mySeq);
+        if (mySeq !== askSeq) return;
+
+        await askSetTitle('as for your question', false);
+        await askSleep(2000);
+        if (mySeq !== askSeq) return;
+
+        await askSetTitle("i don't want to waste tokens on that, search for it yourself :)", false);
+        await askSleep(2200);
+        if (mySeq !== askSeq) return;
+
+        window.open('https://www.google.com/search?q=' + encodeURIComponent(query), '_blank', 'noopener');
+    }
+
+    function openAsk() {
+        askSeq++;
+        askResetState();
+        askContent.style.transition = '';
+        askContent.style.opacity = '';
+        askContent.style.transform = '';
+        askOverlay.classList.remove('hidden');
+        askOverlay.classList.add('is-visible');
+        document.body.classList.add('overflow-hidden');
+        requestAnimationFrame(() => askOverlay.classList.add('is-open'));
+        setTimeout(() => askInput.focus(), 60);
+    }
+    function closeAsk() {
+        askSeq++;
+        document.body.classList.remove('overflow-hidden');
+        askInput.blur();
+        askContent.style.transition = 'opacity .22s ease, transform .22s ease';
+        askContent.style.opacity = '0';
+        askContent.style.transform = 'translateY(6px)';
+        setTimeout(() => askOverlay.classList.remove('is-open'), 210);
+        setTimeout(() => {
+            askOverlay.classList.remove('is-visible');
+            askOverlay.classList.add('hidden');
+            askContent.style.transition = '';
+            askContent.style.opacity = '';
+            askContent.style.transform = '';
+            askResetState();
+        }, 640);
+    }
+    function focusAsk() { if (!askBusy) askInput.focus(); }
+    function askIsOpen() { return askOverlay.classList.contains('is-visible'); }
+
+    askInput.addEventListener('input', () => { askText.textContent = askInput.value; });
+    askInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); askSubmit(); }
     });
 
     // Working Typing Test ⌘J
@@ -1008,9 +1331,24 @@
 
     // Keyboard Shortcuts Listener
     document.addEventListener('keydown', (e) => {
-        if ((e.metaKey || e.altKey || e.ctrlKey) && e.code === 'KeyK') { e.preventDefault(); openAsk(); }
-        if ((e.metaKey || e.altKey || e.ctrlKey) && e.code === 'KeyJ') { e.preventDefault(); openTyping(); }
-        if (e.key === 'Escape') { closeAsk(); closeTyping(); closeModal(); closeImageZoom(); closeBlog(); if(!termModal.classList.contains('hidden')) toggleTerminal(); }
+        if ((e.metaKey || e.altKey || e.ctrlKey) && e.code === 'KeyK') { 
+            e.preventDefault(); 
+            askIsOpen() ? closeAsk() : openAsk(); 
+        }
+        if ((e.metaKey || e.altKey || e.ctrlKey) && e.code === 'KeyJ') { 
+            e.preventDefault(); 
+            openTyping(); 
+        }
+        if (e.key === 'Escape') { 
+            if (askIsOpen()) closeAsk();
+            closeTyping(); 
+            closeModal(); 
+            closeImageZoom(); 
+            closeBlog();
+            const nav = document.getElementById('mobileNav');
+            if (nav && !nav.classList.contains('hidden')) { closeMobileNav(); }
+            if(!termModal.classList.contains('hidden')) { toggleTerminal(); }
+        }
     });
     </script>
 </body>

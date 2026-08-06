@@ -243,8 +243,8 @@
         </button>
 
         <div class="mt-4 border-y border-slate-200 dark:border-slate-800 py-3">
-            <span class="presence-icons inline-flex items-center"><img class="presence-avatar h-5 w-5 rounded-full border border-slate-300 dark:border-slate-700" alt="" src="https://api.dicebear.com/9.x/notionists/svg?seed=Marwen&radius=50&backgroundColor=f1f1f1"></span>
-            <p class="presence-label mt-1 font-mono text-[10.5px] text-slate-500 dark:text-slate-400"><b class="presence-num text-slate-900 dark:text-slate-100">1</b> viewing live</p>
+            <span class="presence-icons inline-flex items-center"></span>
+            <p class="presence-label mt-1 font-mono text-[10.5px] text-slate-500 dark:text-slate-400"></p>
         </div>
 
         <div class="mt-5 shrink-0">
@@ -324,8 +324,8 @@
 
             <!-- Bottom Presence & Controls -->
             <div class="mt-4 border-y border-slate-200 dark:border-slate-800 py-3">
-                <span class="presence-icons inline-flex items-center"><img class="presence-avatar h-5 w-5 rounded-full border border-slate-300 dark:border-slate-700" alt="" src="https://api.dicebear.com/9.x/notionists/svg?seed=Marwen&radius=50&backgroundColor=f1f1f1"></span>
-                <p class="presence-label mt-1 font-mono text-[10.5px] text-slate-500 dark:text-slate-400"><b class="presence-num text-slate-900 dark:text-slate-100">1</b> viewing live</p>
+                <span class="presence-icons inline-flex items-center"></span>
+                <p class="presence-label mt-1 font-mono text-[10.5px] text-slate-500 dark:text-slate-400"></p>
             </div>
 
             <div class="mt-5 shrink-0">
@@ -562,7 +562,11 @@
                     <div>
                         <div class="flex justify-between text-slate-700 dark:text-slate-300 mb-1"><span>Hosting & Server Administration</span><span class="font-semibold text-indigo-600 dark:text-white">75%</span></div>
                         <div class="h-1.5 w-full rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden"><div class="h-full bg-indigo-600 dark:bg-slate-300 rounded-full" style="width: 75%;"></div></div>
-                    </div>                 
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-slate-700 dark:text-slate-300 mb-1"><span>Varsity Long-Distance Swimming</span><span class="font-semibold text-indigo-600 dark:text-white">90%</span></div>
+                        <div class="h-1.5 w-full rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden"><div class="h-full bg-indigo-600 dark:bg-slate-300 rounded-full" style="width: 90%;"></div></div>
+                    </div>
                 </div>
 
                 <!-- Minimalist Tech Badges -->
@@ -785,6 +789,37 @@
 
     <!-- JS Logic Scripts -->
     <script>
+    // Live Viewer Simulation
+    (function () {
+        const AV_SEEDS = ['Marwen', 'Leo', 'Zoe', 'Kai', 'Mia', 'Alex', 'Sam'];
+        
+        function renderPresence(count) {
+            const shown = count > 4 ? 3 : count;
+            let html = '';
+            for (let i = 0; i < shown; i++) {
+                html += `<img class="presence-avatar h-5 w-5 rounded-full border border-slate-300 dark:border-slate-700 -ml-2 first:ml-0 shadow-sm" alt="" loading="lazy" src="https://api.dicebear.com/9.x/notionists/svg?seed=${AV_SEEDS[i % AV_SEEDS.length]}&radius=50&backgroundColor=f1f1f1">`;
+            }
+            if (count > 4) {
+                html += `<span class="inline-flex items-center justify-center h-5 w-5 rounded-full border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-[8px] font-bold text-slate-600 dark:text-slate-300 -ml-2 shadow-sm">+${count - 3}</span>`;
+            }
+            document.querySelectorAll('.presence-icons').forEach(el => { el.innerHTML = html; });
+            
+            const label = `<b class="presence-num text-slate-900 dark:text-slate-100">${count}</b> ` + (count === 1 ? 'viewing live' : 'viewing live');
+            document.querySelectorAll('.presence-label').forEach(el => { el.innerHTML = label; });
+        }
+
+        function simulatePresence() {
+            // Random number between 1 and 6 for realistic portfolio traffic simulation
+            const count = Math.floor(Math.random() * 6) + 1;
+            renderPresence(count);
+        }
+
+        // Initial render
+        simulatePresence();
+        // Fluctuate every 8-15 seconds
+        setInterval(simulatePresence, Math.floor(Math.random() * 7000) + 8000);
+    })();
+
     // Intro Overlay Logic
     document.addEventListener('DOMContentLoaded', () => {
         const introOverlay = document.getElementById('introOverlay');
